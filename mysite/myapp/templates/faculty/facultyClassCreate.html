@@ -95,6 +95,7 @@ Admin Page
 
   <main id="main" class="main px-lg-5">
 
+
     <div class="pagetitle">
       <h1>Create a Class</h1>
       <nav>
@@ -105,78 +106,358 @@ Admin Page
       </nav>
     </div><!-- End Page Title -->
     <section class="section">
-      <div class="row">
 
-        <div class="col-lg-6">
+      <div class="card mb-3">
+         <div class="card-body " >
+           <div class="row ">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Create A Classroom</h5>
+             <form class="row g-3 needs-validation"   method='POST' novalidate>
+               {% csrf_token %}
 
-              <!-- Floating Labels Form -->
-              <form class="row g-3">
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" name="className" class="form-control" id="floatingName" placeholder="Your Name">
-                    <label for="floatingName">Class Name</label>
-                  </div>
-                </div>
+               <div class=" mt-0 container">
+                 <div class=" pb-0">
+                   <h5 class="card-title text-center pb-0 fs-4">Create a Classroom</h5>
+                   <p class="text-center small">Enter the details to create Classroom</p>
+                 </div>
+               </div>
+                 <!-- right Form -->
+                 <div class=" col-xxl-6 col-md-6">
 
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" name="facultyName" class="form-control"  value="{{user.first_name}}">
-                    <label for="floatingPassword">Faculty Name</label>
-                  </div>
-                </div>
+                   <div class="container mt-0 ">
+                     <h5 class="card-title text-center py-0 mb-1 fs-5">Classroom Details</h5>
+                     <p class="text-center small pt-0"> (All are required Fields)</p>
+                   </div>
 
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" name="dept" class="form-control"  placeholder="Class Department">
-                    <label for="floatingPassword">Department</label>
-                  </div>
-                </div>
+                         <div class="col-12 my-2">
+                           <label for="className" class="form-label">Classroom Name</label>
+                           <input type="text" name="className" class="form-control" id="className" required>
+                           <div class="invalid-feedback">Please enter Classroom Name!</div>
+                         </div>
 
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" name="year" class="form-control"  placeholder="Class Department">
-                    <label for="floatingPassword">Academic Year</label>
-                  </div>
-                </div>
+                         <div class="col-12 my-2">
+                           <label for="faculty" class="form-label">Faculty</label>
+                           <input type="text" name="faculty" class="form-control" id="faculty" value="{{user.first_name}} {{user.last_name}}" required>
+                           <div class="invalid-feedback">Please enter Faculty Name!</div>
+                         </div>
 
-                <div class="col-md-12">
-                  <div class="form-floating">
-                    <input type="text" name="gmeet" class="form-control"  placeholder="Gmeet Link">
-                    <label for="floatingPassword">Gmeet Link</label>
-                  </div>
-                </div>
+                         <div class="col-12 my-2 my-2">
+                           <label for="department" class="form-label">Department</label>
+                           <input type="text" name="department" class="form-control" id="department" required>
+                           <div class="invalid-feedback">Please enter Department!</div>
+                         </div>
 
-                <div class="text-center">
-                  <button type="submit" name="submit" class="btn btn-primary">Create Class</button>
+                         <div class="col-12 my-2 my-2">
+                           <label for="year" class="form-label">Academic Year</label>
+                           <input type="text" name="year" class="form-control" id="year" required>
+                           <div class="invalid-feedback">Please enter Academic Year!</div>
+                         </div>
 
-                </div>
-              </form><!-- End floating Labels Form -->
+                         <div class="col-12 my-2 my-2">
+                           <label for="gmeet" class="form-label">Gmeet Link</label>
+                           <input type="text" name="gmeet" class="form-control" id="gmeet" >
+                           <div class="invalid-feedback">Please enter Gmeet Link!</div>
+                         </div>
 
-            </div>
-          </div>
+                     </div>  <!-- End Right Form  -->
 
-        </div>
-      </div>
+
+                 <!-- Left Form -->
+                 <div class="col-xxl-6 col-md-6">
+
+                   <div class="container mt-0 ">
+                     <h5 class="card-title text-center py-0 mb-1 fs-5">Set Time Table</h5>
+                     <p class="text-center small pt-0"> (Start and End Time in 24 Hr Format)</p>
+                   </div>
+
+                   <!-- Time Table Start -->
+                   <div class="container">
+
+                     <!-- Monday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="monday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('monday_start');
+                                        var input2 = document.getElementById('monday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Monday" style="font-size:30px;" />
+                             <label class="form-check-label" for="monday" style="font-size:25px;">Monday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="monday_start" class="form-control" id="monday_start" value=0 disabled>
+                             <label for="monday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="monday_end" class="form-control" id="monday_end" value=0 disabled>
+                             <label for="monday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+                     </div><!-- Ends Monday -->
+
+
+                     <!-- Tuesday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="tuesday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('tuesday_start');
+                                        var input2 = document.getElementById('tuesday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Tuesday" style="font-size:30px;" />
+                             <label class="form-check-label" for="tuesday" style="font-size:25px;">Tuesday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="tuesday_start" class="form-control" id="tuesday_start" value=0 disabled>
+                             <label for="tuesday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="tuesday_end" class="form-control" id="tuesday_end" value=0 disabled>
+                             <label for="tuesday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                     </div><!-- Ends Tuesday -->
+
+
+                     <!-- Wednesday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="wednesday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('wednesday_start');
+                                        var input2 = document.getElementById('wednesday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Wednesday" style="font-size:30px;" />
+                             <label class="form-check-label" for="acceptTerms" style="font-size:25px;">Wednesday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="wednesday_start" class="form-control" id="wednesday_start" value=0 disabled>
+                             <label for="wednesday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="wednesday_end" class="form-control" id="wednesday_end" value=0 disabled>
+                             <label for="wednesday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                     </div> <!-- Ends Wednesday -->
+
+                     <!-- Thursday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="thursday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('thursday_start');
+                                        var input2 = document.getElementById('thursday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Thursday" style="font-size:30px;" />
+                             <label class="form-check-label" for="acceptTerms" style="font-size:25px;">Thursday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="thursday_start" class="form-control" id="thursday_start" value=0 disabled>
+                             <label for="thursday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="thursday_end" class="form-control" id="thursday_end" value=0 disabled>
+                             <label for="thursday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                     </div> <!-- Ends Thursday -->
+
+                     <!-- Friday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="friday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('friday_start');
+                                        var input2 = document.getElementById('friday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Friday" style="font-size:30px;" />
+                             <label class="form-check-label" for="acceptTerms" style="font-size:25px;">Friday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="friday_start" class="form-control" id="friday_start"  value=0 disabled>
+                             <label for="friday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="friday_end" class="form-control" id="friday_end"  value=0 disabled>
+                             <label for="friday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                     </div> <!-- Ends Friday -->
+
+                     <!-- Saturday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="saturday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('saturday_start');
+                                        var input2 = document.getElementById('saturday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Saturday" style="font-size:30px;" />
+                             <label class="form-check-label" for="acceptTerms" style="font-size:25px;">Saturday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="saturday_start" class="form-control" id="saturday_start" value=0 disabled>
+                             <label for="saturday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="saturday_end" class="form-control" id="saturday_end" value=0 disabled>
+                             <label for="saturday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                     </div> <!-- Ends Saturday -->
+
+                     <!-- Sunday -->
+                     <div class="row my-2">
+
+                       <div class="col-lg-4 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-check mt-2 ">
+                             <input class="form-check-input" id="sunday" type="checkbox" name="time"
+                               onclick="var input1 = document.getElementById('sunday_start');
+                                        var input2 = document.getElementById('sunday_end');
+                                        if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                        else{input1.disabled=true; input2.disabled = true;}" value="Sunday" style="font-size:30px;" />
+                             <label class="form-check-label" for="acceptTerms" style="font-size:25px;">Sunday</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="number" min=0 max=24 name="sunday_start" class="form-control" id="sunday_start" value=0 disabled>
+                             <label for="sunday_start">Start Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div class="col-lg-3 mx-auto">
+                         <div class="col-md-12">
+                           <div class="form-floating">
+                             <input type="text" name="sunday_end" class="form-control" id="sunday_end" value=0 disabled>
+                             <label for="sunday_end">End Time</label>
+                           </div>
+                         </div>
+                       </div>
+
+                     </div> <!-- Ends Sunday -->
+
+                   </div> <!-- Ends Time Table -->
+
+
+                </div> <!-- End Left Form  -->
+
+
+                 <div class="container col-lg-6 col-sm-12 mt-lg-4">
+
+                   <div class="col-12">
+                     <button class="btn btn-primary w-100" name="submit" type="submit">Create Class</button>
+                   </div>
+
+                 </div>
+
+              </form>  <!-- End Form -->
+
+             </div> <!-- Row Ends -->
+           </div><!-- Card Body Ends Ends -->
+         </div><!-- Card ends -->
+
     </section>
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="">Rahul Agarwal</a>
     </div>
+    <div class="copyright">
+      &copy; <strong><span>Microsoft Engage'21</span></strong>
+    </div>
+
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

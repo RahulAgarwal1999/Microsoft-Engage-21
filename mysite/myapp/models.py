@@ -6,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class FacultyDetails(models.Model):
     facultyId = models.ForeignKey(User,on_delete=models.CASCADE)
-    facultyName = models.CharField(max_length=10,null=False)
+    facultyName = models.CharField(max_length=100,null=False)
     facultyPhone = PhoneNumberField(null=False, blank=False, unique=False, default='+91')
     facultyGender = models.CharField(max_length=20,null=True)
     facultyDOB = models.DateTimeField(default=datetime.now,null=True)
@@ -25,7 +25,7 @@ class FacultyDetails(models.Model):
 
 class StudentDetails(models.Model):
     studentId = models.ForeignKey(User,on_delete=models.CASCADE)
-    studentName = models.CharField(max_length=10,null=False)
+    studentName = models.CharField(max_length=100,null=False)
     studentPhone = PhoneNumberField(null=False, blank=False, unique=False, default='+91')
     studentGender = models.CharField(max_length=20,null=False)
     studentDOB = models.DateTimeField(default=datetime.now,null=True)
@@ -40,3 +40,17 @@ class StudentDetails(models.Model):
 
     def __str__(self):
         return str(self.studentId) if self.studentId else ''
+
+class ClassRoom(models.Model):
+    classId = models.CharField(max_length=10,primary_key=True)
+    classname = models.CharField(max_length=50,null=False)
+    classDepartment = models.CharField(max_length=50,null=False)
+    academicYear = models.CharField(max_length=2,null=False)
+    classLink = models.TextField(blank=False,null=True)
+    classFacultyID = models.ForeignKey(FacultyDetails,on_delete=models.CASCADE)
+    classFacultyName = models.CharField(max_length=100,null=False)
+    classTimeTable = models.TextField(blank=False,null=True)
+    classCreationTime = models.DateTimeField(default=datetime.now,null=True)
+
+    def __str__(self):
+        return str(self.classId) if self.classId else ''
