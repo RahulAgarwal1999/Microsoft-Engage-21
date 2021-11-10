@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Page
+{% endblock %}
+{% block content %}
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+
+            <div class="container col-6">
+              <div class="d-flex justify-content-center py-4">
+                <a href="" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">EZacademy</span>
+                </a>
+              </div><!-- End Logo -->
+            </div>
+
+
+           <div class="card mb-3">
+              <div class="card-body " >
+                <div class="row ">
+
+                  <form class="row g-3 needs-validation"  enctype="multipart/form-data"  method='POST' novalidate>
+                    {% csrf_token %}
+
+                    <div class=" mt-0 container">
+                      <div class=" pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">Create a Faculty Account</h5>
+                        <p class="text-center small">Enter your personal details to create account</p>
+                      </div>
+                    </div>
+                      <!-- right Form -->
+                      <div class=" col-xxl-6 col-md-6">
+                              <div class="col-12 my-2">
+                                <label for="yourName" class="form-label">Your Name</label>
+                                <input type="text" name="name" class="form-control" id="yourName" required>
+                                <div class="invalid-feedback">Please, enter your name!</div>
+                              </div>
+
+                              <div class="col-12 my-2">
+                                <label for="yourEmail" class="form-label">Your Email</label>
+                                <input type="email" name="email" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                              </div>
+
+                              <div class="col-12 my-2 my-2">
+                                <label for="yourPassword" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                <div class="invalid-feedback">Please enter your password!</div>
+                              </div>
+
+
+                              <div class="col-12 my-2">
+                                <label for="yourPassword" class="form-label">Gender</label>
+                                <div class="col-sm-12">
+                                  <select class="form-select" name="gender" aria-label="Default select example">
+                                    <option selected disabled>Select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                  </select>
+                                </div>
+                                <div class="invalid-feedback">Please enter your Gender!</div>
+                              </div>
+
+
+                              <div class="col-12 my-2">
+                                  <label for="inputDate" class="col-form-label">Date of Birth</label>
+                                  <div class="">
+                                    <input type="date" name="dob" class="form-control ">
+                                  </div>
+                              </div>
+
+
+                              <div class="col-12 my-2">
+                                <label for="inputPassword" class="col-form-label">Contact Number</label>
+                                <div class="col-sm-12">
+                                  <input type="text" name="contact" class="form-control" required></input>
+                                  <div class="invalid-feedback">Please Enter your Contact No.</div>
+                                </div>
+                              </div>
+
+                          </div>  <!-- End Right Form  -->
+
+
+                      <!-- Left Form -->
+                      <div class="col-xxl-6 col-md-6">
+                              <div class="col-12 my-2">
+                                <label for="yourPassword" class="form-label">Institution Name</label>
+                                <input type="text" name="institute" class="form-control" required>
+                                <div class="invalid-feedback">Please enter your Institution!</div>
+                              </div>
+
+                              <div class="col-12 my-2">
+                                <label for="yourPassword" class="form-label">State</label>
+                                <div class="col-sm-12">
+                                  <select class="form-select" name="state" aria-label="Default select example">
+                                    <option selected disabled>Select</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                                <div class="invalid-feedback">Please enter the State!</div>
+                              </div>
+
+                              <div class="col-12 my-2">
+                                <label for="yourPassword" class="form-label">Teaching Experience (in years)</label>
+                                <div class="col-sm-12">
+                                  <input type="text" name="yos" class="form-control" required></input>
+                                </div>
+                                <div class="invalid-feedback">Please enter Teaching Experience!</div>
+                              </div>
+
+
+                              <div class="col-12 my-2">
+                                <label for="inputPassword" class="col-form-label">About You</label>
+                                <div class="col-sm-12">
+                                  <textarea class="form-control" name="about" style="height: 50px"></textarea>
+                                  <div class="invalid-feedback">Please tell something about you!</div>
+                                </div>
+                              </div>
+
+
+
+                              <div class="col-12 my-2">
+                                <label for="facultyPic" class="col-form-label">Profile Picture</label>
+                                <div class="col-sm-12">
+                                  <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" required>
+                                </div>
+                                <div class="invalid-feedback">Please upload your Profile Picture</div>
+                              </div>
+
+                              <div class="col-12 my-2 mt-4">
+                                <div class="form-check">
+                                  <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                  <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                                  <div class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                              </div>
+
+
+                          </div> <!-- End Left Form  -->
+
+
+                        <div class="container col-lg-6 col-sm-12 mt-lg-4">
+
+                          <div class="col-12">
+                            <button class="btn btn-primary w-100" name="submit" type="submit">Create Account</button>
+                          </div>
+                          <div class="col-12 mt-2">
+                            <p class="small mb-0">Already have an account? <a href="{% url 'facultyLogin'%}">Log in</a></p>
+                          </div>
+                        </div>
+
+                      </form>
+
+                    </div> <!-- Row Ends -->
+                  </div><!-- Card Body Ends Ends -->
+                </div><!-- Card ends -->
+
+
+              <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+            </div>  <!-- Inner Container ends -->
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+{% endblock %}
