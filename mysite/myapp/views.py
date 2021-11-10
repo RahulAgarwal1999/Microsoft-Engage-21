@@ -108,7 +108,14 @@ def facultyLogout(request):
 # Dashboard View
 def facultyDashboard(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
-        return render(request,'faculty/facultyDashboard.html')
+        user=request.user
+        faculty = FacultyDetails.objects.get(facultyId = user.id)
+        classRooms = ClassRoom.objects.filter(classFacultyID=faculty.id)
+
+        context={
+            'classRooms' : classRooms,
+        }
+        return render(request,'faculty/facultyDashboard.html',context)
     else:
         return redirect('facultyLogin')
 
@@ -215,7 +222,7 @@ def facultyClassCreate(request):
 
             # sunday = request.POST['sunday']
             if 'Sunday' in temp:
-                # Storing Day,start_time and end_time as a list 
+                # Storing Day,start_time and end_time as a list
                 list=[]
                 list.append('Sunday')
                 sunday_start = request.POST.get('sunday_start',0)
