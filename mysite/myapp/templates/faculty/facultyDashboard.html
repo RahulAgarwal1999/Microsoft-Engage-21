@@ -108,21 +108,16 @@ Admin Page
           <div class="row">
 
 
-
-            <!-- Revenue Card -->
-
-
               {% if classRooms %}
 
                 {% for class in classRooms%}
 
-                <!-- Customers Card -->
+              <a href="{% url 'facultySubject' class.pk %}">
                 <div class="col-xxl-4 col-xl-12">
 
                   <div class="card info-card customers-card">
-
                     <div class="card-body">
-                      <h5 class="card-title">{{class.classname}} <br><span>Class Code : {{class.classId}}</span></h5>
+                      <h5 class="card-title">{{class.classname}} <br><span>Class Code : {{class.pk}}</span></h5>
 
                       <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -131,12 +126,13 @@ Admin Page
                         <div class="ps-3">
                           <h6>145</h6>
                           <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
                         </div>
                       </div>
                     </div>
                   </div>
-                 </div><!-- End Customers Card -->
+                 </div>
+
+                </a>
 
                 {% endfor %}
 

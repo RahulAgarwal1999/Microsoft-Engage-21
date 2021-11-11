@@ -11,7 +11,7 @@ urlpatterns = [
     path('faculty_dashboard/',views.facultyDashboard,name='facultyDashboard'),
     path('faculty_profile/',views.facultyProfile,name='facultyProfile'),
     path('faculty_classCreate/',views.facultyClassCreate,name='facultyClassCreate'),
-    path('faculty_subject/',views.facultySubject,name='facultySubject'),
+    path('faculty_subject/<pk>',views.facultySubject,name='facultySubject'),
     path('faculty_logout/',views.facultyLogout,name='facultyLogout'),
 
 

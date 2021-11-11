@@ -3,11 +3,13 @@ import random
 import string
 from django.shortcuts import render,redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from email_validator import validate_email, EmailNotValidError
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import auth
 from .models import *
+
 
 
 # Landing Page
@@ -98,6 +100,7 @@ def facultyRegister(request):
 
 
 # Logout View
+@login_required
 def facultyLogout(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         auth.logout(request)
@@ -106,6 +109,7 @@ def facultyLogout(request):
         return redirect('facultyLogin')
 
 # Dashboard View
+@login_required
 def facultyDashboard(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         user=request.user
@@ -121,6 +125,7 @@ def facultyDashboard(request):
 
 
 # Profile View
+@login_required
 def facultyProfile(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         return render(request,'faculty/facultyProfile.html')
@@ -129,6 +134,7 @@ def facultyProfile(request):
 
 
 # Classroom Creation View
+@login_required
 def facultyClassCreate(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         if request.method=='POST':
@@ -264,9 +270,15 @@ def facultyClassCreate(request):
         return redirect('facultyLogin')
 
 # Faculty Subject
-def facultySubject(request):
+@login_required
+def facultySubject(request,pk):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
-        return render(request,'faculty/facultySubject.html')
+        id=pk
+        classDetails = ClassRoom.objects.get(classId=id)
+        context={
+            'class':classDetails
+        }
+        return render(request,'faculty/facultySubject.html',context)
     else:
         return redirect('facultyLogin')
 
