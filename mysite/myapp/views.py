@@ -128,7 +128,31 @@ def facultyDashboard(request):
 @login_required
 def facultyProfile(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
-        return render(request,'faculty/facultyProfile.html')
+        user=request.user
+        userDetails = FacultyDetails.objects.get(facultyId = user.pk)
+
+        if request.method=='POST':
+            contact = request.POST['contact']
+            institute = request.POST['institute']
+            state = request.POST['state']
+            experience = request.POST['year']
+            about = request.POST['about']
+            profilePic = request.FILES.get('profilePic')
+
+            userDetails.facultyPhone = contact
+            userDetails.facultyCollege = institute
+            userDetails.collegeState = state
+            userDetails.experience = experience
+            userDetails.facultyDesc = about
+            userDetails.facultyPic = profilePic
+
+            userDetails.save()
+            return redirect(request.path_info)
+
+        context={
+            'userDetails' : userDetails,
+        }
+        return render(request,'faculty/facultyProfile.html',context)
     else:
         return redirect('facultyLogin')
 
@@ -386,7 +410,32 @@ def studentDashboard(request):
 # Profile View
 def studentProfile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
-        return render(request,'student/studentProfile.html')
+        user=request.user
+        userDetails = StudentDetails.objects.get(studentId = user.pk)
+
+        if request.method=='POST':
+            contact = request.POST['contact']
+            institute = request.POST['institute']
+            state = request.POST['state']
+            yos = request.POST['year']
+            about = request.POST['about']
+            profilePic = request.FILES.get('profilePic')
+
+            userDetails.studentPhone = contact
+            userDetails.studentCollege = institute
+            userDetails.collegeState = state
+            userDetails.yearOfStudy = yos
+            userDetails.studentDesc = about
+            userDetails.studentPic = profilePic
+
+            userDetails.save()
+            return redirect(request.path_info)
+
+
+        context={
+            'userDetails' : userDetails,
+        }
+        return render(request,'student/studentProfile.html',context)
     else:
         return redirect('studentLogin')
 
