@@ -2,9 +2,17 @@ import re
 import random
 import string
 from django.shortcuts import render,redirect
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from email_validator import validate_email, EmailNotValidError
+
+from django.contrib import messages
+# from mysite.settings import EMAIL_HOST_USER
+# from django.core.mail import send_mail, EmailMessage
+
+
+from django.template.loader import render_to_string
+from mysite.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail, EmailMessage
+
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import auth
@@ -115,6 +123,38 @@ def facultyDashboard(request):
         user=request.user
         faculty = FacultyDetails.objects.get(facultyId = user.id)
         classRooms = ClassRoom.objects.filter(classFacultyID=faculty.id)
+        unique_id=faculty.facultyId
+
+        # Email Testing
+        if request.method=='POST':
+            # send_mail(
+            #             'Daily Rozgaar',
+            #             'Thank you for showing interest in our website. You have been successfully registered. Feel free to call for any house help and avail our facilities at a rational price !',
+            #             'rahul.agarwal31101999@gmail.com',
+            #             ['adityaverma0198@gmail.com'],
+            #             fail_silently = False
+            #             )
+
+            role_user_email = 'adityaverma0198@gmail.com'
+            mail_subject = "Welcome To VC - Virtual Classroom"
+            message = render_to_string('register_successful.html', {
+                'user': role_user_email,
+                'firstname': user.first_name,
+                'lastname': user.last_name,
+                'unique_id' : unique_id,
+            })
+
+            email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+            email.send()
+
+            # End Email Testing
+
+
+            return redirect(request.path_info)
+
+
+        # Email Testing Ends
+
 
         context={
             'classRooms' : classRooms,

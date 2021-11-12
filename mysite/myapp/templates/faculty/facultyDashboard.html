@@ -112,9 +112,9 @@ Admin Page
 
                 {% for class in classRooms%}
 
-              <a href="{% url 'facultySubject' class.pk %}">
-                <div class="col-xxl-4 col-xl-12">
 
+                <div class="col-xxl-4 col-xl-12">
+                  <a href="{% url 'facultySubject' class.pk %}">
                   <div class="card info-card customers-card">
                     <div class="card-body">
                       <h5 class="card-title">{{class.classname}} <br><span>Class Code : {{class.pk}}</span></h5>
@@ -130,9 +130,10 @@ Admin Page
                       </div>
                     </div>
                   </div>
+                    </a>
                  </div>
 
-                </a>
+
 
                 {% endfor %}
 
@@ -172,6 +173,13 @@ Admin Page
               </div>
             </div>
           </a>
+
+          <div class="col-xxl-6 col-xl-12">
+            <form class=""  method="POST">
+              {% csrf_token %}
+                <button type="submit" class="btn btn-primary" name="button">Submit</button>
+            </form>
+          </div>
 
           </div><!-- End Customers Card -->
 

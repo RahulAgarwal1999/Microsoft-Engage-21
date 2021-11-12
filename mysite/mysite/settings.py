@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from django.core.mail import send_mail
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -131,10 +130,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # EMAIL USE
-# from django.core.mail import send_mail
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
 EMAIL_HOST_USER = 'adityaverma0198@gmail.com'
-EMAIL_HOST_PASSWORD = 'ksitltgsqbkogrvu'
+EMAIL_HOST_PASSWORD = 'mlgcstcudwciboxg'
 EMAIL_USE_TLS = True
