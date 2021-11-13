@@ -10,7 +10,7 @@ Admin Page
   <header id="header" class="header fixed-top d-flex align-items-center px-lg-5">
 
     <div class="d-flex align-items-center justify-content-between ">
-      <a href="{% url 'studentDashboard' %}" class="logo d-flex align-items-center">
+      <a href="{% url 'facultyDashboard' %}" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">NiceAdmin</span>
       </a>
@@ -39,7 +39,7 @@ Admin Page
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'facultyProfile'%}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -142,7 +142,8 @@ Admin Page
           </a>
 
           <!-- Modal for Announcement -->
-          <form class="" action="index.html" method="post">
+          <form class="" method="POST">
+            {% csrf_token %}
             <div class="modal fade" id="announcementModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -154,21 +155,18 @@ Admin Page
 
                    <div class="col-12">
                      <label for="inputNanme4" class="form-label">Heading</label>
-                     <input type="text" class="form-control" name="announcementHeading" id="inputNanme4">
+                     <input type="text" class="form-control" name="announcementHeading" id="announcementHeading">
                    </div>
                    <br>
+
                    <div class="col-12">
-                     <label for="inputEmail4" class="form-label">Description</label>
-                     <!-- Description Editor -->
-                     <div class="quill-editor-default">
-
-                     </div> <!-- End Description Editor -->
+                     <label for="announcementDescription" class="form-label">Description</label>
+                     <textarea type="text" class="form-control" name="announcementDescription" rows="8" cols="80"></textarea>
                    </div>
-
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" name="linkSubmit" class="btn btn-primary">Save changes</button>
+                  <button type="submit" name="postAnnouncement" class="btn btn-primary">Post</button>
                 </div>
               </div>
             </div>
@@ -304,36 +302,38 @@ Admin Page
 
 
 
-          <!-- Recent Activity -->
+          <!-- Meet Link -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title text-center">Gmeet Link <i type="button" class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#gmeetModal"></i></h5>
 
-            <!-- Modal for Meet Link -->
-            <form class=""  method="POST">
-              <div class="modal fade" id="gmeetModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Enter the Meeting Link</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="col-md-12">
-                        <div class="form-floating">
-                          <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                          <label for="floatingName">Meeting Link</label>
+                <!-- Modal for Meet Link -->
+                <form class="needs-validation" method='POST' novalidate  >
+                  {% csrf_token %}
+                  <div class="modal fade" id="gmeetModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Enter the Meeting Link</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="col-md-12">
+                            <div class="form-floating">
+                              <input type="text" name="meetLink" class="form-control" id="floatingName" placeholder="Enter the Link" required>
+                              <label for="floatingName">Meeting Link</label>
+                              <div class="invalid-feedback">Please enter the link</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" name="linkSubmit" class="btn btn-primary">Save changes</button>
                         </div>
                       </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" name="linkSubmit" class="btn btn-primary">Save changes</button>
-                    </div>
                   </div>
-                </div>
-              </div>
-            </form><!-- End Modal-->
+                </form><!-- End Modal-->
 
 
               <div class="activity text-center">
@@ -341,39 +341,37 @@ Admin Page
               </div>
 
             </div>
-          </div><!-- End Recent Activity -->
+          </div><!-- End MeetLink -->
 
 
           <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Offline Mode Available?</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Offline Mode Available?</h5>
 
-                        <!-- Advanced Form Elements -->
-                        <form>
-                          <div class="row mb-5">
+                  <!-- Advanced Form Elements -->
+                  <form>
+                    <div class="row mb-5">
+                      <div class="col-sm-8">
+                        <script type="text/javascript">
+                            function EnableDisableTextBox(flexSwitchCheckDefault) {
+                                var txtPassportNumber = document.getElementById("txtPassportNumber");
+                                txtPassportNumber.disabled = flexSwitchCheckDefault.checked ? false : true;
+                                if (!txtPassportNumber.disabled) {
+                                    txtPassportNumber.focus();
+                                }
+                            }
+                        </script>
 
-                            <div class="col-sm-8">
-                              <script type="text/javascript">
-                                  function EnableDisableTextBox(flexSwitchCheckDefault) {
-                                      var txtPassportNumber = document.getElementById("txtPassportNumber");
-                                      txtPassportNumber.disabled = flexSwitchCheckDefault.checked ? false : true;
-                                      if (!txtPassportNumber.disabled) {
-                                          txtPassportNumber.focus();
-                                      }
-                                  }
-                              </script>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="EnableDisableTextBox(this)">
+                          <label class="form-check-label" for="flexSwitchCheckDefault">YES</label>
+                          <input type="text" id="txtPassportNumber" placeholder="Strength in %" disabled="disabled" />
+                        </div>
+                      </div>
+                    </div>
 
-                              <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="EnableDisableTextBox(this)">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">YES</label>
-                                <input type="text" id="txtPassportNumber" placeholder="Strength in %" disabled="disabled" />
-                              </div>
-                            </div>
-                          </div>
-
-                        </form>
-
-                  </div>
+                  </form>
+               </div>
             </div>
 
         </div><!-- End Right side columns -->
@@ -381,125 +379,37 @@ Admin Page
 
 
 
-        <!-- Left side columns -->
+        <!-- Announcement and Assignment -->
         <div class="col-lg-9">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="">
-              <!-- Default Card -->
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-
-                 </div>
-               </div><!-- End Default Card -->
-            </div>
-
-            <div class="">
-              <!-- Default Card -->
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-                   Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
-                   Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
-                 </div>
-               </div><!-- End Default Card -->
-            </div>
-
-            <div class="">
-              <!-- Default Card -->
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-                   Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
-                   Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
-                 </div>
-               </div><!-- End Default Card -->
-            </div>
-
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Database Systems <br><span>Mrs. Rani Uthra</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                {% if announcements %}
+                  {% for announcement in announcements %}
+                    <div class="">
+                       <div class="card">
+                         <div class="card-body">
+                           <h5 class="card-title">{{announcement.announcementHeading}}</h5>
+                           {{announcement.announcementDescription}}
+                         </div>
+                       </div>
                     </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
+                  {% endfor %}
+                {% else %}
+                <div class="">
+                   <div class="card">
+                     <div class="card-body py-4 text-center">
+                       <h3>No Announcements Yet</h3>
+                     </div>
+                   </div>
                 </div>
+                {% endif %}
+
 
               </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Object Oriented Design <br><span>Mr Akhil Singh</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
+            </div><!-- End Announcement and Assignment -->
 
 
           </div>
-        </div><!-- End Left side columns -->
-
-
-
-      </div>
     </section>
 
   </main><!-- End #main -->
@@ -508,7 +418,7 @@ Admin Page
   {% include 'partials/_footer.html'%}
   <!-- ======= Footer Ends ======= -->
 
-  
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 

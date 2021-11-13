@@ -54,3 +54,13 @@ class ClassRoom(models.Model):
 
     def __str__(self):
         return str(self.classId) if self.classId else ''
+
+class Announcement(models.Model):
+    announcementId = models.CharField(max_length=10,primary_key=True)
+    classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
+    announcementHeading = models.CharField(max_length=50,null=False)
+    announcementDescription = models.TextField(blank=False,null=False)
+    announcementCreationTime = models.DateTimeField(default=datetime.now,null=True)
+
+    def __str__(self):
+        return str(self.announcementId) if self.announcementId else ''

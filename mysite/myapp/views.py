@@ -339,8 +339,39 @@ def facultySubject(request,pk):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         id=pk
         classDetails = ClassRoom.objects.get(classId=id)
+        if request.method=='POST':
+            if 'postAnnouncement' in request.POST:
+                announcementHeading = request.POST['announcementHeading']
+                announcementDescription = request.POST['announcementDescription']
+
+                # print('-------Testing---------')
+                # print(announcementDescription)
+
+                temp = ''.join(random.choices(string.ascii_letters + string.digits, k=9))
+                announcementId = 'A' + temp
+                newAnnouncement = Announcement(announcementId = announcementId, classId_id = classDetails.pk ,announcementHeading = announcementHeading,
+                                                announcementDescription = announcementDescription)
+
+                newAnnouncement.save()
+
+                return redirect(request.path_info)
+
+            if 'linkSubmit' in request.POST:
+                meetLink = request.POST['meetLink']
+
+                # Saving the changes
+                classDetails = ClassRoom.objects.get(classId=id)
+                classDetails.classLink = meetLink
+                classDetails.save()
+
+                return redirect(request.path_info)
+
+            return redirect(request.path_info)
+
+        announcements = Announcement.objects.filter(classId = classDetails.pk).order_by('-announcementCreationTime')
         context={
-            'class':classDetails
+            'class':classDetails,
+            'announcements' : announcements
         }
         return render(request,'faculty/facultySubject.html',context)
     else:
