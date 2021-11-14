@@ -324,8 +324,18 @@ def facultyClassCreate(request):
             if gmeetLink is not None:
                 classCreate.classLink = gmeetLink
 
-            # Saving object in database
             classCreate.save()
+            # End Classroom Created
+
+
+            # Creating object for ClassroomStudentsList
+            # Creating empty dict for the student list
+            my_dict = {}
+            input = json.dumps(my_dict)
+
+            classroomStudentsList  = ClassroomStudentsList(classId_id = classCreate.pk, studentList = input )
+            classroomStudentsList.save()
+            # End Creating object for ClassroomStudentsList
 
             return redirect('facultyDashboard')
 
@@ -447,6 +457,15 @@ def studentRegister(request):
                             studentDesc=about,studentCollege=institute,collegeState=state,yearOfStudy=yearOfStudy,studentPic=profilePic)
 
             student.save()
+
+            # Creating StudentClassroomList object
+            my_dict={}
+            input = json.dumps(my_dict)
+            studentClassroomList = StudentClassroomList(studentId_id = user.pk, classList = input)
+            studentClassroomList.save()
+            # End Creating StudentClassroomList object
+
+
             # u_id = User.objects.get(username=username)
             # addusr = UserDetails(user_id=u_id,number=number)
             # addusr.save()
@@ -501,20 +520,35 @@ def studentDashboard(request):
 
 
                 try:
-                    print('----student classroom present-------')
-                    print(user.pk)
                     list = StudentClassroomList.objects.get(studentId = user.pk)
                     my_dict = json.loads(list.classList)
-                    if key in my_dict.keys():
+                    if classId in my_dict.keys():
+                        print('----student already in classroom -------')
                         return redirect('studentSubject',pk=classId)
                     else:
-                        print('----student classroom not  present-------')
+                        print('----student not in classroom-------')
+                        # classroom  added in student list of StudentClassroomList
                         my_dict[classId] = dt_string
                         input = json.dumps(my_dict)
                         list.classList = input
                         list.save()
+                        # ends
+
+                        # student addid in classroom list of ClassroomStudentsList
+                        studentId_str = str(student.studentId)
+                        classroomStudentsList = ClassroomStudentsList.objects.get(classId = classId)
+                        studentList = classroomStudentsList.studentList
+                        print(studentList)
+                        my_dict = json.loads(studentList)
+                        my_dict[studentId_str] = dt_string
+                        input = json.dumps(my_dict)
+                        classroomStudentsList.studentList = input
+                        classroomStudentsList.save()
+                        # ends
+
                         return redirect('studentSubject',pk=classId)
                     return redirect(request.path_info)
+
                 except(StudentClassroomList.DoesNotExist):
                     my_dict={}
                     my_dict[classId] = dt_string
