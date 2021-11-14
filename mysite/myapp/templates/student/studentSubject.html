@@ -3,7 +3,7 @@
 Admin Page
 {% endblock %}
 {% block content %}
-
+{% load static %}
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -120,20 +120,15 @@ Admin Page
     <section class="section dashboard">
 
 
-      <div class="row">
-        <div class="container">
-          <!-- Card with an image overlay -->
-          <div class="card">
-            <img src="assets/img/card.jpg" class="card-img-top" alt="...">
-            <div class="card-img-overlay">
-              <h5 class="card-title">Card with an image overlay</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div><!-- End Card with an image overlay -->
-
-
+      <div class="card bg-dark text-white">
+          <img src="{% static 'images/slides-1.jpg' %}" class="card-img" style="height:250px;" alt="...">
+          <div class="card-img-overlay">
+            <h5 class="card-title">{{class.classname}}</h5>
+            <p class="card-text">{{class.classDepartment}}</p>
+            <p class="card-text">Class Code : {{class.classId}}</p>
+          </div>
         </div>
-      </div>
+
       <div class="row">
 
         <!-- Right side columns -->
@@ -185,194 +180,39 @@ Admin Page
 
 
 
-          <!-- Budget Report -->
-          <!-- <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Sales',
-                          max: 6500
-                        },
-                        {
-                          name: 'Administration',
-                          max: 16000
-                        },
-                        {
-                          name: 'Information Technology',
-                          max: 30000
-                        },
-                        {
-                          name: 'Customer Support',
-                          max: 38000
-                        },
-                        {
-                          name: 'Development',
-                          max: 52000
-                        },
-                        {
-                          name: 'Marketing',
-                          max: 25000
-                        }
-                      ]
-                    },
-                    series: [{
-                      name: 'Budget vs spending',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Allocated Budget'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Actual Spending'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div> -->
-          <!-- End Budget Report -->
-
-          <!-- Website Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Website Traffic -->
 
         </div><!-- End Right side columns -->
+            <!-- Left side columns -->
+            <div class="col-lg-9">
+              <div class="row">
 
+              {% if announcements %}
+                {% for announcement in announcements %}
+                  <div class="">
+                     <div class="card">
+                       <div class="card-body">
+                         <h5 class="card-title">{{announcement.announcementHeading}}</h5>
+                         {{announcement.announcementDescription}}
+                       </div>
+                     </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="">
+                   <div class="card">
+                     <div class="card-body">
+                       <h5 class="card-title">Default Card</h5>
+                       Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
 
-
-
-        <!-- Left side columns -->
-        <div class="col-lg-9">
-          <div class="row">
-
-          {% if announcements %}
-            {% for announcement in announcements %}
-              <div class="">
-                 <div class="card">
-                   <div class="card-body">
-                     <h5 class="card-title">{{announcement.announcementHeading}}</h5>
-                     {{announcement.announcementDescription}}
+                     </div>
                    </div>
-                 </div>
+                </div>
+              {% endif %}
+
+
               </div>
-            {% endfor %}
-          {% else %}
-            <div class="">
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-
-                 </div>
-               </div>
-            </div>
-          {% endif %}
-
-
-          </div>
-        </div><!-- End Left side columns -->
+            </div><!-- End Left side columns -->
 
 
 

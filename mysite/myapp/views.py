@@ -569,8 +569,10 @@ def studentProfile(request):
 def studentSubject(request,pk):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         id=pk
+        classDetails = ClassRoom.objects.get(classId=id)
         announcements = Announcement.objects.filter(classId = id)
         context={
+            'class' : classDetails,
             'announcements' : announcements,
         }
         return render(request,'student/studentSubject.html',context)
