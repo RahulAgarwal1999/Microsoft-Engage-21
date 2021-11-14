@@ -142,11 +142,11 @@ Admin Page
           <!-- Recent Activity -->
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-center">Gmeet Link </h5>
+              <h5 class="card-title text-center">Meeting Link </h5>
 
-              <div class="activity">
+              <div class="activity text-center">
 
-                <button type="button" class="btn btn-primary" name="button">Join Now</button>
+                <button type="button" class="btn btn-primary col-sm-12" name="button">Join Now</button>
 
               </div>
 
@@ -338,8 +338,6 @@ Admin Page
             </div>
           </div><!-- End Website Traffic -->
 
-
-
         </div><!-- End Right side columns -->
 
 
@@ -349,113 +347,28 @@ Admin Page
         <div class="col-lg-9">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="">
-              <!-- Default Card -->
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-
+          {% if announcements %}
+            {% for announcement in announcements %}
+              <div class="">
+                 <div class="card">
+                   <div class="card-body">
+                     <h5 class="card-title">{{announcement.announcementHeading}}</h5>
+                     {{announcement.announcementDescription}}
+                   </div>
                  </div>
-               </div><!-- End Default Card -->
-            </div>
-
-            <div class="">
-              <!-- Default Card -->
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-                   Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
-                   Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
-                 </div>
-               </div><!-- End Default Card -->
-            </div>
-
-            <div class="">
-              <!-- Default Card -->
-               <div class="card">
-                 <div class="card-body">
-                   <h5 class="card-title">Default Card</h5>
-                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-                   Quidem sit est nulla ullam. Suscipit debitis ullam iusto dolorem animi dolorem numquam. Enim fuga ipsum dolor nulla quia ut.
-                   Rerum dolor voluptatem et deleniti libero totam numquam nobis distinctio. Sit sint aut. Consequatur rerum in.
-                 </div>
-               </div><!-- End Default Card -->
-            </div>
-
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Database Systems <br><span>Mrs. Rani Uthra</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
-                </div>
-
               </div>
-            </div><!-- End Revenue Card -->
+            {% endfor %}
+          {% else %}
+            <div class="">
+               <div class="card">
+                 <div class="card-body">
+                   <h5 class="card-title">Default Card</h5>
+                   Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
 
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Object Oriented Design <br><span>Mr Akhil Singh</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
+                 </div>
+               </div>
+            </div>
+          {% endif %}
 
 
           </div>
@@ -469,18 +382,8 @@ Admin Page
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer><!-- End Footer -->
+  {% include 'partials/_footer.html'%}
+  <!-- ======= Footer Ends ======= -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

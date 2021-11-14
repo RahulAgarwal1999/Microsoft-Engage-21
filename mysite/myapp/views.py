@@ -1,9 +1,10 @@
 import re
 import random
 import string
+import json
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-
+from datetime import datetime
 from django.contrib import messages
 # from mysite.settings import EMAIL_HOST_USER
 # from django.core.mail import send_mail, EmailMessage
@@ -463,6 +464,7 @@ def studentRegister(request):
     return render(request,'student/studentRegister.html')
 
 # Logout View
+@login_required
 def studentLogout(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         auth.logout(request)
@@ -472,13 +474,65 @@ def studentLogout(request):
 
 
 # Dashboard View
+@login_required
 def studentDashboard(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
+
+        # Getting user details
+        user = request.user
+        student = StudentDetails.objects.get(studentId = user.pk)
+
+        if request.method == 'POST':
+            if 'classJoin' in request.POST:
+                classId = request.POST['classJoinCode']
+
+                # datetime object containing current date and time
+                now = datetime.now()
+                # dd/mm/YY H:M:S format
+                dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+                try:
+                    getClass = ClassRoom.objects.get(classId = classId)
+                    print('----Class Link Valid-------')
+                except:
+                    # message.alert(request,"No such class exist")
+                    print('----Class Link Invalid--------')
+                    return redirect(request.path_info)
+
+
+                try:
+                    print('----student classroom present-------')
+                    print(user.pk)
+                    list = StudentClassroomList.objects.get(studentId = user.pk)
+                    my_dict = json.loads(list.classList)
+                    if key in my_dict.keys():
+                        return redirect('studentSubject',pk=classId)
+                    else:
+                        print('----student classroom not  present-------')
+                        my_dict[classId] = dt_string
+                        input = json.dumps(my_dict)
+                        list.classList = input
+                        list.save()
+                        return redirect('studentSubject',pk=classId)
+                    return redirect(request.path_info)
+                except(StudentClassroomList.DoesNotExist):
+                    my_dict={}
+                    my_dict[classId] = dt_string
+                    input = json.dumps(my_dict)
+                    list = StudentClassroomList(studentId_id = user.pk,classList = input)
+                    list.save()
+                    return redirect('studentSubject',pk=classId)
+
+                return redirect(request.path_info)    # classJoin post ends
+            return redirect(request.path_info)   #  post ends
+
         return render(request,'student/studentDashboard.html')
+
     else:
         return redirect('studentLogin')
 
 # Profile View
+@login_required
 def studentProfile(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         user=request.user
@@ -511,13 +565,20 @@ def studentProfile(request):
         return redirect('studentLogin')
 
 # Student Subject View
-def studentSubject(request):
+@login_required
+def studentSubject(request,pk):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
-        return render(request,'student/studentSubject.html')
+        id=pk
+        announcements = Announcement.objects.filter(classId = id)
+        context={
+            'announcements' : announcements,
+        }
+        return render(request,'student/studentSubject.html',context)
     else:
         return redirect('studentLogin')
 
 # Assignment View
+@login_required
 def studentAssignment(request):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         return render(request,'student/studentAssignment.html')

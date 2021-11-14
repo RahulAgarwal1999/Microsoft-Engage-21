@@ -20,7 +20,7 @@ urlpatterns = [
     # path('student_details/',views.studentDetails,name='studentDetails'),
     path('student_dashboard/',views.studentDashboard,name='studentDashboard'),
     path('student_profile/',views.studentProfile,name='studentProfile'),
-    path('student_subject/',views.studentSubject,name='studentSubject'),
+    path('student_subject/<pk>',views.studentSubject,name='studentSubject'),
     path('student_assignment/',views.studentAssignment,name='studentAssignment'),
     path('student_logout/',views.studentLogout,name='studentLogout'),
 ]

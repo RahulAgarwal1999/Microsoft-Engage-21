@@ -64,3 +64,11 @@ class Announcement(models.Model):
 
     def __str__(self):
         return str(self.announcementId) if self.announcementId else ''
+
+# Table storing List of classroom joined by students
+class StudentClassroomList(models.Model):
+    studentId = models.ForeignKey(User,on_delete=models.CASCADE)
+    classList = models.TextField(blank=True,null=True)
+
+    def __str__(self):
+        return str(self.studentId) if self.studentId else ''
