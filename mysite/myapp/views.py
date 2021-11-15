@@ -413,6 +413,24 @@ def facultySubject(request,pk):
         return redirect('facultyLogin')
 
 
+@login_required
+def classMembersList(request,pk):
+    id = pk
+
+    studentListObject = ClassroomStudentsList.objects.get(classId = id)
+    studentListDict = json.loads(studentListObject.studentList)
+
+    studentList = [*studentListDict]
+    students = []
+
+    for x in studentList:
+        temp = User.objects.get(username = x)
+        students.append(temp)
+
+    context = {
+        'students' : students,
+    }
+    return render(request,'faculty/classMembersList.html',context)
 # -----------------------------------
 # Student Section
 # -----------------------------------
@@ -641,10 +659,18 @@ def studentSubject(request,pk):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         id=pk
         classDetails = ClassRoom.objects.get(classId=id)
-        announcements = Announcement.objects.filter(classId = id)
+        # announcements = Announcement.objects.filter(classId = id)
+
+        announcements = Announcement.objects.filter(classId = id).annotate(type=Value('announcement', CharField()))
+        assignments = Assignment.objects.filter(classId = id).annotate(type=Value('assignment', CharField()))
+
+        all_items = list(assignments) + list(announcements)
+
+        all_items_feed = sorted(all_items, key=lambda obj: obj.publishedTime,reverse=True)
+
         context={
             'class' : classDetails,
-            'announcements' : announcements,
+            'all_items_feed' : all_items_feed,
         }
         return render(request,'student/studentSubject.html',context)
     else:

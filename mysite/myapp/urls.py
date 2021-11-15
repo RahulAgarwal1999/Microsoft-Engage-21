@@ -14,6 +14,7 @@ urlpatterns = [
     path('faculty_subject/<pk>',views.facultySubject,name='facultySubject'),
     path('faculty_logout/',views.facultyLogout,name='facultyLogout'),
 
+    path('class_members/<pk>',views.classMembersList,name='classMembersList'),
 
     path('student_login/',views.studentLogin,name="studentLogin"),
     path('student_register/',views.studentRegister,name="studentRegister"),

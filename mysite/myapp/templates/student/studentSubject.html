@@ -6,23 +6,16 @@ Admin Page
 {% load static %}
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <header id="header" class="header fixed-top d-flex align-items-center px-lg-5">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{% url 'studentDashboard' %}" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">VirtualClassroom</span>
       </a>
       <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
     </div><!-- End Logo -->
 
-    <!-- <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div> -->
-    <!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -38,12 +31,12 @@ Admin Page
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{user.first_name}} {{user.last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>{{user.first_name}} {{user.last_name}}</h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -51,21 +44,12 @@ Admin Page
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'studentProfile' %}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -100,24 +84,24 @@ Admin Page
         </li><!-- End Profile Nav -->
 
       </ul>
-    </nav><!-- End Icons Navigation -->
+    </nav>
 
   </header><!-- End Header -->
 
 
-  <main id="main" class="main px-5" >
+  <main id="main" class="main px-md-5 mx-md-5" >
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
+    <div class="pagetitle px-lg-5">
+      <h1>Classroom</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'studentDashboard' %}">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section dashboard">
+    <section class="section dashboard px-xxl-5">
 
 
       <div class="card bg-dark text-white">
@@ -134,22 +118,25 @@ Admin Page
         <!-- Right side columns -->
         <div class="col-lg-3">
 
-          <!-- Recent Activity -->
+          <!-- Meeting Details -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title text-center">Meeting Link </h5>
 
               <div class="activity text-center">
-
-                <button type="button" class="btn btn-primary col-sm-12" name="button">Join Now</button>
+                {% if class.classLink %}
+                  <a type="button" href="{{class.classLink}}" class="btn btn-primary col-sm-12" name="button">Join Now</a>
+                {% else %}
+                  <button type="button" class="btn btn-primary col-sm-12" name="button" disabled>Join Now</button>
+                {% endif %}
 
               </div>
 
             </div>
-          </div><!-- End Recent Activity -->
+          </div><!-- End Meeting Details -->
 
 
-          <!-- Recent Activity -->
+          <!-- Attendence Details -->
           <div class="card">
             <div class="card-body">
 
@@ -175,7 +162,7 @@ Admin Page
                 </div>
 
             </div>
-          </div><!-- End Recent Activity -->
+          </div><!-- Attendence Details -->
 
 
 
@@ -187,29 +174,47 @@ Admin Page
             <div class="col-lg-9">
               <div class="row">
 
-              {% if announcements %}
-                {% for announcement in announcements %}
-                  <div class="">
-                     <div class="card">
-                       <div class="card-body">
-                         <h5 class="card-title">{{announcement.announcementHeading}}</h5>
-                         {{announcement.announcementDescription}}
+                    {% if all_items_feed%}
+                      {% for item in all_items_feed %}
+                          {% if item.type == 'announcement' %}
+
+                          <div class="">
+                             <div class="card">
+                               <div class="card-body">
+                                 <h5 class="card-title">{{item.announcementHeading}}</h5>
+                                 {{item.announcementDescription}}
+                               </div>
+                             </div>
+                          </div>
+
+                          {% elif item.type == 'assignment' %}
+
+                        <a href="#">
+                          <div class="">
+                             <div class="card">
+                               <div class="card-body">
+                                 <div class="d-flex justify-content-between">
+                                   <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                                   <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                                 </div>
+                                <p>{{item.assignmentDescription}}</p>
+                               </div>
+                             </div>
+                          </div>
+                        </a>
+
+                          {% endif %}
+                    {% endfor %}
+
+                  {% else %}
+                    <div class="">
+                       <div class="card">
+                         <div class="card-body py-4 text-center">
+                           <h3>Nothing To Display For Now!!</h3>
+                         </div>
                        </div>
-                     </div>
-                  </div>
-                {% endfor %}
-              {% else %}
-                <div class="">
-                   <div class="card">
-                     <div class="card-body">
-                       <h5 class="card-title">Default Card</h5>
-                       Ut in ea error laudantium quas omnis officia. Sit sed praesentium voluptas. Corrupti inventore consequatur nisi necessitatibus modi consequuntur soluta id. Enim autem est esse natus assumenda. Non sunt dignissimos officiis expedita. Consequatur sint repellendus voluptas.
-
-                     </div>
-                   </div>
-                </div>
-              {% endif %}
-
+                    </div>
+                  {% endif %}
 
               </div>
             </div><!-- End Left side columns -->

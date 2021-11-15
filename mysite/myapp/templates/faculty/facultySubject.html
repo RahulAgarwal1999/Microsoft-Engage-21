@@ -439,27 +439,6 @@ Admin Page
         <div class="col-lg-9">
           <div class="row">
 
-                <!-- {% if announcements %}
-                  {% for announcement in announcements %}
-                    <div class="">
-                       <div class="card">
-                         <div class="card-body">
-                           <h5 class="card-title">{{announcement.announcementHeading}}</h5>
-                           {{announcement.announcementDescription}}
-                         </div>
-                       </div>
-                    </div>
-                  {% endfor %}
-                {% else %}
-                <div class="">
-                   <div class="card">
-                     <div class="card-body py-4 text-center">
-                       <h3>No Announcements Yet</h3>
-                     </div>
-                   </div>
-                </div>
-                {% endif %} -->
-
             {% if all_items_feed%}
               {% for item in all_items_feed %}
                   {% if item.type == 'announcement' %}
