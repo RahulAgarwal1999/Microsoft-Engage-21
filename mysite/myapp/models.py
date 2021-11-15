@@ -60,10 +60,26 @@ class Announcement(models.Model):
     classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
     announcementHeading = models.CharField(max_length=50,null=False)
     announcementDescription = models.TextField(blank=False,null=False)
-    announcementCreationTime = models.DateTimeField(default=datetime.now,null=True)
+    publishedTime = models.DateTimeField(default=datetime.now,null=True)
 
     def __str__(self):
         return str(self.announcementId) if self.announcementId else ''
+
+
+class Assignment(models.Model):
+    assignmentId = models.CharField(max_length=10,primary_key=True)
+    classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
+    assignmentHeading = models.CharField(max_length=50,null=False)
+    assignmentDescription = models.TextField(blank=False,null=False)
+    publishedTime = models.DateTimeField(default=datetime.now,null=True)
+    assignmentDueTime = models.DateTimeField(default=datetime.now,null=True)
+    assignmentLink = models.TextField(blank=True,null=True)
+    assignmentSubmission = models.TextField(null=True, blank=True, default='{}')
+
+    def __str__(self):
+        return str(self.assignmentId) if self.assignmentId else ''
+
+
 
 # Table storing List of classroom joined by students
 class StudentClassroomList(models.Model):

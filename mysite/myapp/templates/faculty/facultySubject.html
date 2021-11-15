@@ -12,7 +12,7 @@ Admin Page
     <div class="d-flex align-items-center justify-content-between ">
       <a href="{% url 'facultyDashboard' %}" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">VirtualClassroom</span>
       </a>
       <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
     </div><!-- End Logo -->
@@ -95,7 +95,7 @@ Admin Page
 
   <main id="main" class="main px-lg-5 mx-lg-5" >
 
-    <div class="pagetitle">
+    <div class="pagetitle px-lg-5">
       <h1>Classroom</h1>
       <nav>
         <ol class="breadcrumb">
@@ -105,7 +105,7 @@ Admin Page
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section dashboard">
+    <section class="section dashboard px-lg-5">
 
       <div class="card bg-dark text-white">
           <img src="{% static 'images/slides-1.jpg' %}" class="card-img" style="height:250px;" alt="...">
@@ -173,29 +173,85 @@ Admin Page
           </div>
         </form><!-- End Announcement Modal-->
 
-
         </div>
 
+
+
+
         <div class="col-xxl-3 col-md-4 col-sm-6">
-          <div class="card info-card sales-card">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#assignmentModal">
+            <div class="card info-card sales-card">
 
-            <div class="card-body">
-              <h5 class="card-title">Assignment</h5>
+              <div class="card-body">
+                <h5 class="card-title">Post Assignment</h5>
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-cart"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>145</h6>
+                    <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                  </div>
                 </div>
-                <div class="ps-3">
-                  <h6>145</h6>
-                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+              </div>
 
+            </div>
+          </a>
+
+          <!-- Modal for Assignment -->
+          <form class="needs-validation" method="POST" novalidate>
+            {% csrf_token %}
+            <div class="modal fade" id="assignmentModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Post Assignment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                   <div class="col-12">
+                     <label for="inputNanme4" class="form-label">Heading</label>
+                     <input type="text" class="form-control" name="assignmentHeading" id="assignmentHeading" required>
+                     <div class="invalid-feedback">Please, enter the Assignment Heading!</div>
+                   </div>
+                   <br>
+
+                   <div class="col-12">
+                     <label for="assignmentDescription" class="form-label">Description</label>
+                     <textarea type="text" class="form-control" name="assignmentDescription" rows="2" cols="80" required></textarea>
+                     <div class="invalid-feedback">Please, enter the Assignment Description!</div>
+                   </div>
+                   <br>
+                   <div class="col-12">
+                     <label for="inputNanme4" class="form-label">Assignment Link(Eg. Google Drive Link)</label>
+                     <input type="text" class="form-control" name="assignmentLink" id="assignmentLink">
+                   </div>
+                   <br>
+
+                   <div class="col-12">
+
+                     <label for="inputNanme4" class="form-label">Due Date and Time</label>
+                     <input type="datetime-local" class="form-control" name="dueDate" id="dueDate" required>
+                     <div class="invalid-feedback">Please, enter the Due Date and Time</div>
+                   </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" name="postAssignment" class="btn btn-primary">Post</button>
                 </div>
               </div>
             </div>
-
           </div>
+        </form><!-- End Assignment Modal-->
+
+
         </div>
+
+
 
         <div class="col-xxl-3 col-md-4 col-sm-6">
           <div class="card info-card sales-card">
@@ -383,7 +439,7 @@ Admin Page
         <div class="col-lg-9">
           <div class="row">
 
-                {% if announcements %}
+                <!-- {% if announcements %}
                   {% for announcement in announcements %}
                     <div class="">
                        <div class="card">
@@ -402,7 +458,49 @@ Admin Page
                      </div>
                    </div>
                 </div>
-                {% endif %}
+                {% endif %} -->
+
+            {% if all_items_feed%}
+              {% for item in all_items_feed %}
+                  {% if item.type == 'announcement' %}
+
+                  <div class="">
+                     <div class="card">
+                       <div class="card-body">
+                         <h5 class="card-title">{{item.announcementHeading}}</h5>
+                         {{item.announcementDescription}}
+                       </div>
+                     </div>
+                  </div>
+
+                  {% elif item.type == 'assignment' %}
+
+                <a href="#">
+                  <div class="">
+                     <div class="card">
+                       <div class="card-body">
+                         <div class="d-flex justify-content-between">
+                           <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                           <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                         </div>
+                        <p>{{item.assignmentDescription}}</p>
+                       </div>
+                     </div>
+                  </div>
+                </a>
+
+                  {% endif %}
+            {% endfor %}
+
+          {% else %}
+            <div class="">
+               <div class="card">
+                 <div class="card-body py-4 text-center">
+                   <h3>Nothing To Display For Now!!</h3>
+                 </div>
+               </div>
+            </div>
+          {% endif %}
 
 
               </div>

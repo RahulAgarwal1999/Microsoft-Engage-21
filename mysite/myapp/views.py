@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib import messages
+from django.db.models import Value,CharField
 # from mysite.settings import EMAIL_HOST_USER
 # from django.core.mail import send_mail, EmailMessage
 
@@ -358,13 +359,28 @@ def facultySubject(request,pk):
                 # print('-------Testing---------')
                 # print(announcementDescription)
 
-                temp = ''.join(random.choices(string.ascii_letters + string.digits, k=9))
-                announcementId = 'A' + temp
+                temp = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+                announcementId = 'AN' + temp
                 newAnnouncement = Announcement(announcementId = announcementId, classId_id = classDetails.pk ,announcementHeading = announcementHeading,
                                                 announcementDescription = announcementDescription)
 
                 newAnnouncement.save()
 
+                return redirect(request.path_info)
+
+            if 'postAssignment' in request.POST:
+                assignmentHeading = request.POST['assignmentHeading']
+                assignmentDescription = request.POST['assignmentDescription']
+                assignmentLink = request.POST['assignmentLink']
+                dueDate = request.POST['dueDate']
+
+                temp = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+                assignmentId = 'AS' + temp
+
+                newAssignment = Assignment(assignmentId = assignmentId, classId_id = classDetails.pk ,assignmentHeading = assignmentHeading,
+                                                assignmentDescription = assignmentDescription, assignmentLink = assignmentLink, assignmentDueTime = dueDate)
+
+                newAssignment.save()
                 return redirect(request.path_info)
 
             if 'linkSubmit' in request.POST:
@@ -379,10 +395,18 @@ def facultySubject(request,pk):
 
             return redirect(request.path_info)
 
-        announcements = Announcement.objects.filter(classId = classDetails.pk).order_by('-announcementCreationTime')
+        announcements = Announcement.objects.filter(classId = classDetails.pk).annotate(type=Value('announcement', CharField()))
+        assignments = Assignment.objects.filter(classId = classDetails.pk).annotate(type=Value('assignment', CharField()))
+
+        all_items = list(assignments) + list(announcements)
+
+        all_items_feed = sorted(all_items, key=lambda obj: obj.publishedTime,reverse=True)
+        # print(all_items_feed)
+
         context={
             'class':classDetails,
-            'announcements' : announcements
+            'announcements' : announcements,
+            'all_items_feed' : all_items_feed
         }
         return render(request,'faculty/facultySubject.html',context)
     else:
@@ -501,6 +525,16 @@ def studentDashboard(request):
         user = request.user
         student = StudentDetails.objects.get(studentId = user.pk)
 
+        # Getting classroom list joined by student
+        classRoomList = StudentClassroomList.objects.get(studentId_id = user.pk)
+        dict = json.loads(classRoomList.classList)
+        temp = [*dict]
+        classList =[]
+        for x in temp:
+            temp = ClassRoom.objects.get(classId = x)
+            classList.append(temp)
+        # ends
+
         if request.method == 'POST':
             if 'classJoin' in request.POST:
                 classId = request.POST['classJoinCode']
@@ -560,7 +594,10 @@ def studentDashboard(request):
                 return redirect(request.path_info)    # classJoin post ends
             return redirect(request.path_info)   #  post ends
 
-        return render(request,'student/studentDashboard.html')
+        context={
+            'classList' : classList,
+        }
+        return render(request,'student/studentDashboard.html',context)
 
     else:
         return redirect('studentLogin')
