@@ -189,19 +189,63 @@ Admin Page
 
                           {% elif item.type == 'assignment' %}
 
-                        <a href="#">
-                          <div class="">
-                             <div class="card">
-                               <div class="card-body">
-                                 <div class="d-flex justify-content-between">
-                                   <h5 class="card-title">{{item.assignmentHeading}}</h5>
-                                   <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+
+                              <div class="">
+                                 <div class="card px-lg-2">
+                                   <div class="card-body">
+                                     <div class="d-flex justify-content-between">
+                                       <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                                       <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                                     </div>
+
+                                    <p>{{item.assignmentDescription}}</p>
+                                    {% if item.assignmentLink %}
+                                      <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
+                                    {% else %}
+                                    {% endif %}
+
+                                    <div style="text-align:right;">
+                                      {% if user.username in item.assignmentSubmission %}
+                                        <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
+                                      {% else %}
+                                      <div class="">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#{{item.assignmentId}}">
+                                          <button class="btn btn-primary btn-sm" type="button" name="button"><span class="bi bi-cloud-plus"> </span> Attach</button>
+                                        </a>
+                                      </div>
+                                      {% endif %}
+                                    </div>
+                                   </div>
                                  </div>
-                                <p>{{item.assignmentDescription}}</p>
-                               </div>
-                             </div>
-                          </div>
-                        </a>
+                              </div>
+
+
+                            <form class="needs-validation" method="POST" novalidate>
+                              {% csrf_token %}
+                              <div class="modal fade" id="{{item.assignmentId}}" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">Post Submission</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                     <div class="col-12">
+                                       <label for="inputNanme4" class="form-label">Assignment Submission Link (Eg. Google Drive Link)</label>
+                                       <input type="text" class="form-control" name="assignmentLink" id="assignmentLink" required>
+                                       <div class="invalid-feedback">Please submit the assignment</div>
+                                       <input type="text"  class="form-control"  name="assignmentId" value="{{item.assignmentId}}" hidden required>
+                                     </div>
+                                     <br>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="postSubmission" class="btn btn-primary">Submit</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form><!-- End Assignment Modal-->
 
                           {% endif %}
                     {% endfor %}

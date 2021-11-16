@@ -659,7 +659,30 @@ def studentSubject(request,pk):
     if request.user.is_active and not request.user.is_staff and not request.user.is_superuser:
         id=pk
         classDetails = ClassRoom.objects.get(classId=id)
+        user=request.user
+        userDetails = StudentDetails.objects.get(studentId = user.pk)
         # announcements = Announcement.objects.filter(classId = id)
+
+        if request.method == 'POST':
+            if 'postSubmission' in request.POST:
+
+                assignmentId = request.POST['assignmentId']
+                assignmentSubmission = request.POST['assignmentLink']
+
+                assignment = Assignment.objects.get(assignmentId = assignmentId)
+                dict = json.loads(assignment.assignmentSubmission)
+
+                now = datetime.now()
+                # dd/mm/YY H:M:S format
+                dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+                dict[str(userDetails)] = [assignmentSubmission,dt_string]
+                input = json.dumps(dict)
+                assignment.assignmentSubmission = input;
+                assignment.save()
+
+                return redirect(request.path_info)
+            return redirect(request.path_info)
+
 
         announcements = Announcement.objects.filter(classId = id).annotate(type=Value('announcement', CharField()))
         assignments = Assignment.objects.filter(classId = id).annotate(type=Value('assignment', CharField()))
