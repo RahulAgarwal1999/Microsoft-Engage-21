@@ -79,6 +79,16 @@ class Assignment(models.Model):
     def __str__(self):
         return str(self.assignmentId) if self.assignmentId else ''
 
+# Table storing Attendence of classroom
+class Attendence(models.Model):
+    attendenceId = models.CharField(max_length=20,primary_key=True)
+    classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
+    totalClassConducted = models.BigIntegerField(null=True,blank=True,default=0)
+    attendenceList = models.TextField(blank=True,null=True,default='{}')
+    studentAttendence = models.TextField(blank=True,null=True,default='{}')
+
+    def __str__(self):
+        return str(self.classId) if self.classId else ''
 
 
 # Table storing List of classroom joined by students

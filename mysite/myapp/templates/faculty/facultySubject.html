@@ -277,16 +277,18 @@ Admin Page
 
 
         <div class="col-xxl-3 col-md-4 col-sm-6">
-          <div class="card info-card sales-card ">
-            <div class="card-body align-self-center mt-3">
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-clipboard-data"></i>
+          <a href="{% url 'classAttendence' class.pk %}">
+            <div class="card info-card sales-card ">
+              <div class="card-body align-self-center mt-3">
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-clipboard-data"></i>
+                  </div>
+                  <h5 class="card-title">Attendence</h5>
                 </div>
-                <h5 class="card-title">Attendence</h5>
               </div>
             </div>
-          </div>
+          </a>
         </div>
 
         <div class="col-xxl-3 col-md-4 col-sm-6">
@@ -297,9 +299,7 @@ Admin Page
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <i class="bi bi-people"></i>
                 </div>
-
                 <h5 class="card-title">Members</h5>
-
               </div>
             </div>
           </div>

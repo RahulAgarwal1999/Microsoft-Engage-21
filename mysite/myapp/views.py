@@ -4,7 +4,7 @@ import string
 import json
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from datetime import datetime,date
 from django.contrib import messages
 from django.db.models import Value,CharField
 from django.template.defaulttags import register
@@ -334,10 +334,17 @@ def facultyClassCreate(request):
             # Creating empty dict for the student list
             my_dict = {}
             input = json.dumps(my_dict)
-
             classroomStudentsList  = ClassroomStudentsList(classId_id = classCreate.pk, studentList = input )
             classroomStudentsList.save()
             # End Creating object for ClassroomStudentsList
+
+
+            # Creating object for attendence
+            attendenceId = str(classCreate.pk)
+            attendence = Attendence(attendenceId = attendenceId, classId_id = classCreate.pk)
+            attendence.save()
+            # End Creating object for attendence
+
 
             return redirect('facultyDashboard')
 
@@ -434,6 +441,80 @@ def classMembersList(request,pk):
     return render(request,'faculty/classMembersList.html',context)
 
 
+@login_required
+def classAttendence(request,pk):
+    if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
+        id = pk
+        studentListObject = ClassroomStudentsList.objects.get(classId = id)
+        studentListDict = json.loads(studentListObject.studentList)
+        studentList = [*studentListDict]
+        students = []
+
+        for x in studentList:
+            temp = User.objects.get(username = x)
+            students.append(temp)
+
+        # Getting attendence list of the classroom
+        attendenceObject = Attendence.objects.get(classId = id)
+        attendence = json.loads(attendenceObject.attendenceList)
+        studentAttendence =  json.loads(attendenceObject.studentAttendence)
+
+        now = date.today()
+        dt_string = now.strftime("%d/%m/%Y")
+
+        status = False
+        if dt_string in attendence:
+            status = True
+
+        if request.method == 'POST':
+            attended = request.POST.getlist('attendence')
+            print(attended)
+
+            now = date.today()
+            dt_string = now.strftime("%d/%m/%Y")
+
+            # Date already present
+            if dt_string in attendence:
+                attendee = attendence.get(dt_string)   #Getting todays dict of presentee
+                for student in attended:          #Traversing todays list of presentee list
+                    if student not in attendee:
+                        studentAttendence[student] = studentAttendence.get(student,0) + 1
+                    attendee[student]=True
+                attendence[dt_string] = attendee
+
+            #Date not present
+            else:
+                # Update total class conducted
+                attendenceObject.totalClassConducted += 1
+                temp = {}
+                attendence[dt_string] = temp
+                attendee = attendence.get(dt_string)   #Getting todays set of presentee
+                for student in attended:          #Traversing todays list of presentee list
+                    if student not in attendee:
+                        studentAttendence[student] = studentAttendence.get(student,0) + 1
+                    attendee[student]=True
+                attendence[dt_string] = attendee
+
+            attendenceStr = json.dumps(attendence)
+            studentAttendenceStr = json.dumps(studentAttendence)
+            attendenceObject.attendenceList = attendenceStr
+            attendenceObject.studentAttendence = studentAttendenceStr
+            attendenceObject.save()
+
+            return redirect(request.path_info)
+
+        context = {
+            'students' : students,
+            'status' : status,
+            'id':id
+        }
+        return render(request,'faculty/facultyAttendencePage.html',context)
+    else:
+        return redirect('facultyLogin')
+
+
+
+
 # Function to get assignment Submission link and time
 @register.filter
 def get_item_link(dictionary, key):
@@ -467,6 +548,8 @@ def assignmentSubmissions(request,pk):
 
 
         return render(request,'faculty/assignmentSubmissionList.html',context)
+    else:
+        return redirect('facultyLogin')
 
 # -----------------------------------
 # Student Section
