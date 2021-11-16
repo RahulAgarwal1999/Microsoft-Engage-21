@@ -11,10 +11,12 @@ urlpatterns = [
     path('faculty_dashboard/',views.facultyDashboard,name='facultyDashboard'),
     path('faculty_profile/',views.facultyProfile,name='facultyProfile'),
     path('faculty_classCreate/',views.facultyClassCreate,name='facultyClassCreate'),
+    path('class_members/<pk>',views.classMembersList,name='classMembersList'),
+    path('assignment_submissions/<pk>',views.assignmentSubmissions,name='assignmentSubmissions'),
     path('faculty_subject/<pk>',views.facultySubject,name='facultySubject'),
     path('faculty_logout/',views.facultyLogout,name='facultyLogout'),
 
-    path('class_members/<pk>',views.classMembersList,name='classMembersList'),
+
 
     path('student_login/',views.studentLogin,name="studentLogin"),
     path('student_register/',views.studentRegister,name="studentRegister"),

@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib import messages
 from django.db.models import Value,CharField
+from django.template.defaulttags import register
 # from mysite.settings import EMAIL_HOST_USER
 # from django.core.mail import send_mail, EmailMessage
 
@@ -431,6 +432,42 @@ def classMembersList(request,pk):
         'students' : students,
     }
     return render(request,'faculty/classMembersList.html',context)
+
+
+# Function to get assignment Submission link and time
+@register.filter
+def get_item_link(dictionary, key):
+    return dictionary.get(key)[0]
+
+@register.filter
+def get_date(dictionary, key):
+    return dictionary.get(key)[1]
+# Ends
+
+@login_required
+def assignmentSubmissions(request,pk):
+    if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
+        id = pk
+
+        assignment = Assignment.objects.get(assignmentId = id)
+        assignmentDict = json.loads(assignment.assignmentSubmission)
+
+        classId = assignment.classId
+        studentListObject = ClassroomStudentsList.objects.get(classId = classId)
+        studentListDict = json.loads(studentListObject.studentList)
+        studentList = [*studentListDict]
+        students = []
+        for x in studentList:
+            temp = User.objects.get(username = x)
+            students.append(temp)
+        context = {
+            'assignments' : assignmentDict,
+            'students' : students
+        }
+
+
+        return render(request,'faculty/assignmentSubmissionList.html',context)
+
 # -----------------------------------
 # Student Section
 # -----------------------------------
