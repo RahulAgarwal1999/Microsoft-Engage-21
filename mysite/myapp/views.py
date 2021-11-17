@@ -662,6 +662,7 @@ def studentDashboard(request):
         # Getting user details
         user = request.user
         student = StudentDetails.objects.get(studentId = user.pk)
+        userDetails = StudentDetails.objects.get(studentId = user.pk)
 
         # Getting classroom list joined by student
         classRoomList = StudentClassroomList.objects.get(studentId_id = user.pk)
@@ -734,6 +735,7 @@ def studentDashboard(request):
 
         context={
             'classList' : classList,
+            'userDetails' : userDetails
         }
         return render(request,'student/studentDashboard.html',context)
 
@@ -792,6 +794,9 @@ def studentSubject(request,pk):
         if user.username in attendenceList:
             totalAttended = int(attendenceList.get(user.username,0))
 
+        totalAbsent = totalConducted - totalAttended
+        attendencePercent = round((totalAttended/totalConducted)*100,1)
+
         record = []
         record.append(totalConducted)
         record.append(totalAttended)
@@ -828,7 +833,10 @@ def studentSubject(request,pk):
             'class' : classDetails,
             'all_items_feed' : all_items_feed,
             'totalConducted' : totalConducted,
-            'totalAttended' : totalAttended
+            'totalAttended' : totalAttended,
+            'totalAbsent' : totalAbsent,
+            'attendencePercent' : attendencePercent,
+            'userDetails' : userDetails
         }
         return render(request,'student/studentSubject.html',context)
     else:
