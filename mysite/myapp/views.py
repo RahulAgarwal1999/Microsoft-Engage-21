@@ -783,6 +783,19 @@ def studentSubject(request,pk):
         userDetails = StudentDetails.objects.get(studentId = user.pk)
         # announcements = Announcement.objects.filter(classId = id)
 
+        attendenceObject = Attendence.objects.get(classId = id)
+        attendenceList = json.loads(attendenceObject.studentAttendence)
+
+        totalConducted = attendenceObject.totalClassConducted
+        totalAttended = 0
+
+        if user.username in attendenceList:
+            totalAttended = int(attendenceList.get(user.username,0))
+
+        record = []
+        record.append(totalConducted)
+        record.append(totalAttended)
+
         if request.method == 'POST':
             if 'postSubmission' in request.POST:
 
@@ -814,6 +827,8 @@ def studentSubject(request,pk):
         context={
             'class' : classDetails,
             'all_items_feed' : all_items_feed,
+            'totalConducted' : totalConducted,
+            'totalAttended' : totalAttended
         }
         return render(request,'student/studentSubject.html',context)
     else:

@@ -30,7 +30,7 @@ Admin Page
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{user.first_name}} {{user.last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -150,14 +150,23 @@ Admin Page
                     <h4>Total Attended</h4>
                     <h4>Total Absent</h4> -->
                     <div class="col-lg-6 col-md-4 label ">Total Class</div>
-                    <div class="col-lg-6 col-md-8">: 45</div>
+                    <div class="col-lg-6 col-md-8">: <span id='totalAttended'>{{totalConducted}}</span></div>
                     <div class="col-lg-6 col-md-4 label ">Total Attended</div>
-                    <div class="col-lg-6 col-md-8">: 45</div>
+                    <div class="col-lg-6 col-md-8">: {{totalAttended}}</div>
                     <div class="col-lg-6 col-md-4 label ">Total Absent</div>
-                    <div class="col-lg-6 col-md-8">: 45</div>
+                    <div class="col-lg-6 col-md-8" id='totalAbsent'>0</div>
                     <div class="col-lg-6 col-md-4 label ">Attendence %</div>
-                    <div class="col-lg-6 col-md-8">: 90</div>
+                    <div class="col-lg-6 col-md-8" id='attendence%'>: 90</div>
 
+                    <script type="text/javascript">
+                      var a= {{totalConducted}}+2
+                      var b= {{totalAttended}}+1
+                      var c= a-b
+                      var d= (Math.round(b * 100) / a).toFixed(1);
+                      document.getElementById('totalAbsent').innerHTML = ':   ' + c;
+                      document.getElementById('attendence%').innerHTML = ':  ' + d;
+
+                    </script>
                   </div>
                 </div>
 
@@ -179,9 +188,16 @@ Admin Page
                           {% if item.type == 'announcement' %}
 
                           <div class="">
-                             <div class="card">
+                             <div class="card info-card sales-card p-lg-2 ">
                                <div class="card-body">
-                                 <h5 class="card-title">{{item.announcementHeading}}</h5>
+                                 <div class="">
+                                   <div class="d-flex align-items-center my-2">
+                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                       <i class="bi bi-chat-right-text"></i>
+                                     </div>
+                                     <h5 class="card-title">{{item.announcementHeading}}</h5>
+                                   </div>
+                                 </div>
                                  {{item.announcementDescription}}
                                </div>
                              </div>
@@ -189,21 +205,35 @@ Admin Page
 
                           {% elif item.type == 'assignment' %}
 
-
-                              <div class="">
-                                 <div class="card px-lg-2">
-                                   <div class="card-body">
-                                     <div class="d-flex justify-content-between">
+                            <div class="">
+                               <div class="card info-card sales-card p-lg-2">
+                                 <div class="card-body">
+                                   <div class="d-flex justify-content-between">
+                                     <div class="d-flex align-items-center my-2">
+                                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                         <i class="bi bi-book"></i>
+                                       </div>
                                        <h5 class="card-title">{{item.assignmentHeading}}</h5>
-                                       <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
                                      </div>
-
+                                     <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                                   </div>
                                     <p>{{item.assignmentDescription}}</p>
                                     {% if item.assignmentLink %}
+                                    <div class="d-flex justify-content-between">
                                       <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
+                                      <div style="text-align:right;">
+                                        {% if user.username in item.assignmentSubmission %}
+                                          <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
+                                        {% else %}
+                                        <div class="">
+                                          <a href="#" data-bs-toggle="modal" data-bs-target="#{{item.assignmentId}}">
+                                            <button class="btn btn-primary btn-sm" type="button" name="button"><span class="bi bi-cloud-plus"> </span> Attach</button>
+                                          </a>
+                                        </div>
+                                        {% endif %}
+                                      </div>
+                                    </div>
                                     {% else %}
-                                    {% endif %}
-
                                     <div style="text-align:right;">
                                       {% if user.username in item.assignmentSubmission %}
                                         <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
@@ -215,11 +245,12 @@ Admin Page
                                       </div>
                                       {% endif %}
                                     </div>
-                                   </div>
+                                    {% endif %}
                                  </div>
-                              </div>
+                               </div>
+                            </div>
 
-
+                            <!-- Assignment Submission Modal-->
                             <form class="needs-validation" method="POST" novalidate>
                               {% csrf_token %}
                               <div class="modal fade" id="{{item.assignmentId}}" tabindex="-1">
@@ -245,7 +276,7 @@ Admin Page
                                 </div>
                               </div>
                             </div>
-                          </form><!-- End Assignment Modal-->
+                          </form> <!-- End Assignment Submission Modal-->
 
                           {% endif %}
                     {% endfor %}

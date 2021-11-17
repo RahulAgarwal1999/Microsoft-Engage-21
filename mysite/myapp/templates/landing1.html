@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Page
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <a href="{% url 'facultyLogin' %}" type="button" class="btn btn-primary" name="login">Faculty</a>
+  <a href="{% url 'studentLogin' %}" type="button" class="btn btn-primary" name="register">Student</a>
+</div>
+
+{% endblock %}
