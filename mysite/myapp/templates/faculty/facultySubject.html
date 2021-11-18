@@ -110,48 +110,62 @@ Admin Page
           </div>
         </div>
 
-        <div class="col-lg-4 col-sm-12">
-            <div class="card">
-              <div class="card-body py-0 align-items-center">
-                <h5 class="card-title text-center mb-0">Time Table<i type="button" class="bi bi-pencil-square"></i></h5>
-                  <div class="mx-auto mt-0">
-                      <table class="table table-borderless ">
-                      <tbody>
+        <!-- Attendence Details -->
+        <div class="col-xxl-4 col-lg-5 col-sm-12">
+          <div class="card mb-3 info-card sales-card pb-0">
+           <div class="row g-0" style="background: #FFC300">
+             <div class="col-sm-4 align-self-center ">
+               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                 <i class="bi bi-calendar-check" style="color: #FFC300"></i>
+               </div>
+             </div>
+             <div class="col-sm-8 bg-white">
+               <div class="card-body mt-0  pb-0">
+                 <h5 class="card-title text-center my-0 pt-3 ">TIME TABLE</h5>
+                 <div class="activity">
+                   <div class="mx-auto mt-0 ">
+                       <table class="table table-borderless ">
+                       <tbody>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>MONDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                           </tr>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>TUESDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                           </tr>
 
-                          <!-- <tr>
-                            <td><strong>Monday</strong></td>
-                            <td><strong>-</strong></td>
-                          </tr> -->
-                          <!-- <tr>
-                            <td><strong>Tuesday</strong></td>
-                            <td><strong>12:00 - 14:35</strong></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Wednesday</strong></td>
-                            <td><strong>2016-05-25</strong></td>
-                          </tr> -->
-                          <tr>
-                            <td><strong>Thursday</strong></td>
-                            <td><strong>2016-05-25</strong></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Friday</strong></td>
-                            <td><strong>2016-05-25</strong></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Saturday</strong></td>
-                            <td><strong>2016-05-25</strong></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Sunday</strong></td>
-                            <td><strong>2016-05-25</strong></td>
-                          </tr>
-                      </tbody>
-                    </table>
-                  </div>
-              </div>
-            </div>
-          </div>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 2-3</strong></td>
+                           </tr>
+
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>THURSDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                           </tr>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>FRIDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                           </tr>
+
+                           <tr>
+                             <td class="py-1" style="color:#012970"><strong>SATURDAY</strong></td>
+                             <td class="py-1" style="color:#012970"><strong >: &nbsp; 5-6</strong></td>
+                           </tr>
+                           <tr>
+                             <td class="py-1" style="color:#012970"><strong>SUNDAY %</strong></td>
+                             <td class="py-1" style="color:#012970"><strong>: &nbsp; 7-9</strong></td>
+                           </tr>
+                       </tbody>
+                     </table>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+        </div><!-- End Attendence Details -->
 
     </div>
 
@@ -159,70 +173,84 @@ Admin Page
 
       <div class="row">
 
-        <div class="col-xxl-3 col-md-4 col-sm-6">
-          <a href="#" data-bs-toggle="modal" data-bs-target="#announcementModal">
-            <div class="card info-card sales-card ">
-              <div class="card-body align-self-center mt-3">
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-chat-right-text"></i>
-                  </div>
-                  <h5 class="card-title">Announcement</h5>
+        <!-- Meeting Details -->
+        <!-- End Meeting Details -->
+
+
+
+       <div class="col-xxl-3 col-md-4 col-sm-6">
+         <a href="#" data-bs-toggle="modal" data-bs-target="#announcementModal">
+           <div class="card info-card sales-card pb-0">
+            <div class="row g-0" style="background: #4154f1">
+              <div class="col-md-4 align-self-center ">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                  <i class="bi bi-chat-right-text" style=""></i>
                 </div>
               </div>
-            </div>
-          </a>
-
-          <!-- Modal for Announcement -->
-          <form class="" method="POST">
-            {% csrf_token %}
-            <div class="modal fade" id="announcementModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Post Announcement</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-
-                   <div class="col-12">
-                     <label for="inputNanme4" class="form-label">Heading</label>
-                     <input type="text" class="form-control" name="announcementHeading" id="announcementHeading">
-                   </div>
-                   <br>
-
-                   <div class="col-12">
-                     <label for="announcementDescription" class="form-label">Description</label>
-                     <textarea type="text" class="form-control" name="announcementDescription" rows="8" cols="80"></textarea>
-                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" name="postAnnouncement" class="btn btn-primary">Post</button>
+              <div class="col-md-8 bg-white">
+                <div class="card-body my-1  mt-2 mb-0">
+                  <h5 class="card-title text-center ">POST <br>ANNOUNCEMENT</h5>
                 </div>
               </div>
             </div>
           </div>
-        </form><!-- End Announcement Modal-->
+         </a>
 
-        </div>
+         <!-- Modal for Announcement -->
+         <form class="" method="POST">
+           {% csrf_token %}
+           <div class="modal fade" id="announcementModal" tabindex="-1">
+             <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title">Post Announcement</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+
+                  <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Heading</label>
+                    <input type="text" class="form-control" name="announcementHeading" id="announcementHeading">
+                  </div>
+                  <br>
+
+                  <div class="col-12">
+                    <label for="announcementDescription" class="form-label">Description</label>
+                    <textarea type="text" class="form-control" name="announcementDescription" rows="8" cols="80"></textarea>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 <button type="submit" name="postAnnouncement" class="btn btn-primary">Post</button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </form><!-- End Announcement Modal-->
+       </div>
 
 
 
 
         <div class="col-xxl-3 col-md-4 col-sm-6">
+
           <a href="#" data-bs-toggle="modal" data-bs-target="#assignmentModal">
-            <div class="card info-card sales-card ">
-              <div class="card-body align-self-center mt-3">
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-book"></i>
-                  </div>
-                  <h5 class="card-title">Assignment</h5>
-                </div>
-              </div>
-            </div>
+            <div class="card info-card sales-card pb-0">
+             <div class="row g-0" style="background: #4154f1">
+               <div class="col-md-4 align-self-center ">
+                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                   <i class="bi bi-pencil-square" style=""></i>
+                 </div>
+               </div>
+               <div class="col-md-8 bg-white">
+                 <div class="card-body my-1  mt-2 mb-0">
+                   <h5 class="card-title text-center ">POST <br>ASSIGNMENT</h5>
+                 </div>
+               </div>
+             </div>
+           </div>
           </a>
+
 
           <!-- Modal for Assignment -->
           <form class="needs-validation" method="POST" novalidate>
@@ -276,34 +304,42 @@ Admin Page
         </div>
 
 
-
         <div class="col-xxl-3 col-md-4 col-sm-6">
           <a href="{% url 'classAttendence' class.pk %}">
-            <div class="card info-card sales-card ">
-              <div class="card-body align-self-center mt-3">
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-clipboard-data"></i>
-                  </div>
-                  <h5 class="card-title">Attendence</h5>
-                </div>
-              </div>
-            </div>
+            <div class="card info-card sales-card pb-0">
+             <div class="row g-0" style="background: #4154f1">
+               <div class="col-md-4 align-self-center ">
+                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                   <i class="bi bi-clipboard-data" style=""></i>
+                 </div>
+               </div>
+               <div class="col-md-8 bg-white">
+                 <div class="card-body my-1  mt-2 mb-0">
+                   <h5 class="card-title text-center ">TAKE <br>Attendence</h5>
+                 </div>
+               </div>
+             </div>
+           </div>
           </a>
         </div>
 
         <div class="col-xxl-3 col-md-4 col-sm-6">
-        <a href="{% url 'classMembersList' class.pk%}">
-          <div class="card info-card sales-card ">
-            <div class="card-body align-self-center mt-3">
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-people"></i>
-                </div>
-                <h5 class="card-title">Members</h5>
-              </div>
-            </div>
-          </div>
+
+          <a href="{% url 'classMembersList' class.pk%}">
+            <div class="card info-card sales-card pb-0">
+             <div class="row g-0" style="background: #4154f1">
+               <div class="col-md-4 align-self-center ">
+                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                   <i class="bi bi-people" style=""></i>
+                 </div>
+               </div>
+               <div class="col-md-8 bg-white">
+                 <div class="card-body my-1  mt-2 mb-0">
+                   <h5 class="card-title text-center ">CHECK <br>MEMBERS</h5>
+                 </div>
+               </div>
+             </div>
+           </div>
           </a>
         </div>
 
@@ -319,20 +355,25 @@ Admin Page
         <div class="col-lg-3">
 
           <div class="">
+
             <a href="#" data-bs-toggle="modal" data-bs-target="#sendInvitesModal">
-              <div class="card info-card sales-card ">
-                <div class="card-body align-self-center mt-3">
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cursor"></i>
-                    </div>
-                    <h5 class="card-title">Send Invites</h5>
-                  </div>
-                </div>
-              </div>
+              <div class="card info-card sales-card pb-0">
+               <div class="row g-0" style="background: #4154f1">
+                 <div class="col-md-4 align-self-center ">
+                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                     <i class="bi bi-cursor" style=""></i>
+                   </div>
+                 </div>
+                 <div class="col-md-8 bg-white">
+                   <div class="card-body my-1  mt-2 mb-0">
+                     <h5 class="card-title text-center ">SEND <br>INVITES</h5>
+                   </div>
+                 </div>
+               </div>
+             </div>
             </a>
 
-            <!-- Modal for Announcement -->
+            <!-- Modal for Invites -->
             <form class="" method="post">
               <div class="modal fade" id="sendInvitesModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -356,53 +397,63 @@ Admin Page
                 </div>
               </div>
             </div>
-          </form><!-- End Announcement Modal-->
+          </form><!-- End Invites Modal-->
 
         </div>
 
 
+        <!-- Meeting Details -->
+        <div class="card mb-3 info-card sales-card pb-0">
+         <div class="row g-0" style="background: #4154f1">
+           <div class="col-md-4 align-self-center ">
+             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+               <i class="bi bi-camera-video" style=""></i>
+             </div>
+           </div>
+           <div class="col-md-8 bg-white">
+             <div class="card-body my-1">
+               <h5 class="card-title text-center">MEET LINK <i type="button" class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#gmeetModal"></i></h5>
+               <div class="activity text-center">
+                 {% if class.classLink %}
+                   <a type="button" href="{{class.classLink}}"  class="btn btn-primary col-sm-12" style="background: #4154f1" name="button">JOIN NOW</a>
+                 {% else %}
+                   <button type="button" class="btn btn-primary col-sm-8" style="background: #4154f1" name="button" disabled>JOIN NOW</button>
+                 {% endif %}
+
+               </div>
+             </div>
+           </div>
+         </div>
+       </div><!-- End Meeting Details -->
 
 
-          <!-- Meet Link -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title text-center">Gmeet Link <i type="button" class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#gmeetModal"></i></h5>
-
-                <!-- Modal for Meet Link -->
-                <form class="needs-validation" method='POST' novalidate  >
-                  {% csrf_token %}
-                  <div class="modal fade" id="gmeetModal" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Enter the Meeting Link</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="col-md-12">
-                            <div class="form-floating">
-                              <input type="text" name="meetLink" class="form-control" id="floatingName" placeholder="Enter the Link" required>
-                              <label for="floatingName">Meeting Link</label>
-                              <div class="invalid-feedback">Please enter the link</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" name="linkSubmit" class="btn btn-primary">Save changes</button>
-                        </div>
-                      </div>
+        <!-- Modal for Meet Link -->
+        <form class="needs-validation" method='POST' novalidate  >
+          {% csrf_token %}
+          <div class="modal fade" id="gmeetModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Enter the Meeting Link</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="url" name="meetLink" class="form-control" id="floatingName" placeholder="Enter the Link" required>
+                      <label for="floatingName">Meeting Link</label>
+                      <div class="invalid-feedback">Please enter Valid Link</div>
                     </div>
                   </div>
-                </form><!-- End Modal-->
-
-
-              <div class="activity text-center">
-                <button type="button" class="btn btn-primary px-5" name="button">Join Now</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" name="linkSubmit" class="btn btn-primary">Save changes</button>
+                </div>
               </div>
-
             </div>
-          </div><!-- End MeetLink -->
+          </div>
+        </form><!-- End Modal-->
 
 
           <div class="card">
@@ -448,49 +499,66 @@ Admin Page
               {% for item in all_items_feed %}
                   {% if item.type == 'announcement' %}
 
-                  <div class="">
-                     <div class="card info-card sales-card p-lg-2 ">
+                  <!-- Meeting Details -->
+                <div class="">
+                  <div class="card info-card sales-card pb-0">
+                   <div class="row g-0" style="background: #355C7D">
+                     <div class="col-sm-2 align-self-center ">
+                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto bg-white">
+                         <i class="bi bi-chat-right-text " style="color:#355C7D"></i>
+                       </div>
+                     </div>
+                     <div class="col-sm-10 bg-white" >
                        <div class="card-body">
                          <div class="">
-                           <div class="d-flex align-items-center my-2">
-                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                               <i class="bi bi-chat-right-text"></i>
-                             </div>
+                           <div class="">
                              <h5 class="card-title">{{item.announcementHeading}}</h5>
                            </div>
                          </div>
                          {{item.announcementDescription}}
                        </div>
                      </div>
-                  </div>
+                   </div>
+                 </div>
+                 </div><!-- End Meeting Details -->
 
                   {% elif item.type == 'assignment' %}
 
                   <div class="">
-                     <div class="card info-card sales-card p-lg-2">
-                       <div class="card-body">
-                         <div class="d-flex justify-content-between">
-                           <div class="d-flex align-items-center my-2">
-                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                               <i class="bi bi-book"></i>
-                             </div>
-                             <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                     <div class="card info-card sales-card  pb-0">
+                       <div class="row g-0" style="background: #99B898" >
+                         <div class="col-sm-2 align-self-center"  >
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="">
+                             <i class="bi bi-pencil-square " style="color: #99B898"></i>
                            </div>
-                           <h5 class="card-title">Due : {{item.assignmentDueTime |date:"M d, Y" }}</h5>
                          </div>
-                          <p>{{item.assignmentDescription}}</p>
-                          {% if item.assignmentLink %}
-                          <div class="d-flex justify-content-between">
-                            <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
-                            <div class="" style="text-align:right;">
-                              <a class="btn btn-primary btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button">View Submissions</a>
-                            </div>
-                          </div>
-                          {% else %}
-                          <div class="" style="text-align:right;">
-                            <a class="btn btn-primary btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button">View Submissions</a>
-                          </div>
-                          {% endif %}
+                         <div class="col-sm-10 bg-white">
+                           <div class="card-body">
+                             <div class="d-flex justify-content-between">
+                               <div class="col-sm-9">
+                                 <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                               </div>
+                               <div class="col-sm-3">
+                                 <h5 class="card-title">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                               </div>
+                             </div>
+
+                             <p>{{item.assignmentDescription}}</p>
+                             {% if item.assignmentLink %}
+                             <div class="d-flex justify-content-between">
+                               <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
+                               <div class="" style="text-align:right;">
+                                 <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
+                               </div>
+                             </div>
+                             {% else %}
+                             <div class="" style="text-align:right;">
+                               <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
+                             </div>
+                             {% endif %}
+
+                           </div>
+                         </div>
                        </div>
                      </div>
                   </div>

@@ -117,46 +117,48 @@ Admin Page
             </div>
         </div>
 
+        <!-- Attendence Details -->
         <div class="col-xxl-4 col-lg-5 col-sm-12">
+          <div class="card mb-3 info-card sales-card pb-0">
+           <div class="row g-0" style="background: #FFC300">
+             <div class="col-sm-4 align-self-center ">
+               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                 <i class="bi bi-calendar-check" style="color: #FFC300"></i>
+               </div>
+             </div>
+             <div class="col-sm-8 bg-white">
+               <div class="card-body mt-0  ">
+                 <h5 class="card-title text-center mt-0 pt-3">TIME TABLE</h5>
+                 <div class="activity">
+                   <div class="mx-auto mt-0">
+                       <table class="table table-borderless ">
+                       <tbody>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>MONDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; {{totalConducted}}</strong></td>
+                           </tr>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; {{totalAttended}}</strong></td>
+                           </tr>
+                           <tr>
+                             <td class="py-1" style="color:#012970"><strong>SATURDAY</strong></td>
+                             <td class="py-1" style="color:#012970"><strong >: &nbsp; {{totalAbsent}}</strong></td>
+                           </tr>
+                           <tr>
+                             <td class="py-1" style="color:#012970"><strong>SUNDAY %</strong></td>
+                             <td class="py-1" style="color:#012970"><strong>: &nbsp; {{attendencePercent}}</strong></td>
+                           </tr>
+                       </tbody>
+                     </table>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+        </div><!-- End Attendence Details -->
 
-          <!-- Attendence Details -->
-          <div class="card">
-            <div class="card-body">
-
-
-              <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
-                  <h5 class="card-title text-center">TIME TABLE</h5>
-
-                  <div class="row mx-auto">
-                    <!-- <h4 class=""">Total Class</h4>
-                    <h4>Total Attended</h4>
-                    <h4>Total Absent</h4> -->
-                    <div class="col-lg-6 col-md-4 label ">Total Class</div>
-                    <div class="col-lg-6 col-md-8">: <span id='totalAttended'>{{totalConducted}}</span></div>
-                    <div class="col-lg-6 col-md-4 label ">Total Attended</div>
-                    <div class="col-lg-6 col-md-8">: {{totalAttended}}</div>
-                    <div class="col-lg-6 col-md-4 label ">Total Absent</div>
-                    <div class="col-lg-6 col-md-8" id='totalAbsent'>0</div>
-                    <div class="col-lg-6 col-md-4 label ">Attendence %</div>
-                    <div class="col-lg-6 col-md-8" id='attendence%'>: 90</div>
-
-                    <script type="text/javascript">
-                      var a= {{totalConducted}}+2
-                      var b= {{totalAttended}}+1
-                      var c= a-b
-                      var d= (Math.round(b * 100) / a).toFixed(1);
-                      document.getElementById('totalAbsent').innerHTML = ':   ' + c;
-                      document.getElementById('attendence%').innerHTML = ':  ' + d;
-
-                    </script>
-                  </div>
-                </div>
-
-            </div>
-          </div><!-- Attendence Details -->
-
-        </div>
       </div>
 
 
@@ -197,7 +199,7 @@ Admin Page
 
 
 
-        <!-- Meeting Details -->
+        <!-- Attendence Details -->
         <div class="card mb-3 info-card sales-card pb-0">
          <div class="row g-0" style="background: #4154f1">
            <div class="col-sm-4 align-self-center ">
@@ -238,7 +240,7 @@ Admin Page
              </div>
            </div>
          </div>
-       </div><!-- End Meeting Details -->
+       </div><!-- End Attendence Details -->
 
 
        <!-- Meeting Details -->
@@ -269,26 +271,23 @@ Admin Page
 
 
         </div><!-- End Right side columns -->
-            <!-- Left side columns -->
-            <div class="col-lg-8">
-              <div class="row">
 
 
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
 
-
-
-
-                    {% if all_items_feed%}
-                      {% for item in all_items_feed %}
-                          {% if item.type == 'announcement' %}
-
+                {% if all_items_feed%}
+                  {% for item in all_items_feed %}
+                      {% if item.type == 'announcement' %}
 
                           <!-- Meeting Details -->
-                          <div class="card mb-3 info-card sales-card pb-0">
-                           <div class="row g-0" style="background: #4154f1">
+                        <div class="">
+                          <div class="card info-card sales-card pb-0">
+                           <div class="row g-0" style="background: #355C7D">
                              <div class="col-sm-2 align-self-center ">
                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto bg-white">
-                                 <i class="bi bi-chat-right-text " style="color:#4154f1"></i>
+                                 <i class="bi bi-chat-right-text " style="color:#355C7D"></i>
                                </div>
                              </div>
                              <div class="col-sm-10 bg-white" >
@@ -302,113 +301,109 @@ Admin Page
                                </div>
                              </div>
                            </div>
+                         </div>
                          </div><!-- End Meeting Details -->
 
+                      {% elif item.type == 'assignment' %}
 
-
-
-                          {% elif item.type == 'assignment' %}
-
-                          <div class="">
-                             <div class="card info-card sales-card  pb-0">
-                               <div class="row g-0" style="background: #4154f1" >
-                                 <div class="col-sm-2 align-self-center"  >
-                                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="">
-                                     <i class="bi bi-pencil-square " style="color: #4154f1"></i>
-                                   </div>
-                                 </div>
-                                 <div class="col-sm-10 bg-white">
-                                   <div class="card-body">
-                                     <div class="d-flex justify-content-between">
-                                       <div class="col-sm-9">
-                                         <h5 class="card-title">{{item.assignmentHeading}}</h5>
-                                       </div>
-                                       <div class="col-sm-3">
-                                         <h5 class="card-title">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
-                                       </div>
-                                     </div>
-
-                                      <p>{{item.assignmentDescription}}</p>
-                                      {% if item.assignmentLink %}
-                                      <div class="d-flex justify-content-between">
-                                        <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Clicks Here</a></strong></p>
-                                        <div style="text-align:right;">
-                                          {% if user.username in item.assignmentSubmission %}
-                                            <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
-                                          {% else %}
-                                          <div class="">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#{{item.assignmentId}}">
-                                              <button class="btn btn-primary btn-sm" type="button" name="button"><span class="bi bi-cloud-plus"> </span> Attach</button>
-                                            </a>
-                                          </div>
-                                          {% endif %}
-                                        </div>
-                                      </div>
-                                      {% else %}
-                                      <div style="text-align:right;">
-                                        {% if user.username in item.assignmentSubmission %}
-                                          <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
-                                        {% else %}
-                                        <div class="">
-                                          <a href="#" data-bs-toggle="modal" data-bs-target="#{{item.assignmentId}}">
-                                            <button class="btn btn-primary btn-sm" type="button" name="button"><span class="bi bi-cloud-plus"> </span> Attach</button>
-                                          </a>
-                                        </div>
-                                        {% endif %}
-                                      </div>
-                                      {% endif %}
-
-                                   </div>
-                                 </div>
+                      <div class="">
+                         <div class="card info-card sales-card  pb-0">
+                           <div class="row g-0" style="background: #99B898" >
+                             <div class="col-sm-2 align-self-center"  >
+                               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="">
+                                 <i class="bi bi-pencil-square " style="color: #99B898"></i>
                                </div>
                              </div>
-                          </div>
+                             <div class="col-sm-10 bg-white">
+                               <div class="card-body">
+                                 <div class="d-flex justify-content-between">
+                                   <div class="col-sm-9">
+                                     <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                                   </div>
+                                   <div class="col-sm-3">
+                                     <h5 class="card-title">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                                   </div>
+                                 </div>
 
-
-
-                            <!-- Assignment Submission Modal-->
-                            <form class="needs-validation" method="POST" novalidate>
-                              {% csrf_token %}
-                              <div class="modal fade" id="{{item.assignmentId}}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title">Post Submission</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  <p>{{item.assignmentDescription}}</p>
+                                  {% if item.assignmentLink %}
+                                  <div class="d-flex justify-content-between">
+                                    <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Clicks Here</a></strong></p>
+                                    <div style="text-align:right;">
+                                      {% if user.username in item.assignmentSubmission %}
+                                        <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
+                                      {% else %}
+                                      <div class="">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#{{item.assignmentId}}">
+                                          <button class="btn btn-primary btn-sm" type="button" name="button"><span class="bi bi-cloud-plus"> </span> Attach</button>
+                                        </a>
+                                      </div>
+                                      {% endif %}
                                     </div>
-                                    <div class="modal-body">
-                                     <div class="col-12">
-                                       <label for="inputNanme4" class="form-label">Assignment Submission Link (Eg. Google Drive Link)</label>
-                                       <input type="url" class="form-control" name="assignmentLink" id="assignmentLink" required>
-                                       <div class="invalid-feedback">Please submit the assignment with valid URL</div>
-                                       <input type="text"  class="form-control"  name="assignmentId" value="{{item.assignmentId}}" hidden required>
-                                     </div>
-                                     <br>
                                   </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" name="postSubmission" class="btn btn-primary">Submit</button>
+                                  {% else %}
+                                  <div style="text-align:right;">
+                                    {% if user.username in item.assignmentSubmission %}
+                                      <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
+                                    {% else %}
+                                    <div class="">
+                                      <a href="#" data-bs-toggle="modal" data-bs-target="#{{item.assignmentId}}">
+                                        <button class="btn btn-primary btn-sm" type="button" name="button"><span class="bi bi-cloud-plus"> </span> Attach</button>
+                                      </a>
+                                    </div>
+                                    {% endif %}
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                          </form> <!-- End Assignment Submission Modal-->
+                                  {% endif %}
 
-                          {% endif %}
-                    {% endfor %}
-
-                  {% else %}
-                    <div class="">
-                       <div class="card">
-                         <div class="card-body py-4 text-center">
-                           <h3>Nothing To Display For Now!!</h3>
+                               </div>
+                             </div>
+                           </div>
                          </div>
-                       </div>
-                    </div>
-                  {% endif %}
+                      </div>
 
-              </div>
-            </div><!-- End Left side columns -->
+                      <!-- Assignment Submission Modal-->
+                      <form class="needs-validation" method="POST" novalidate>
+                        {% csrf_token %}
+                        <div class="modal fade" id="{{item.assignmentId}}" tabindex="-1">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Post Submission</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                               <div class="col-12">
+                                 <label for="inputNanme4" class="form-label">Assignment Submission Link (Eg. Google Drive Link)</label>
+                                 <input type="url" class="form-control" name="assignmentLink" id="assignmentLink" required>
+                                 <div class="invalid-feedback">Please submit the assignment with valid URL</div>
+                                 <input type="text"  class="form-control"  name="assignmentId" value="{{item.assignmentId}}" hidden required>
+                               </div>
+                               <br>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" name="postSubmission" class="btn btn-primary">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form> <!-- End Assignment Submission Modal-->
+
+                    {% endif %}
+              {% endfor %}
+
+              {% else %}
+                <div class="">
+                   <div class="card">
+                     <div class="card-body py-4 text-center">
+                       <h3>Nothing To Display For Now!!</h3>
+                     </div>
+                   </div>
+                </div>
+              {% endif %}
+
+          </div>
+        </div><!-- End Left side columns -->
 
 
 
