@@ -130,46 +130,345 @@ Admin Page
              </div>
              <div class="col-sm-8 bg-white">
                <div class="card-body mt-0  pb-0">
-                 <h5 class="card-title text-center my-0 pt-3 ">TIME TABLE</h5>
+                 <h5 class="card-title text-center my-0 pt-3 ">TIME TABLE &nbsp;<i type="button" class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#timeTableModal"></i></h5>
                  <div class="activity">
                    <div class="mx-auto mt-0 ">
                        <table class="table table-borderless ">
                        <tbody>
                            <tr >
                              <td class="py-1" style="color: #012970"><strong>MONDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                             {% if 'Monday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Monday' }} - {{ timeTable|get_end_time:'Monday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
                            <tr >
                              <td class="py-1" style="color: #012970"><strong>TUESDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                             {% if 'Tuesday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Tuesday' }} - {{ timeTable|get_end_time:'Tuesday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
 
                            <tr >
                              <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 2-3</strong></td>
+                             {% if 'Wednesday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Wednesday' }} - {{ timeTable|get_end_time:'Wednesday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
 
                            <tr >
                              <td class="py-1" style="color: #012970"><strong>THURSDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                             {% if 'Thursday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Thursday' }} - {{ timeTable|get_end_time:'Thursday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
                            <tr >
                              <td class="py-1" style="color: #012970"><strong>FRIDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                             {% if 'Friday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Friday' }} - {{ timeTable|get_end_time:'Friday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
 
                            <tr>
                              <td class="py-1" style="color:#012970"><strong>SATURDAY</strong></td>
-                             <td class="py-1" style="color:#012970"><strong >: &nbsp; 5-6</strong></td>
+                             {% if 'Saturday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Saturday' }} - {{ timeTable|get_end_time:'Saturday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
                            <tr>
-                             <td class="py-1" style="color:#012970"><strong>SUNDAY %</strong></td>
-                             <td class="py-1" style="color:#012970"><strong>: &nbsp; 7-9</strong></td>
+                             <td class="py-1" style="color:#012970"><strong>SUNDAY </strong></td>
+                             {% if 'Sunday' in timeTable %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Sunday' }} - {{ timeTable|get_end_time:'Sunday' }}</strong></td>
+                             {% else %}
+                              <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                             {% endif %}
                            </tr>
                        </tbody>
                      </table>
                    </div>
                  </div>
+
+                 <!-- Modal for Meet Link -->
+                 <form class="needs-validation" method='POST' novalidate  >
+                   {% csrf_token %}
+                   <div class="modal fade" id="timeTableModal" tabindex="-1">
+                     <div class="modal-dialog modal-dialog-centered">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <h5 class="modal-title">Update Time Table</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                           <div class="col-md-12">
+                             <div class="form-floating">
+                               <!-- Monday -->
+                               <div class="container px-2">
+
+
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="monday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('monday_start');
+                                                  var input2 = document.getElementById('monday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Monday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="monday" style="font-size:20px;">Monday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="monday_start" class="form-control" id="monday_start" value=0 disabled>
+                                       <label for="monday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="monday_end" class="form-control" id="monday_end" value=0 disabled>
+                                       <label for="monday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div><!-- Ends Monday -->
+
+
+                               <!-- Tuesday -->
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="tuesday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('tuesday_start');
+                                                  var input2 = document.getElementById('tuesday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Tuesday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="tuesday" style="font-size:20px;">Tuesday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="tuesday_start" class="form-control" id="tuesday_start" value=0 disabled>
+                                       <label for="tuesday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="tuesday_end" class="form-control" id="tuesday_end" value=0 disabled>
+                                       <label for="tuesday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div><!-- Ends Tuesday -->
+
+
+                               <!-- Wednesday -->
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="wednesday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('wednesday_start');
+                                                  var input2 = document.getElementById('wednesday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Wednesday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="acceptTerms" style="font-size:20px;">Wednesday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="wednesday_start" class="form-control" id="wednesday_start" value=0 disabled>
+                                       <label for="wednesday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="wednesday_end" class="form-control" id="wednesday_end" value=0 disabled>
+                                       <label for="wednesday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div> <!-- Ends Wednesday -->
+
+                               <!-- Thursday -->
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="thursday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('thursday_start');
+                                                  var input2 = document.getElementById('thursday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Thursday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="acceptTerms" style="font-size:20px;">Thursday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="thursday_start" class="form-control" id="thursday_start" value=0 disabled>
+                                       <label for="thursday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="thursday_end" class="form-control" id="thursday_end" value=0 disabled>
+                                       <label for="thursday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div> <!-- Ends Thursday -->
+
+                               <!-- Friday -->
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="friday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('friday_start');
+                                                  var input2 = document.getElementById('friday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Friday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="acceptTerms" style="font-size:20px;">Friday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="friday_start" class="form-control" id="friday_start"  value=0 disabled>
+                                       <label for="friday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="friday_end" class="form-control" id="friday_end"  value=0 disabled>
+                                       <label for="friday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div> <!-- Ends Friday -->
+
+                               <!-- Saturday -->
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="saturday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('saturday_start');
+                                                  var input2 = document.getElementById('saturday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Saturday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="acceptTerms" style="font-size:20px;">Saturday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="saturday_start" class="form-control" id="saturday_start" value=0 disabled>
+                                       <label for="saturday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="saturday_end" class="form-control" id="saturday_end" value=0 disabled>
+                                       <label for="saturday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div> <!-- Ends Saturday -->
+
+                               <!-- Sunday -->
+                               <div class="row my-2">
+                                 <div class="col-lg-4 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-check mt-2 ">
+                                       <input class="form-check-input" id="sunday" type="checkbox" name="time"
+                                         onclick="var input1 = document.getElementById('sunday_start');
+                                                  var input2 = document.getElementById('sunday_end');
+                                                  if(this.checked){ input1.disabled = false; input2.disabled = false; input.focus();}
+                                                  else{input1.disabled=true; input2.disabled = true;}" value="Sunday" style="font-size:25px;" />
+                                       <label class="form-check-label" for="acceptTerms" style="font-size:20px;">Sunday</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="number" min=0 max=24 name="sunday_start" class="form-control" id="sunday_start" value=0 disabled>
+                                       <label for="sunday_start">From</label>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="col-lg-3 mx-auto">
+                                   <div class="col-md-12">
+                                     <div class="form-floating">
+                                       <input type="text" name="sunday_end" class="form-control" id="sunday_end" value=0 disabled>
+                                       <label for="sunday_end">To</label>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div> <!-- Ends Sunday -->
+                               </div>
+
+                             </div>
+                           </div>
+                         </div>
+                         <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           <button type="submit" name="timeSubmit" class="btn btn-primary">Save changes</button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </form><!-- End Modal-->
+
+
                </div>
              </div>
            </div>

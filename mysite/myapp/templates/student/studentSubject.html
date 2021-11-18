@@ -140,39 +140,67 @@ Admin Page
                  <div class="activity">
                    <div class="mx-auto mt-0 ">
                        <table class="table table-borderless ">
-                       <tbody>
-                           <tr >
-                             <td class="py-1" style="color: #012970"><strong>MONDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
-                           </tr>
-                           <tr >
-                             <td class="py-1" style="color: #012970"><strong>TUESDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
-                           </tr>
+                         <tbody>
+                             <tr >
+                               <td class="py-1" style="color: #012970"><strong>MONDAY</strong></td>
+                               {% if 'Monday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Monday' }} - {{ timeTable|get_end_time:'Monday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
+                             <tr >
+                               <td class="py-1" style="color: #012970"><strong>TUESDAY</strong></td>
+                               {% if 'Tuesday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Tuesday' }} - {{ timeTable|get_end_time:'Tuesday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
 
-                           <tr >
-                             <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 2-3</strong></td>
-                           </tr>
+                             <tr >
+                               <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
+                               {% if 'Wednesday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Wednesday' }} - {{ timeTable|get_end_time:'Wednesday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
 
-                           <tr >
-                             <td class="py-1" style="color: #012970"><strong>THURSDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
-                           </tr>
-                           <tr >
-                             <td class="py-1" style="color: #012970"><strong>FRIDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
-                           </tr>
+                             <tr >
+                               <td class="py-1" style="color: #012970"><strong>THURSDAY</strong></td>
+                               {% if 'Thursday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Thursday' }} - {{ timeTable|get_end_time:'Thursday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
+                             <tr >
+                               <td class="py-1" style="color: #012970"><strong>FRIDAY</strong></td>
+                               {% if 'Friday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Friday' }} - {{ timeTable|get_end_time:'Friday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
 
-                           <tr>
-                             <td class="py-1" style="color:#012970"><strong>SATURDAY</strong></td>
-                             <td class="py-1" style="color:#012970"><strong >: &nbsp; 5-6</strong></td>
-                           </tr>
-                           <tr>
-                             <td class="py-1" style="color:#012970"><strong>SUNDAY %</strong></td>
-                             <td class="py-1" style="color:#012970"><strong>: &nbsp; 7-9</strong></td>
-                           </tr>
-                       </tbody>
+                             <tr>
+                               <td class="py-1" style="color:#012970"><strong>SATURDAY</strong></td>
+                               {% if 'Saturday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Saturday' }} - {{ timeTable|get_end_time:'Saturday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
+                             <tr>
+                               <td class="py-1" style="color:#012970"><strong>SUNDAY </strong></td>
+                               {% if 'Sunday' in timeTable %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; {{ timeTable|get_start_time:'Sunday' }} - {{ timeTable|get_end_time:'Sunday' }}</strong></td>
+                               {% else %}
+                                <td class="py-1" style="color: #012970"><strong>: &nbsp; ---</strong></td>
+                               {% endif %}
+                             </tr>
+                         </tbody>
                      </table>
                    </div>
                  </div>

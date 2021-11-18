@@ -351,6 +351,16 @@ def facultyClassCreate(request):
     else:
         return redirect('facultyLogin')
 
+
+@register.filter(name='get_start_time')
+def get_start_time(d, k):
+    # print('-------call------------')
+    return d[k][0]
+
+@register.filter(name='get_end_time')
+def get_end_time(d, k):
+    return d[k][1]
+
 # Faculty Subject
 @login_required
 def facultySubject(request,pk):
@@ -360,6 +370,110 @@ def facultySubject(request,pk):
         classDetails = ClassRoom.objects.get(classId=id)
         userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
         if request.method=='POST':
+
+            if 'timeSubmit' in request.POST:
+                # Getting list of days when class will happen
+                timetable = ""
+                temp = request.POST.getlist('time')
+
+                # monday = request.POST['monday']
+                if 'Monday' in temp:
+                    # Storing Day,start_time and end_time as a list
+                    timing=[]
+                    timing.append('Monday')
+                    monday_start = request.POST.get('monday_start',0)
+                    monday_end = request.POST.get('monday_end',0)
+                    timing.append(monday_start)
+                    timing.append(monday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+                # print(monday)
+
+                # tuesday = request.POST.get('tuesday')
+                if 'Tuesday' in temp:
+                    # Storing Day,start_time and end_time as a timing
+                    timing=[]
+                    timing.append('Tuesday')
+                    tuesday_start = request.POST.get('tuesday_start',0)
+                    tuesday_end = request.POST.get('tuesday_end',0)
+                    timing.append(tuesday_start)
+                    timing.append(tuesday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+                # print(tuesday)
+
+                # wednesday = request.POST['wednesday']
+                if 'Wednesday' in temp:
+                    # Storing Day,start_time and end_time as a timing
+                    timing=[]
+                    timing.append('Wednesday')
+                    wednesday_start = request.POST.get('wednesday_start',0)
+                    wednesday_end = request.POST.get('wednesday_end',0)
+                    timing.append(wednesday_start)
+                    timing.append(wednesday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+
+                # thursday = request.POST['thursday']
+                if 'Thursday' in temp:
+                    # Storing Day,start_time and end_time as a timing
+                    timing=[]
+                    timing.append('Thursday')
+                    thursday_start = request.POST.get('thursday_start',0)
+                    thursday_end = request.POST.get('thursday_end',0)
+                    timing.append(thursday_start)
+                    timing.append(thursday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+
+                # friday = request.POST['friday']
+                if 'Friday' in temp:
+                    # Storing Day,start_time and end_time as a timing
+                    timing=[]
+                    timing.append('Friday')
+                    friday_start = request.POST.get('friday_start',0)
+                    friday_end = request.POST.get('friday_end',0)
+                    timing.append(friday_start)
+                    timing.append(friday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+                # saturday = request.POST['saturday']
+                if 'Saturday' in temp:
+                    # Storing Day,start_time and end_time as a timing
+                    timing=[]
+                    timing.append('Saturday')
+                    saturday_start = request.POST.get('saturday_start',0)
+                    saturday_end = request.POST.get('saturday_end',0)
+                    timing.append(saturday_start)
+                    timing.append(saturday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+                # sunday = request.POST['sunday']
+                if 'Sunday' in temp:
+                    # Storing Day,start_time and end_time as a timing
+                    timing=[]
+                    timing.append('Sunday')
+                    sunday_start = request.POST.get('sunday_start',0)
+                    sunday_end = request.POST.get('sunday_end',0)
+                    timing.append(sunday_start)
+                    timing.append(sunday_end)
+                    timetable += str(timing)
+                    timetable += '+'
+
+                if len(timetable) > 0:
+                    timetable = timetable[:-1]
+                # print(timetable)
+                classDetails.classTimeTable = timetable
+                classDetails.save()
+                return redirect(request.path_info)
+
+
             if 'postAnnouncement' in request.POST:
                 announcementHeading = request.POST['announcementHeading']
                 announcementDescription = request.POST['announcementDescription']
@@ -433,21 +547,42 @@ def facultySubject(request,pk):
 
         announcements = Announcement.objects.filter(classId = classDetails.pk).annotate(type=Value('announcement', CharField()))
         assignments = Assignment.objects.filter(classId = classDetails.pk).annotate(type=Value('assignment', CharField()))
-
         all_items = list(assignments) + list(announcements)
-
         all_items_feed = sorted(all_items, key=lambda obj: obj.publishedTime,reverse=True)
         # print(all_items_feed)
+
+
+        timeTable = {}
+        strTime = classDetails.classTimeTable
+        try:
+            days = strTime.split('+')
+            for x in days:
+                curr = x.split(',')
+                a = curr[0][1:]
+                a=a.strip()
+                a=a.strip("\'")
+                b = curr[1]
+                b=b.strip()
+                b=b.strip("\'")
+                c = curr[2][:len(curr[2])-1]
+                c=c.strip()
+                c=c.strip("\'")
+                timeTable[a] = [b,c]
+        except:
+            timeTable={}
+        # print(timeTable)
 
         context={
             'class':classDetails,
             'announcements' : announcements,
             'all_items_feed' : all_items_feed,
-            'userDetails': userDetails
+            'userDetails': userDetails,
+            'timeTable':timeTable
         }
         return render(request,'faculty/facultySubject.html',context)
     else:
         return redirect('facultyLogin')
+
 
 
 @login_required
@@ -853,10 +988,29 @@ def studentSubject(request,pk):
 
         announcements = Announcement.objects.filter(classId = id).annotate(type=Value('announcement', CharField()))
         assignments = Assignment.objects.filter(classId = id).annotate(type=Value('assignment', CharField()))
-
         all_items = list(assignments) + list(announcements)
-
         all_items_feed = sorted(all_items, key=lambda obj: obj.publishedTime,reverse=True)
+
+        timeTable = {}
+        strTime = classDetails.classTimeTable
+        try:
+            days = strTime.split('+')
+            for x in days:
+                curr = x.split(',')
+                a = curr[0][1:]
+                a=a.strip()
+                a=a.strip("\'")
+                b = curr[1]
+                b=b.strip()
+                b=b.strip("\'")
+                c = curr[2][:len(curr[2])-1]
+                c=c.strip()
+                c=c.strip("\'")
+                timeTable[a] = [b,c]
+        except:
+            timeTable={}
+        # print(timeTable)
+
 
         context={
             'class' : classDetails,
@@ -865,7 +1019,8 @@ def studentSubject(request,pk):
             'totalAttended' : totalAttended,
             'totalAbsent' : totalAbsent,
             'attendencePercent' : attendencePercent,
-            'userDetails' : userDetails
+            'userDetails' : userDetails,
+            'timeTable' : timeTable
         }
         return render(request,'student/studentSubject.html',context)
     else:
