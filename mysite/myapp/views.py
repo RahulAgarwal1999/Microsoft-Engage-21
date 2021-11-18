@@ -161,6 +161,7 @@ def facultyDashboard(request):
 
         context={
             'classRooms' : classRooms,
+            'faculty' : faculty
         }
         return render(request,'faculty/facultyDashboard.html',context)
     else:
@@ -344,12 +345,9 @@ def facultyClassCreate(request):
             attendence = Attendence(attendenceId = attendenceId, classId_id = classCreate.pk)
             attendence.save()
             # End Creating object for attendence
-
-
             return redirect('facultyDashboard')
 
         return render(request,'faculty/facultyClassCreate.html')
-
     else:
         return redirect('facultyLogin')
 
@@ -358,7 +356,9 @@ def facultyClassCreate(request):
 def facultySubject(request,pk):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         id=pk
+        user=request.user
         classDetails = ClassRoom.objects.get(classId=id)
+        userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
         if request.method=='POST':
             if 'postAnnouncement' in request.POST:
                 announcementHeading = request.POST['announcementHeading']
@@ -391,6 +391,34 @@ def facultySubject(request,pk):
                 newAssignment.save()
                 return redirect(request.path_info)
 
+            if 'sendInvite' in request.POST:
+                studentId = request.POST['studentId']
+
+                try:
+                    student = User.objects.get(username = studentId)
+                    email = student.email
+                    email = 'rahul.agarwal31101999@gmail.com'
+
+                    # role_user_email = email
+                    # mail_subject = "[INVITE] - You have been invited to join the Classroom"
+                    # message = render_to_string('classInviteSend.html', {
+                    #     'facultyName': classDetails.classFacultyName,
+                    #     'className' : classDetails.classname,
+                    #     'firstname': student.first_name,
+                    #     'lastname': student.last_name,
+                    #     'classId' : id,
+                    # })
+                    #
+                    # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+                    # email.send()
+
+                    return redirect(request.path_info)
+                except:
+                    return redirect(request.path_info)
+
+                return redirect(request.path_info)
+
+
             if 'linkSubmit' in request.POST:
                 meetLink = request.POST['meetLink']
 
@@ -414,7 +442,8 @@ def facultySubject(request,pk):
         context={
             'class':classDetails,
             'announcements' : announcements,
-            'all_items_feed' : all_items_feed
+            'all_items_feed' : all_items_feed,
+            'userDetails': userDetails
         }
         return render(request,'faculty/facultySubject.html',context)
     else:

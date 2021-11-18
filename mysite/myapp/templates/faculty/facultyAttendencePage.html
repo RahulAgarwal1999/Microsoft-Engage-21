@@ -12,8 +12,8 @@ Admin Page
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{% url 'facultyDashboard' %}" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">VirtualClassroom</span>
+        <img src="" alt="">
+        <span class="d-lg-block">VirtualClassroom</span>
       </a>
     </div><!-- End Logo -->
 
@@ -108,9 +108,9 @@ Admin Page
               </div>
             <div class="my-3">
               {% if status %}
-                <h5>Today's Attendence Status : <strong>MARKED</strong></h5>
+                <h5>Today's Attendence Status : <strong style="color:green;">MARKED</strong></h5>
               {% else %}
-                <h5>Today's Attendence Status : <strong>NOT MARKED</strong> </h5>
+                <h5>Today's Attendence Status : <strong style="color:red;">NOT MARKED</strong> </h5>
               {% endif %}
             </div>
 

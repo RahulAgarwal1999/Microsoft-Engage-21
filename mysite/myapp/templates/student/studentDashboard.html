@@ -6,23 +6,14 @@ Admin Page
 
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center px-5">
+  <header id="header" class="header fixed-top d-flex align-items-center px-lg-5">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{% url 'studentDashboard' %}" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">VirtualClassroom</span>
+        <img src="" alt="">
+        <span class=" d-lg-block">VirtualClassroom</span>
       </a>
-      <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
     </div><!-- End Logo -->
-
-    <!-- <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div> -->
-    <!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -30,14 +21,13 @@ Admin Page
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{ userDetails.studentPic.url }}" alt="Profile" class="rounded-circle" style="width:40px;">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{user.first_name}} {{user.last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{user.first_name}} {{user.last_name}}</h6>
-              <!-- <span>Web Designer</span> -->
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -104,35 +94,31 @@ Admin Page
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-9">
+        <div class="col-lg-8">
           <div class="row">
 
           {% if classList %}
             {% for class in classList %}
-
-                <div class="col-xxl-4 col-md-6">
-                    <a href="{% url 'studentSubject' class.pk %}">
-                    <div class="card info-card sales-card box">
-
-                      <div class="card-body">
-                        <h5 class="card-title">{{class.classname}} <br><span>{{class.classFacultyName}}</span></h5>
-
-                        <div class="d-flex align-items-center">
-                          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="bi bi-cart"></i>
-                          </div>
-                          <div class="ps-3">
-                            <h6>145</h6>
-                            <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                    </a>
-                </div>
-
+                <div class="col-xxl-6 col-lg-12">
+                  <a href="{% url 'studentSubject' class.pk %}">
+                    <div class="card info-card sales-card pb-0">
+                     <div class="row g-0" style="background: #4154f1">
+                       <div class="col-md-4 align-self-center ">
+                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="height: 5rem; width:5rem;">
+                           <i class="bi bi-easel" style="font-size: 2.5rem;"></i>
+                         </div>
+                       </div>
+                       <div class="col-md-8 bg-white">
+                         <div class="card-body my-1  mt-2 mb-0">
+                           <h5 class="card-title" style="text-transform: uppercase;">{{class.classname | truncatechars:20}} <br><span>Class Code : {{class.pk}}</span></h5>
+                           <h5 class="card-title pt-0" style="text-transform: uppercase;">DEPARTMENT : <br><span>{{class.classDepartment | truncatechars:28}}</span></h5>
+                           <h5 class="card-title pt-0" style="text-transform: uppercase;">FACULTY : <br><span>{{class.classFacultyName | truncatechars:28}}</span></h5>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                  </a>
+              </div>
             {% endfor %}
           {% else %}
           <div class="col-lg-12">
@@ -153,23 +139,24 @@ Admin Page
 
 
         <!-- Right side columns -->
-        <div class="col-lg-3">
+        <div class="col-lg-4">
 
-          <div class="col-lg-8 mx-auto">
+          <div class="col-xxl-10 col-xl-12">
             <a href="#" data-bs-toggle="modal" data-bs-target="#joinClassroom">
-              <div class="card info-card sales-card" style="background : RGB(68, 184, 172); ">
-
-                <div class="card-body" >
-                  <h4 class="card-title text-center" style="color :white;">Join Classroom</h4>
-
-                  <div class=" align-items-center ">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
-                      <i class="bi bi-plus-lg"></i>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+              <div class="card info-card sales-card pb-0">
+               <div class="row g-0" style="background: #FFC300">
+                 <div class="col-md-4 align-self-center ">
+                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                     <i class="bi bi-patch-plus" style="color: #FFC300"  ></i>
+                   </div>
+                 </div>
+                 <div class="col-md-8 bg-white">
+                   <div class="card-body my-1  mt-2 mb-0">
+                     <h5 class="card-title text-center ">JOIN <br>CLASSROOM</h5>
+                   </div>
+                 </div>
+               </div>
+             </div>
             </a>
 
             <!-- Modal for Joining Classroom -->
@@ -203,9 +190,7 @@ Admin Page
               </div>
             </div>
           </form><!-- End Modal for Joining Classroom-->
-
-        </div>
-
+          </div><!-- End Create Classroom Card -->
 
         </div><!-- End Right side columns -->
 

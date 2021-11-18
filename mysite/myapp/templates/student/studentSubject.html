@@ -91,7 +91,7 @@ Admin Page
 
   <main id="main" class="main px-md-5 mx-md-5" >
 
-    <div class="pagetitle px-lg-5">
+    <div class="pagetitle px-xxl-2 px-lg-5">
       <h1>Classroom</h1>
       <nav>
         <ol class="breadcrumb">
@@ -102,23 +102,31 @@ Admin Page
     </div><!-- End Page Title -->
 
 
-    <section class="section dashboard px-xxl-5">
+    <section class="section dashboard px-xxl-2 px-lg-0">
 
 
-      <div class="row">
-        <div class="col-xxl-8 col-lg-7 col-sm-12">
-          <div class="card bg-dark text-white">
-              <img src="{% static 'images/slides-1.jpg' %}" class="card-img" style="height:250px;" alt="...">
-              <div class="card-img-overlay">
-                <h5 class="card-title">{{class.classname}}</h5>
-                <p class="card-text">{{class.classDepartment}}</p>
-                <p class="card-text">Class Code : {{class.classId}}</p>
-              </div>
-            </div>
+      <div class="row d-flex">
+        <div class=" text-white col-lg-8 col-md-6  col-sm-12 h-100">
+          <div class="card info-card sales-card pb-0" style="height: -webkit-calc(5vh - 72px); height: -moz-calc(50vh - 72px);  height: calc(46vh - 72px);">
+           <div class="row g-0" style="background: #FFC300; height: -webkit-calc(5vh - 72px); height: -moz-calc(50vh - 72px); height: calc(46vh - 72px);">
+             <div class="col-md-3 align-self-center ">
+               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="height: 6rem; width:6rem;">
+                 <i class="bi bi-easel" style="font-size: 3rem; color: #FFC300"></i>
+               </div>
+             </div>
+             <div class="col-md-9 bg-white" style="height:100%;">
+               <div class="card-body my-1  mt-lg-5 mb-0">
+                 <h5 class="card-title" style="text-transform: uppercase;">{{class.classname}}</h5>
+                 <p class="" style="color:black;">{{class.classDepartment}}</p>
+                 <p class="" style="color:black;">Class Code : <strong>{{class.classId}}</strong></p>
+               </div>
+             </div>
+           </div>
+         </div>
         </div>
 
-        <!-- Attendence Details -->
-        <div class="col-xxl-4 col-lg-5 col-sm-12">
+        <!-- Time Table Details -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3 info-card sales-card pb-0">
            <div class="row g-0" style="background: #FFC300">
              <div class="col-sm-4 align-self-center ">
@@ -127,27 +135,42 @@ Admin Page
                </div>
              </div>
              <div class="col-sm-8 bg-white">
-               <div class="card-body mt-0  ">
-                 <h5 class="card-title text-center mt-0 pt-3">TIME TABLE</h5>
+               <div class="card-body mt-0  pb-0">
+                 <h5 class="card-title text-center my-0 pt-3 ">TIME TABLE</h5>
                  <div class="activity">
-                   <div class="mx-auto mt-0">
+                   <div class="mx-auto mt-0 ">
                        <table class="table table-borderless ">
                        <tbody>
                            <tr >
                              <td class="py-1" style="color: #012970"><strong>MONDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; {{totalConducted}}</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
                            </tr>
                            <tr >
-                             <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
-                             <td class="py-1" style="color: #012970"><strong>: &nbsp; {{totalAttended}}</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>TUESDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
                            </tr>
+
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>WEDNESDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 2-3</strong></td>
+                           </tr>
+
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>THURSDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                           </tr>
+                           <tr >
+                             <td class="py-1" style="color: #012970"><strong>FRIDAY</strong></td>
+                             <td class="py-1" style="color: #012970"><strong>: &nbsp; 12-14</strong></td>
+                           </tr>
+
                            <tr>
                              <td class="py-1" style="color:#012970"><strong>SATURDAY</strong></td>
-                             <td class="py-1" style="color:#012970"><strong >: &nbsp; {{totalAbsent}}</strong></td>
+                             <td class="py-1" style="color:#012970"><strong >: &nbsp; 5-6</strong></td>
                            </tr>
                            <tr>
                              <td class="py-1" style="color:#012970"><strong>SUNDAY %</strong></td>
-                             <td class="py-1" style="color:#012970"><strong>: &nbsp; {{attendencePercent}}</strong></td>
+                             <td class="py-1" style="color:#012970"><strong>: &nbsp; 7-9</strong></td>
                            </tr>
                        </tbody>
                      </table>
@@ -157,7 +180,7 @@ Admin Page
              </div>
            </div>
          </div>
-        </div><!-- End Attendence Details -->
+        </div><!-- End Time Table Details -->
 
       </div>
 
@@ -241,34 +264,6 @@ Admin Page
            </div>
          </div>
        </div><!-- End Attendence Details -->
-
-
-       <!-- Meeting Details -->
-       <div class="card mb-3 info-card sales-card pb-0">
-        <div class="row g-0" >
-          <div class="col-sm-4 align-self-center ">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="background: #4154f1">
-              <i class="bi bi-clipboard-data " style="color:white"></i>
-            </div>
-          </div>
-          <div class="col-sm-8" style="background: #4154f1">
-            <div class="card-body my-1">
-              <h5 class="card-title text-center" style="color:white">MEET LINK</h5>
-              <div class="activity text-center">
-                {% if class.classLink %}
-                  <a type="button" href="{{class.classLink}}"  class="btn btn-primary col-sm-8" style="background: white; color:#4154f1;" name="button">JOIN NOW</a>
-                {% else %}
-                  <button type="button" class="btn btn-primary col-sm-8" style="background: white; color:#4154f1;" name="button" disabled>JOIN NOW</button>
-                {% endif %}
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div><!-- End Meeting Details -->
-
-
 
         </div><!-- End Right side columns -->
 
@@ -391,15 +386,26 @@ Admin Page
 
                     {% endif %}
               {% endfor %}
-
               {% else %}
-                <div class="">
-                   <div class="card">
-                     <div class="card-body py-4 text-center">
-                       <h3>Nothing To Display For Now!!</h3>
+
+              <div class="">
+                <div class="card info-card sales-card pb-0 ">
+                 <div class="row g-0" style="background: #F52664">
+                   <div class="col-md-3 my-lg-4  pl-0  align-self-center ">
+                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                       <i class="bi bi-exclamation-circle" style="color: #F52664"  ></i>
                      </div>
                    </div>
-                </div>
+                   <div class="col-md-9 py-lg-4 bg-white">
+                     <div class="card-body  mt-2 mb-0">
+                       <h5 class="card-title text-center ">Nothing To Display For Now!!</h5>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+              </div>
+
+
               {% endif %}
 
           </div>

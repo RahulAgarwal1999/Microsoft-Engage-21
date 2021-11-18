@@ -32,6 +32,19 @@
 
 	<!-- Favicon  -->
     <link rel="icon" href="{% static 'landing/images/favicon.png' %}">
+
+    <style media="screen">
+        @media (min-width: 1200px){
+        .header .image-container img {
+          position: absolute;
+          top: -80px;
+          left: 10px;
+          width: 840px;
+          max-width: none;
+        }
+    }
+    </style>
+
 </head>
 <body data-spy="scroll" data-target=".fixed-top">
 
@@ -90,19 +103,25 @@
             <div class="wave"></div>
             <div class="wave"></div>
         </div>
+
+
+
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h1 class="h1-large">Gemdev is a free HTML template designed for your web products</h1>
-                        <p class="p-large">Use Gemdev to create awesome websites for your products, services and ideas in a short amount of time</p>
+                <div class="col-lg-6 col-xl-5">
+                    <div class="text-container mt-0">
+                        <h1 class="h1-large">VirtualClassroom </h1>
+                        <p class="p-large text-justify">A web platform that gives students an array of digital academic and
+social tools to stay engaged with their academics and help teaching professional
+in creating and managing virtual classrooms</p>
+                          <h1 class="h1-large">YOU ARE : </h1>
                         <a href="{% url 'facultyLogin' %}" type="button" class="btn-solid-lg" name="login">Faculty</a>
                         <a href="{% url 'studentLogin' %}" type="button" class="btn-solid-lg" name="register">Student</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-xl-7">
                     <div class="image-container">
-                        <img class="img-fluid" src="{% static 'landing/images/header-gem.svg' %} " alt="alternative">
+                        <img class="img-fluid" src="{% static 'images/header-illustration.svg' %} " alt="alternative">
                     </div> <!-- end of image-container -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
