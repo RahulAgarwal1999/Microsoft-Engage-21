@@ -486,7 +486,7 @@ Admin Page
 
 
 
-       <div class="col-xxl-3 col-md-4 col-sm-6">
+       <div class="col-xxl-3 col-xl-3 col-md-4 col-sm-6">
          <a href="#" data-bs-toggle="modal" data-bs-target="#announcementModal">
            <div class="card info-card sales-card pb-0">
             <div class="row g-0" style="background: #4154f1">
@@ -540,7 +540,7 @@ Admin Page
 
 
 
-        <div class="col-xxl-3 col-md-4 col-sm-6">
+        <div class="col-xxl-3 col-xl-3 col-md-4 col-sm-6">
 
           <a href="#" data-bs-toggle="modal" data-bs-target="#assignmentModal">
             <div class="card info-card sales-card pb-0">
@@ -612,7 +612,7 @@ Admin Page
         </div>
 
 
-        <div class="col-xxl-3 col-md-4 col-sm-6">
+        <div class="col-xxl-3 col-xl-3 col-md-4 col-sm-6">
           <a href="{% url 'classAttendence' class.pk %}">
             <div class="card info-card sales-card pb-0">
              <div class="row g-0" style="background: #4154f1">
@@ -631,7 +631,7 @@ Admin Page
           </a>
         </div>
 
-        <div class="col-xxl-3 col-md-4 col-sm-6">
+        <div class="col-xxl-3 col-xl-3 col-md-4 col-sm-6">
 
           <a href="{% url 'classMembersList' class.pk%}">
             <div class="card info-card sales-card pb-0">
@@ -765,36 +765,103 @@ Admin Page
           </div>
         </form><!-- End Modal-->
 
-
-          <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Offline Mode Available?</h5>
-
-                  <!-- Advanced Form Elements -->
-                  <form>
-                    <div class="row mb-5">
-                      <div class="col-sm-8">
-                        <script type="text/javascript">
-                            function EnableDisableTextBox(flexSwitchCheckDefault) {
-                                var txtPassportNumber = document.getElementById("txtPassportNumber");
-                                txtPassportNumber.disabled = flexSwitchCheckDefault.checked ? false : true;
-                                if (!txtPassportNumber.disabled) {
-                                    txtPassportNumber.focus();
-                                }
-                            }
-                        </script>
-
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onclick="EnableDisableTextBox(this)">
-                          <label class="form-check-label" for="flexSwitchCheckDefault">YES</label>
-                          <input type="text" id="txtPassportNumber" placeholder="Strength in %" disabled="disabled" />
-                        </div>
-                      </div>
-                    </div>
-
-                  </form>
+          <!-- Meeting Details -->
+          <div class="card mb-3 info-card sales-card pb-0">
+           <div class="row g-0" style="background: #4154f1">
+             <div class="col-md-4 align-self-center ">
+               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                 <i class="bi bi-columns-gap" style=""></i>
                </div>
-            </div>
+             </div>
+             <div class="col-md-8 bg-white">
+               <div class="card-body my-1">
+                 <h5 class="card-title text-center mb-0">OFFLINE MODE ?</h5>
+                 <div class="activity ">
+                   {% if classOfflineStatus.offlineStatus == 'NO' %}
+                      <p><strong>STATUS : NO</strong></p>
+                      <a type="button" class="btn btn-primary col-sm-12 bg-danger" style="border:red;" data-bs-toggle="modal" data-bs-target="#enableOffline">CHANGE STATUS</a>
+                   {% else %}
+                      <p class="my-1"><strong>STATUS : YES</strong></p>
+                      <p class="my-1"><strong>Vaccine Dose : {{classOfflineStatus.vaccineRequired}}</strong></p>
+                      <p class="my-1"><strong>Strength % : {{classOfflineStatus.classStrength}}</strong></p>
+                      <br>
+                      <a href="" class="btn btn-primary col-sm-12 my- 2 bg-warning" style="border:red;">OPTED STUDENTS</a>
+                      <a type="button" class="btn btn-primary col-sm-12 bg-success my-2" style="border:green;" data-bs-toggle="modal" data-bs-target="#disableOffline">CHANGE STATUS</a>
+                   {% endif %}
+
+                 </div>
+               </div>
+             </div>
+           </div>
+
+
+           <!-- Modal for Meet Link -->
+           <form class="needs-validation" method='POST' novalidate  >
+             {% csrf_token %}
+             <div class="modal fade" id="enableOffline" tabindex="-1">
+               <div class="modal-dialog modal-dialog-centered">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title">Offline Mode Requirements</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                   <div class="modal-body">
+                     <div class="col-md-11 my-2 mx-auto">
+                       <div class="form-floating">
+                         <select class="form-control" name="vaccine">
+                           <option value="0">0</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                         </select>
+                         <label for="floatingName">Vaccine Dose Required</label>
+                         <div class="invalid-feedback">Please enter Valid Link</div>
+                       </div>
+                     </div>
+
+                     <div class="col-md-11 my-3 mx-auto">
+                       <div class="form-floating">
+                         <input type="number" name="strength" class="form-control" min="0" max="100">
+                         <label for="floatingName">Class Strength Allowed (in %)</label>
+                         <div class="invalid-feedback">Please enter valid class strength (0 - 100)</div>
+                       </div>
+                     </div>
+
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     <button type="submit" name="enableOffline" class="btn btn-primary">Save changes</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </form><!-- End Modal-->
+
+           <!-- Modal for Meet Link -->
+           <form class="needs-validation" method='POST' novalidate  >
+             {% csrf_token %}
+             <div class="modal fade" id="disableOffline" tabindex="-1">
+               <div class="modal-dialog modal-dialog-centered">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title">Offline Mode Requirements</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                   <div class="modal-body">
+                     <h4 class="card-title">Are you Sure want to change the Status ?</h4>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                     <button type="submit" name="disableOffline" class="btn btn-primary">YES</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </form><!-- End Modal-->
+
+         </div><!-- End Meeting Details -->
+
+
+
 
         </div><!-- End Right side columns -->
 

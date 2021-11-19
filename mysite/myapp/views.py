@@ -345,6 +345,15 @@ def facultyClassCreate(request):
             attendence = Attendence(attendenceId = attendenceId, classId_id = classCreate.pk)
             attendence.save()
             # End Creating object for attendence
+
+            # Creating object for Offline Classes
+            my_dict1 = {}
+            input1 = json.dumps(my_dict1)
+            offline = OfflineClass(classId_id = classCreate.pk, studentList = input1)
+            offline.save()
+            # End Creating object for Offline Classes
+
+
             return redirect('facultyDashboard')
 
         return render(request,'faculty/facultyClassCreate.html')
@@ -543,15 +552,40 @@ def facultySubject(request,pk):
 
                 return redirect(request.path_info)
 
+            if 'enableOffline' in request.POST:
+                vaccine = request.POST['vaccine']
+                strength = request.POST['strength']
+
+                classOfflineStatus = OfflineClass.objects.get(classId = id)
+                classOfflineStatus.offlineStatus = 'YES'
+                classOfflineStatus.vaccineRequired = vaccine
+                classOfflineStatus.classStrength = strength
+                classOfflineStatus.studentList = '{}'
+                classOfflineStatus.save()
+                return redirect(request.path_info)
+
+            if 'disableOffline' in request.POST:
+                classOfflineStatus = OfflineClass.objects.get(classId = id)
+                classOfflineStatus.offlineStatus = 'NO'
+                classOfflineStatus.vaccineRequired = 0
+                classOfflineStatus.classStrength = 0
+                classOfflineStatus.studentList = '{}'
+                classOfflineStatus.save()
+                return redirect(request.path_info)
+
+
             return redirect(request.path_info)
 
+        # Feed List
         announcements = Announcement.objects.filter(classId = classDetails.pk).annotate(type=Value('announcement', CharField()))
         assignments = Assignment.objects.filter(classId = classDetails.pk).annotate(type=Value('assignment', CharField()))
         all_items = list(assignments) + list(announcements)
         all_items_feed = sorted(all_items, key=lambda obj: obj.publishedTime,reverse=True)
         # print(all_items_feed)
+        # End Feed List
 
 
+        # Time Table
         timeTable = {}
         strTime = classDetails.classTimeTable
         try:
@@ -571,13 +605,18 @@ def facultySubject(request,pk):
         except:
             timeTable={}
         # print(timeTable)
+        # End Time Table
+
+        classOfflineStatus = OfflineClass.objects.get(classId = id)
+
 
         context={
             'class':classDetails,
             'announcements' : announcements,
             'all_items_feed' : all_items_feed,
             'userDetails': userDetails,
-            'timeTable':timeTable
+            'timeTable':timeTable,
+            'classOfflineStatus' : classOfflineStatus
         }
         return render(request,'faculty/facultySubject.html',context)
     else:

@@ -107,3 +107,13 @@ class ClassroomStudentsList(models.Model):
 
     def __str__(self):
         return str(self.classId) if self.classId else ''
+
+class OfflineClass(models.Model):
+    classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
+    offlineStatus = models.CharField(max_length=5,null=True,blank=True,default='NO')
+    vaccineRequired = models.IntegerField(null=True,blank=True,default=0)
+    classStrength = models.IntegerField(null=True,blank=True,default=0)
+    studentList = models.TextField(blank=True,null=True)
+
+    def __str__(self):
+        return str(self.classId) if self.classId else ''
