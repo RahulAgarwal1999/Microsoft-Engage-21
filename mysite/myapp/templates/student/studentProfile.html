@@ -24,7 +24,10 @@ Admin Page
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            {% if userDetails.studentPic %}
             <img src="{{ userDetails.studentPic.url }}" alt="Profile" class="rounded-circle">
+            {% else %}
+            {% endif %}
             <span class="d-none d-md-block dropdown-toggle ps-2">{{user.first_name}} {{user.last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -103,7 +106,11 @@ Admin Page
                 <div class="px-4">
                   <div class="m-auto ">
                     <div class="user-profile-photo  m-auto " style="border:50%; height:200px; width:200px;">
-                      <img src="{{ userDetails.studentPic.url }}" style="border:50%; height:200px; width:200px;" alt="" class="rounded-circle">
+                      {% if userDetails.studentPic  %}
+                        <img src="{{ userDetails.studentPic.url }}" style="border:50%; height:200px; width:200px;" alt="" class="rounded-circle">
+                      {% else %}
+                      {% endif %}
+
                     </div>
                   </div>
                   <div class="">
@@ -196,6 +203,13 @@ Admin Page
                     <div class="col-lg-9 col-md-8">{{userDetails.studentDOB}}</div>
                   </div>
 
+                  <h5 class="card-title">Vaccination Status</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Vaccine Dose Taken : </div>
+                    <div class="col-lg-9 col-md-8">{{dose}}</div>
+                  </div>
+
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -207,11 +221,13 @@ Admin Page
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="{{ userDetails.studentPic.url }}" alt="Profile" style="height:150px;">
+                        {% if userDetails.studentPic  %}
+                          <img src="{{ userDetails.studentPic.url }}" alt="Profile" style="height:150px;">
+                        {% else %}
+                        {% endif %}
                         <div class="col-12 my-2">
-
                           <div class="col-sm-12">
-                            <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" required>
+                            <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" >
                           </div>
                           <div class="invalid-feedback">Please upload your Profile Picture</div>
                         </div>
@@ -277,6 +293,17 @@ Admin Page
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="email" type="email" class="form-control" id="Email" value="{{user.email}}" disabled required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Vaccine Dose</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select class="form-control" name="vaccineDose" required>
+                          <option value="0" selected>0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                        </select>
                       </div>
                     </div>
 

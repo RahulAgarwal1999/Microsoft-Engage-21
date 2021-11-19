@@ -85,7 +85,7 @@ Admin Page
   <main id="main" class="main px-lg-5 mx-lg-5">
 
     <div class="pagetitle">
-      <h1>Members List</h1>
+      <h1>Offline Class List</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'facultyDashboard' %}">Home</a></li>
@@ -99,17 +99,24 @@ Admin Page
 
       <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
+              <h5 class="card-title text-center">OFFLINE CLASS DETAILS</h5>
 
               <!-- Table with stripped rows -->
+              <div class="my-3">
+
+                <h5>Class Strength : <strong style="color:green;">{{students|length}}</strong></h5>
+                <h5>Students Opted for Offline Mode: <strong style="color:green;">{{offlineList|length}}</strong></h5>
+
+              </div>
+
               <table class="table datatable table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Student ID</th>
                     <th scope="col">Full Name</th>
-                    <th scope="col">Attachment</th>
-                    <th scope="col">Submission Date</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Offline Mode</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -118,12 +125,11 @@ Admin Page
                     <th scope="row">{{ forloop.counter}}</th>
                     <td>{{user.username}}</td>
                     <td>{{user.first_name}} {{user.last_name}}</td>
-                    {% if user.username in assignments %}
-                      <td><strong><a href="{{assignments|get_item_link:user.username}}">View</a></strong></td>
-                      <td>{{assignments|get_date:user.username}}</td>
+                    <td>{{user.email}}</td>
+                    {% if user.username in offlineList %}
+                      <td style="color:green;"><strong>YES</strong></td>
                     {% else %}
-                      <td style="color:red"><strong>Not Submitted</strong></td>
-                      <td> - </td>
+                      <td style="color:red;"><strong>NO</strong></td>
                     {% endif %}
                   </tr>
                   {% endfor %}

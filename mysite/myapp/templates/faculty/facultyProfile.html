@@ -10,8 +10,8 @@ Admin Page
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{% url 'facultyDashboard' %}" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">VirtualClassroom</span>
+        <img src="" alt="">
+        <span class="d-lg-block">VirtualClassroom</span>
       </a>
     </div><!-- End Logo -->
 
@@ -23,7 +23,7 @@ Admin Page
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{userDetails.facultyPic.url}}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{user.first_name}} {{user.last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -216,7 +216,7 @@ Admin Page
                         <div class="col-12 my-2">
                           <!-- <label for="facultyPic" class="col-form-label">Profile Picture</label> -->
                           <div class="col-sm-12">
-                            <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" required>
+                            <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" >
                           </div>
                           <div class="invalid-feedback">Please upload your Profile Picture</div>
                         </div>

@@ -785,7 +785,7 @@ Admin Page
                       <p class="my-1"><strong>Vaccine Dose : {{classOfflineStatus.vaccineRequired}}</strong></p>
                       <p class="my-1"><strong>Strength % : {{classOfflineStatus.classStrength}}</strong></p>
                       <br>
-                      <a href="" class="btn btn-primary col-sm-12 my- 2 bg-warning" style="border:red;">OPTED STUDENTS</a>
+                      <a href="{% url 'offlineOptedList' class.pk %}" class="btn btn-primary col-sm-12 my- 2 bg-warning" style="border:red;">OPTED STUDENTS</a>
                       <a type="button" class="btn btn-primary col-sm-12 bg-success my-2" style="border:green;" data-bs-toggle="modal" data-bs-target="#disableOffline">CHANGE STATUS</a>
                    {% endif %}
 

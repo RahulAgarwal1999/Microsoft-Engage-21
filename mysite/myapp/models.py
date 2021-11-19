@@ -108,6 +108,13 @@ class ClassroomStudentsList(models.Model):
     def __str__(self):
         return str(self.classId) if self.classId else ''
 
+class VaccineStatus(models.Model):
+    userId = models.ForeignKey(User,on_delete=models.CASCADE)
+    vaccineDose = models.IntegerField(null=True,blank=True,default=0)
+
+    def __str__(self):
+        return str(self.userId) if self.userId else ''
+
 class OfflineClass(models.Model):
     classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
     offlineStatus = models.CharField(max_length=5,null=True,blank=True,default='NO')

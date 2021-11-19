@@ -188,7 +188,8 @@ def facultyProfile(request):
             userDetails.collegeState = state
             userDetails.experience = experience
             userDetails.facultyDesc = about
-            userDetails.facultyPic = profilePic
+            if profilePic:
+                userDetails.facultyPic = profilePic
 
             userDetails.save()
             return redirect(request.path_info)
@@ -622,7 +623,31 @@ def facultySubject(request,pk):
     else:
         return redirect('facultyLogin')
 
+@login_required
+def offlineOptedList(request,pk):
+    if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
+        id = pk
 
+        studentListObject = ClassroomStudentsList.objects.get(classId = id)
+        studentListDict = json.loads(studentListObject.studentList)
+
+        studentList = [*studentListDict]
+        students = []
+
+        for x in studentList:
+            temp = User.objects.get(username = x)
+            students.append(temp)
+
+        offlineClass = OfflineClass.objects.get(classId = id)
+        offlineList = json.loads(offlineClass.studentList)
+
+        context = {
+            'students' : students,
+            'offlineList' : offlineList
+        }
+        return render(request,'faculty/offlineOptedList.html',context)
+    else:
+        return redirect('facultyLogin')
 
 @login_required
 def classMembersList(request,pk):
@@ -958,21 +983,43 @@ def studentProfile(request):
             state = request.POST['state']
             yos = request.POST['year']
             about = request.POST['about']
+            totalDose = request.POST['vaccineDose']
             profilePic = request.FILES.get('profilePic')
+
 
             userDetails.studentPhone = contact
             userDetails.studentCollege = institute
             userDetails.collegeState = state
             userDetails.yearOfStudy = yos
             userDetails.studentDesc = about
-            userDetails.studentPic = profilePic
+            if profilePic:
+                userDetails.studentPic = profilePic
 
             userDetails.save()
+
+            try:
+                vaccine = VaccineStatus.objects.get(userId_id = user.pk)
+                vaccine.vaccineDose = totalDose
+                vaccine.save()
+            except:
+                vaccine = VaccineStatus(userId_id = user.pk)
+                vaccine.vaccineDose = totalDose
+                vaccine.save()
+
+
             return redirect(request.path_info)
 
+        dose = 0
+        try:
+            vaccine = VaccineStatus.objects.get(userId = user.pk)
+            print('------in-------')
+            dose = vaccine.vaccineDose
+        except:
+            dose = 0
 
         context={
             'userDetails' : userDetails,
+            'dose' : dose
         }
         return render(request,'student/studentProfile.html',context)
     else:
@@ -1022,14 +1069,40 @@ def studentSubject(request,pk):
                 assignment.save()
 
                 return redirect(request.path_info)
+
+            if 'optOffline' in request.POST:
+                offline = OfflineClass.objects.get(classId_id = id)
+                stu_list = json.loads(offline.studentList)
+                stu_list[user.username] = True
+                offline.studentList = json.dumps(stu_list)
+                offline.save()
+
+                return redirect(request.path_info)
+
+            if 'optOnline' in request.POST:
+                offline = OfflineClass.objects.get(classId_id = id)
+                stu_list = json.loads(offline.studentList)
+
+                if user.username in stu_list:
+                    del stu_list[user.username]
+                else:
+                    None
+                offline.studentList = json.dumps(stu_list)
+                offline.save()
+
+                return redirect(request.path_info)
+
             return redirect(request.path_info)
 
-
+        # Feeds
         announcements = Announcement.objects.filter(classId = id).annotate(type=Value('announcement', CharField()))
         assignments = Assignment.objects.filter(classId = id).annotate(type=Value('assignment', CharField()))
         all_items = list(assignments) + list(announcements)
         all_items_feed = sorted(all_items, key=lambda obj: obj.publishedTime,reverse=True)
+        # End Feeds
 
+
+        # Time teble
         timeTable = {}
         strTime = classDetails.classTimeTable
         try:
@@ -1049,8 +1122,43 @@ def studentSubject(request,pk):
         except:
             timeTable={}
         # print(timeTable)
+        # End Time Table
 
+        # Offline Status
+        classOfflineStatus = OfflineClass.objects.get(classId = id)
 
+        eligible = False
+        available = False
+        opted = False
+        try:
+            vaccineStatus = VaccineStatus.objects.get(userId_id = user.pk)
+            if vaccineStatus.vaccineDose >= classOfflineStatus.vaccineRequired:
+                eligible = True
+            else:
+                eligible = False
+        except:
+            eligible = False
+
+        if classOfflineStatus.offlineStatus == 'NO':
+            None
+        else:
+            classroomStudent = ClassroomStudentsList.objects.get(classId = id)
+            temp = json.loads(classroomStudent.studentList)
+            totalClassStrength = len(temp)
+
+            totalSeat = int((totalClassStrength * classOfflineStatus.classStrength)/100)
+            temp1 = json.loads(classOfflineStatus.studentList)
+            totalBooked = len(temp1)
+            if user.username in temp1:
+                opted = True
+
+            if totalBooked < totalSeat:
+                available = True
+            else:
+                available = False
+        # End Offline Class
+
+        # eligible= True
         context={
             'class' : classDetails,
             'all_items_feed' : all_items_feed,
@@ -1059,7 +1167,11 @@ def studentSubject(request,pk):
             'totalAbsent' : totalAbsent,
             'attendencePercent' : attendencePercent,
             'userDetails' : userDetails,
-            'timeTable' : timeTable
+            'timeTable' : timeTable,
+            'classOfflineStatus' : classOfflineStatus,
+            'eligible' : eligible,
+            'available' : available,
+            'opted':opted
         }
         return render(request,'student/studentSubject.html',context)
     else:

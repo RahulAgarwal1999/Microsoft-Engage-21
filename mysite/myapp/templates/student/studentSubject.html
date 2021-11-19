@@ -293,6 +293,97 @@ Admin Page
          </div>
        </div><!-- End Attendence Details -->
 
+
+           <!-- Meeting Details -->
+           <div class="card mb-3 info-card sales-card pb-0">
+            <div class="row g-0" style="background: #4154f1">
+              <div class="col-md-4 align-self-center ">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                  <i class="bi bi-columns-gap" style=""></i>
+                </div>
+              </div>
+              <div class="col-md-8 bg-white">
+                <div class="card-body my-1">
+                  <h5 class="card-title text-center mb-0">OFFLINE MODE ?</h5>
+                  <div class="activity ">
+                    {% if classOfflineStatus.offlineStatus == 'NO' %}
+                       <p><strong>Offline Mode : NO</strong></p>
+                    {% else %}
+                       <p class="my-1"><strong>Offline Mode : YES</strong></p>
+                       <p class="my-1"><strong>Dose Required : {{classOfflineStatus.vaccineRequired}}</strong></p>
+                       <p class="my-1"><strong>Strength% Allowed : {{classOfflineStatus.classStrength}}</strong></p>
+                           {% if opted %}
+                                <p class="my-1"><strong>Opted For : Offline </strong></p>
+                                <a type="button" class="btn btn-primary col-sm-12 bg-danger my-2" style="" data-bs-toggle="modal" data-bs-target="#optOnline">Opt Online</a>
+                           {% else %}
+                                 {% if eligible == True %}
+                                      <p class="my-1"><strong>Eligibility : ELIGIBLE </strong></p>
+                                      {% if available %}
+                                            <p class="my-1"><strong>Current Seat Availability : YES </strong></p>
+                                            <br>
+                                            <a type="button" class="btn btn-primary col-sm-12 bg-success my-2" style="border:green;" data-bs-toggle="modal" data-bs-target="#optOffline">Opt Offline</a>
+                                      {% else %}
+                                          <p class="my-1"><strong>Current Seat Availability : NO </strong></p>
+                                      {% endif %}
+                                 {% else %}
+                                      <p class="my-1"><strong>Eligibility : NOT ELIGIBLE</strong></p>
+                                 {% endif %}
+                           {% endif %}
+
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal for Meet Link -->
+            <form class="needs-validation" method='POST' novalidate  >
+              {% csrf_token %}
+              <div class="modal fade" id="optOffline" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Opt Offline Mode</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="card-title">Are you Sure want to Opt Offline Classes ?</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                      <button type="submit" name="optOffline" class="btn btn-primary">YES</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form><!-- End Modal-->
+
+            <!-- Modal for Meet Link -->
+            <form class="needs-validation" method='POST' novalidate  >
+              {% csrf_token %}
+              <div class="modal fade" id="optOnline" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Opt Online Mode</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="card-title">Are you Sure want to Opt Online Classes ?</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                      <button type="submit" name="optOnline" class="btn btn-primary">YES</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form><!-- End Modal-->
+
+
+          </div>
+
         </div><!-- End Right side columns -->
 
 
