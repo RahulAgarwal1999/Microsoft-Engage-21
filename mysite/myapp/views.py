@@ -49,14 +49,15 @@ def facultyLogin(request):
             login(request, user)
             return redirect('facultyDashboard')
         else:
-            messages.error(request, "You are Not registered")
-            return redirect('facultyRegister')
+            messages.error(request, "You are not registered")
+            return redirect('facultyLogin')
     return render(request,'faculty/facultyLogin.html')
 
 # Register View
 def facultyRegister(request):
     if request.method=='POST':
-        full_name = request.POST['name']
+        first_name = request.POST['fname']
+        last_name = request.POST['lname']
         email = request.POST['email']
         password = request.POST['password']
         gender = request.POST['gender']
@@ -75,8 +76,6 @@ def facultyRegister(request):
         unique_id = str1 + str(num)
 
         username=unique_id
-        first_name=full_name.split(' ')[0]
-        last_name=full_name.split(' ')[1]
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')
             return redirect('facultyLogin')
@@ -104,7 +103,7 @@ def facultyRegister(request):
             #             fail_silently = False
             #             )
 
-            messages.success(request,'You are now registered and can log in')
+            messages.success(request,'You are now registered and can Log In')
             return redirect('facultyLogin')
 
     return render(request,'faculty/facultyRegister.html')
@@ -811,7 +810,8 @@ def studentLogin(request):
 # Register View
 def studentRegister(request):
     if request.method=='POST':
-        full_name = request.POST['name']
+        first_name = request.POST['fname']
+        last_name = request.POST['lname']
         email = request.POST['email']
         password = request.POST['password']
         gender = request.POST['gender']
@@ -830,8 +830,6 @@ def studentRegister(request):
         unique_id = str1 + str(num)
 
         username=unique_id
-        first_name=full_name.split(' ')[0]
-        last_name=full_name.split(' ')[1]
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')
             return redirect('studentLogin')
@@ -1045,7 +1043,10 @@ def studentSubject(request,pk):
             totalAttended = int(attendenceList.get(user.username,0))
 
         totalAbsent = totalConducted - totalAttended
-        attendencePercent = round((totalAttended/totalConducted)*100,1)
+        if totalConducted > 0:
+            attendencePercent = round((totalAttended/totalConducted)*100,1)
+        else:
+            attendencePercent = 0
 
         record = []
         record.append(totalConducted)

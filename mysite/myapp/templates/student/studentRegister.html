@@ -35,10 +35,17 @@ Admin Page
                     </div>
                       <!-- right Form -->
                       <div class=" col-xxl-6 col-md-6">
-                              <div class="col-12 my-2">
-                                <label for="yourName" class="form-label">Your Name</label>
-                                <input type="text" name="name" class="form-control" id="yourName" required>
-                                <div class="invalid-feedback">Please, enter your name!</div>
+                              <div class="row d-flex">
+                                <div class="col-lg-6">
+                                <label for="fname" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname" required>
+                                <div class="invalid-feedback">Please enter First Name!</div>
+                                </div>
+                                <div class="col-lg-6">
+                                <label for="lname" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lname" name="lname" required>
+                                <div class="invalid-feedback">Please enter Last Name!</div>
+                                </div>
                               </div>
 
                               <div class="col-12 my-2">
@@ -57,8 +64,8 @@ Admin Page
                               <div class="col-12 my-2">
                                 <label for="yourPassword" class="form-label">Gender</label>
                                 <div class="col-sm-12">
-                                  <select class="form-select" name="gender" aria-label="Default select example">
-                                    <option selected disabled>Select</option>
+                                  <select class="form-select" name="gender" aria-label="Default select example" required>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
@@ -71,7 +78,7 @@ Admin Page
                               <div class="col-12 my-2">
                                   <label for="inputDate" class="col-form-label">Date of Birth</label>
                                   <div class="">
-                                    <input type="date" name="dob" class="form-control ">
+                                    <input type="date" name="dob" class="form-control " required>
                                   </div>
                               </div>
 
@@ -99,7 +106,7 @@ Admin Page
                                 <label for="yourPassword" class="form-label">State</label>
                                 <div class="col-sm-12">
                                   <select class="form-select" name="state" aria-label="Default select example" required>
-                                    <option selected disabled>Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
