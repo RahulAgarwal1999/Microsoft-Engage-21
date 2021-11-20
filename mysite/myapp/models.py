@@ -49,7 +49,7 @@ class ClassRoom(models.Model):
     classLink = models.TextField(blank=False,null=True)
     classFacultyID = models.ForeignKey(FacultyDetails,on_delete=models.CASCADE)
     classFacultyName = models.CharField(max_length=100,null=False)
-    classTimeTable = models.TextField(blank=False,null=True)
+    classTimeTable = models.TextField(blank=True,null=True,default="")
     classCreationTime = models.DateTimeField(default=datetime.now,null=True)
 
     def __str__(self):

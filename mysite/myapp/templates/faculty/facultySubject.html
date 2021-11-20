@@ -8,15 +8,13 @@ Admin Page
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center px-lg-5">
-
     <div class="d-flex align-items-center justify-content-between ">
       <a href="{% url 'facultyDashboard' %}" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="" alt="">
         <span class="d-lg-block">VirtualClassroom</span>
       </a>
       <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
     </div><!-- End Logo -->
-
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -101,18 +99,21 @@ Admin Page
     <div class="row d-flex">
 
       <div class=" text-white col-lg-8 col-md-6  col-sm-12 h-100">
-        <div class="card info-card sales-card pb-0" style="height: -webkit-calc(5vh - 72px); height: -moz-calc(50vh - 72px);  height: calc(46vh - 72px);">
-         <div class="row g-0" style="background: #FFC300; height: -webkit-calc(5vh - 72px); height: -moz-calc(50vh - 72px); height: calc(46vh - 72px);">
+        <div class="card info-card sales-card pb-0 h-100" style="">
+         <div class="row g-0" style="background: #4154f1; ">
            <div class="col-md-3 align-self-center ">
              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="height: 6rem; width:6rem;">
-               <i class="bi bi-easel" style="font-size: 3rem; color: #FFC300"></i>
+               <i class="bi bi-easel" style="font-size: 3rem; color: #4154f1"></i>
              </div>
            </div>
-           <div class="col-md-9 bg-white" style="height:100%;">
-             <div class="card-body my-1  mt-lg-5 mb-0">
-               <h5 class="card-title" style="text-transform: uppercase;">{{class.classname}}</h5>
+           <div class="col-md-9 bg-white pb-lg-5" style="height:272px;">
+             <div class="card-body mt-lg-5 mb-0">
+               <h5 class="card-title" style="text-transform: uppercase; font-size:25px;">{{class.classname | truncatechars:20}} <br><span>Class Code : {{class.pk}}</span></h5>
+               <h5 class="card-title pt-0" style="">DEPARTMENT : <br><span style="font-size:22px;">{{class.classDepartment | truncatechars:50}}</span></h5>
+               <h5 class="card-title pt-0" style="text-transform: uppercase;">ACADEMIC YEAR : {{class.academicYear | truncatechars:15}}</h5>
+               <!-- <h1  style="color:red; text-transform: uppercase;">{{class.classname}}</h1>
                <p class="" style="color:black;">{{class.classDepartment}}</p>
-               <p class="" style="color:black;">Class Code : <strong>{{class.classId}}</strong></p>
+               <p class="" style="color:black;">Class Code : <strong>{{class.classId}}</strong></p> -->
              </div>
            </div>
          </div>
@@ -122,10 +123,10 @@ Admin Page
         <!-- Time Table Details -->
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3 info-card sales-card pb-0">
-           <div class="row g-0" style="background: #FFC300">
+           <div class="row g-0" style="background: #4154f1">
              <div class="col-sm-4 align-self-center ">
                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
-                 <i class="bi bi-calendar-check" style="color: #FFC300"></i>
+                 <i class="bi bi-calendar-check" style="color: #4154f1"></i>
                </div>
              </div>
              <div class="col-sm-8 bg-white">
@@ -481,11 +482,6 @@ Admin Page
 
       <div class="row">
 
-        <!-- Meeting Details -->
-        <!-- End Meeting Details -->
-
-
-
        <div class="col-xxl-3 col-xl-3 col-md-4 col-sm-6">
          <a href="#" data-bs-toggle="modal" data-bs-target="#announcementModal">
            <div class="card info-card sales-card pb-0">
@@ -496,7 +492,7 @@ Admin Page
                 </div>
               </div>
               <div class="col-md-8 bg-white">
-                <div class="card-body my-1  mt-2 mb-0">
+                <div class="card-body mt-2 mb-0">
                   <h5 class="card-title text-center ">POST <br>ANNOUNCEMENT</h5>
                 </div>
               </div>
@@ -662,6 +658,62 @@ Admin Page
         <!-- Right side columns -->
         <div class="col-lg-3">
 
+          <!-- Meeting Details -->
+          <div class="card mb-3 info-card sales-card pb-0">
+           <div class="row g-0" style="background: #4154f1">
+             <div class="col-md-4 align-self-center ">
+               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                 <i class="bi bi-camera-video" style=""></i>
+               </div>
+             </div>
+             <div class="col-md-8 bg-white">
+               <div class="card-body my-1">
+                 <h5 class="card-title text-center">MEET LINK <i type="button" class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#gmeetModal"></i></h5>
+                 <div class="activity text-center">
+                   {% if class.classLink %}
+                     <a type="button" href="{{class.classLink}}"  class="btn btn-primary col-sm-12" style="background: #4154f1" name="button">JOIN NOW</a>
+                   {% else %}
+                     <button type="button" class="btn btn-primary col-sm-8" style="background: #4154f1" name="button" disabled>JOIN NOW</button>
+                   {% endif %}
+
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div><!-- End Meeting Details -->
+
+
+          <!-- Modal for Meet Link -->
+          <form class="needs-validation" method='POST' novalidate  >
+            {% csrf_token %}
+            <div class="modal fade" id="gmeetModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Enter the Meeting Link</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input type="url" name="meetLink" class="form-control" id="floatingName" placeholder="Enter the Link" required>
+                        <label for="floatingName">Meeting Link</label>
+                        <div class="invalid-feedback">Please enter Valid Link</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="linkSubmit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form><!-- End Modal-->
+
+            <!-- Meeting Details -->
+
+
           <div class="">
 
             <a href="#" data-bs-toggle="modal" data-bs-target="#sendInvitesModal">
@@ -712,60 +764,6 @@ Admin Page
         </div>
 
 
-        <!-- Meeting Details -->
-        <div class="card mb-3 info-card sales-card pb-0">
-         <div class="row g-0" style="background: #4154f1">
-           <div class="col-md-4 align-self-center ">
-             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
-               <i class="bi bi-camera-video" style=""></i>
-             </div>
-           </div>
-           <div class="col-md-8 bg-white">
-             <div class="card-body my-1">
-               <h5 class="card-title text-center">MEET LINK <i type="button" class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#gmeetModal"></i></h5>
-               <div class="activity text-center">
-                 {% if class.classLink %}
-                   <a type="button" href="{{class.classLink}}"  class="btn btn-primary col-sm-12" style="background: #4154f1" name="button">JOIN NOW</a>
-                 {% else %}
-                   <button type="button" class="btn btn-primary col-sm-8" style="background: #4154f1" name="button" disabled>JOIN NOW</button>
-                 {% endif %}
-
-               </div>
-             </div>
-           </div>
-         </div>
-       </div><!-- End Meeting Details -->
-
-
-        <!-- Modal for Meet Link -->
-        <form class="needs-validation" method='POST' novalidate  >
-          {% csrf_token %}
-          <div class="modal fade" id="gmeetModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Enter the Meeting Link</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="col-md-12">
-                    <div class="form-floating">
-                      <input type="url" name="meetLink" class="form-control" id="floatingName" placeholder="Enter the Link" required>
-                      <label for="floatingName">Meeting Link</label>
-                      <div class="invalid-feedback">Please enter Valid Link</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" name="linkSubmit" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form><!-- End Modal-->
-
-          <!-- Meeting Details -->
           <div class="card mb-3 info-card sales-card pb-0">
            <div class="row g-0" style="background: #4154f1">
              <div class="col-md-4 align-self-center ">
@@ -869,97 +867,99 @@ Admin Page
 
 
         <!-- Announcement and Assignment -->
-        <div class="col-lg-9">
+        <div class="col-lg-9 px-lg-5">
           <div class="row">
+            <div class="container ">
 
-            {% if all_items_feed%}
-              {% for item in all_items_feed %}
-                  {% if item.type == 'announcement' %}
 
-                  <!-- Meeting Details -->
-                <div class="">
-                  <div class="card info-card sales-card pb-0">
-                   <div class="row g-0" style="background: #355C7D">
-                     <div class="col-sm-2 align-self-center ">
-                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto bg-white">
-                         <i class="bi bi-chat-right-text " style="color:#355C7D"></i>
-                       </div>
-                     </div>
-                     <div class="col-sm-10 bg-white" >
-                       <div class="card-body">
-                         <div class="">
-                           <div class="">
-                             <h5 class="card-title">{{item.announcementHeading}}</h5>
+                {% if all_items_feed%}
+                  {% for item in all_items_feed %}
+                      {% if item.type == 'announcement' %}
+
+                      <!-- Meeting Details -->
+                    <div class="">
+                      <div class="card info-card sales-card pb-0">
+                       <div class="row g-0" style="background: #355C7D">
+                         <div class="col-sm-2 align-self-center ">
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto bg-white">
+                             <i class="bi bi-chat-right-text " style="color:#355C7D"></i>
                            </div>
                          </div>
-                         {{item.announcementDescription}}
+                         <div class="col-sm-10 bg-white" >
+                           <div class="card-body">
+                             <div class="">
+                               <div class="">
+                                 <h5 class="card-title">{{item.announcementHeading}}</h5>
+                               </div>
+                             </div>
+                             {{item.announcementDescription}}
+                           </div>
+                         </div>
                        </div>
+                     </div>
+                     </div><!-- End Meeting Details -->
+
+                      {% elif item.type == 'assignment' %}
+
+                      <div class="">
+                         <div class="card info-card sales-card  pb-0">
+                           <div class="row g-0" style="background: #99B898" >
+                             <div class="col-sm-2 align-self-center"  >
+                               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="">
+                                 <i class="bi bi-pencil-square " style="color: #99B898"></i>
+                               </div>
+                             </div>
+                             <div class="col-sm-10 bg-white">
+                               <div class="card-body">
+                                 <div class="d-flex justify-content-between">
+                                   <div class="col-sm-9">
+                                     <h5 class="card-title">{{item.assignmentHeading}}</h5>
+                                   </div>
+                                   <div class="col-sm-3">
+                                     <h5 class="card-title">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                                   </div>
+                                 </div>
+
+                                 <p>{{item.assignmentDescription}}</p>
+                                 {% if item.assignmentLink %}
+                                 <div class="d-flex justify-content-between">
+                                   <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
+                                   <div class="" style="text-align:right;">
+                                     <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
+                                   </div>
+                                 </div>
+                                 {% else %}
+                                 <div class="" style="text-align:right;">
+                                   <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
+                                 </div>
+                                 {% endif %}
+
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                      </div>
+
+
+                      {% endif %}
+                {% endfor %}
+
+              {% else %}
+                <div class="">
+                   <div class="card">
+                     <div class="card-body py-4 text-center">
+                       <h3>Nothing To Display For Now!!</h3>
                      </div>
                    </div>
-                 </div>
-                 </div><!-- End Meeting Details -->
+                </div>
+              {% endif %}
 
-                  {% elif item.type == 'assignment' %}
-
-                  <div class="">
-                     <div class="card info-card sales-card  pb-0">
-                       <div class="row g-0" style="background: #99B898" >
-                         <div class="col-sm-2 align-self-center"  >
-                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto" style="">
-                             <i class="bi bi-pencil-square " style="color: #99B898"></i>
-                           </div>
-                         </div>
-                         <div class="col-sm-10 bg-white">
-                           <div class="card-body">
-                             <div class="d-flex justify-content-between">
-                               <div class="col-sm-9">
-                                 <h5 class="card-title">{{item.assignmentHeading}}</h5>
-                               </div>
-                               <div class="col-sm-3">
-                                 <h5 class="card-title">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
-                               </div>
-                             </div>
-
-                             <p>{{item.assignmentDescription}}</p>
-                             {% if item.assignmentLink %}
-                             <div class="d-flex justify-content-between">
-                               <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
-                               <div class="" style="text-align:right;">
-                                 <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
-                               </div>
-                             </div>
-                             {% else %}
-                             <div class="" style="text-align:right;">
-                               <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
-                             </div>
-                             {% endif %}
-
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                  </div>
-
-
-                  {% endif %}
-            {% endfor %}
-
-          {% else %}
-            <div class="">
-               <div class="card">
-                 <div class="card-body py-4 text-center">
-                   <h3>Nothing To Display For Now!!</h3>
-                 </div>
-               </div>
             </div>
-          {% endif %}
-
-
-              </div>
-            </div><!-- End Announcement and Assignment -->
-
-
           </div>
+        </div><!-- End Announcement and Assignment -->
+
+
+      </div>
     </section>
 
   </main><!-- End #main -->

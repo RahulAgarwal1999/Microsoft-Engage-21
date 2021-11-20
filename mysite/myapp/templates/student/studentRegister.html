@@ -4,23 +4,13 @@ Admin Page
 {% endblock %}
 {% block content %}
 
-  <main>
+  <main style="background: #eee;">
     <div class="container">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center pt-3">
         <div class="container">
 
-            <div class="container col-6">
-              <div class="d-flex justify-content-center py-4">
-                <a href="" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">VirtualClassroom</span>
-                </a>
-              </div><!-- End Logo -->
-            </div>
-
-
-           <div class="card mb-3">
+           <div class="card mb-3 px-lg-4" style="border-radius:30px;">
               <div class="card-body " >
                 <div class="row ">
 
@@ -34,7 +24,7 @@ Admin Page
                       </div>
                     </div>
                       <!-- right Form -->
-                      <div class=" col-xxl-6 col-md-6">
+                      <div class=" col-xxl-6 col-md-6  px-lg-3 mt-2">
                               <div class="row d-flex">
                                 <div class="col-lg-6">
                                 <label for="fname" class="form-label">First Name</label>
@@ -95,7 +85,7 @@ Admin Page
 
 
                       <!-- Left Form -->
-                      <div class="col-xxl-6 col-md-6">
+                      <div class="col-xxl-6 col-md-6 mt-0">
                               <div class="col-12 my-2">
                                 <label for="yourPassword" class="form-label">Institution Name</label>
                                 <input type="text" name="institute" class="form-control" required>
@@ -176,7 +166,7 @@ Admin Page
 
 
                               <div class="col-12 my-2">
-                                <label for="facultyPic" class="col-form-label">Profile Picture</label>
+                                <label for="profilePic" class="col-form-label">Profile Picture</label>
                                 <div class="col-sm-12">
                                   <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" required>
                                 </div>
@@ -195,7 +185,7 @@ Admin Page
                           </div> <!-- End Left Form  -->
 
 
-                        <div class="container col-lg-6 col-sm-12 mt-lg-4">
+                        <div class="container col-lg-6 col-sm-12 mt-lg-3">
 
                           <div class="col-12">
                             <button class="btn btn-primary w-100" name="submit" type="submit">Create Account</button>
@@ -211,10 +201,6 @@ Admin Page
                   </div><!-- Card Body Ends Ends -->
                 </div><!-- Card ends -->
 
-
-                <!-- ======= Footer ======= -->
-                {% include 'partials/_footer.html'%}
-                <!-- ======= Footer Ends ======= -->
       </section>
 
     </div>

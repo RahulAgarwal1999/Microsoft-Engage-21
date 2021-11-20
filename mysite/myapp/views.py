@@ -160,7 +160,7 @@ def facultyDashboard(request):
 
         context={
             'classRooms' : classRooms,
-            'faculty' : faculty
+            'userDetails' : faculty
         }
         return render(request,'faculty/facultyDashboard.html',context)
     else:
@@ -205,111 +205,16 @@ def facultyProfile(request):
 @login_required
 def facultyClassCreate(request):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
+        # Getting faculty details
+        user=request.user
+        faculty = FacultyDetails.objects.get(facultyId = user.pk)
+
         if request.method=='POST':
             className = request.POST['className']
             facultyName = request.POST['faculty']
             department = request.POST['department']
             academicYear = request.POST['year']
             gmeetLink = request.POST['gmeet']
-
-            # Getting list of days when class will happen
-            timetable = ""
-            temp = request.POST.getlist('time')
-
-            # monday = request.POST['monday']
-            if 'Monday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Monday')
-                monday_start = request.POST.get('monday_start',0)
-                monday_end = request.POST.get('monday_end',0)
-                list.append(monday_start)
-                list.append(monday_end)
-                timetable += str(list)
-                timetable += '+'
-
-            # print(monday)
-
-            # tuesday = request.POST.get('tuesday')
-            if 'Tuesday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Tuesday')
-                tuesday_start = request.POST.get('tuesday_start',0)
-                tuesday_end = request.POST.get('tuesday_end',0)
-                list.append(tuesday_start)
-                list.append(tuesday_end)
-                timetable += str(list)
-                timetable += '+'
-
-            # print(tuesday)
-
-            # wednesday = request.POST['wednesday']
-            if 'Wednesday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Wednesday')
-                wednesday_start = request.POST.get('wednesday_start',0)
-                wednesday_end = request.POST.get('wednesday_end',0)
-                list.append(wednesday_start)
-                list.append(wednesday_end)
-                timetable += str(list)
-                timetable += '+'
-
-
-            # thursday = request.POST['thursday']
-            if 'Thursday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Thursday')
-                thursday_start = request.POST.get('thursday_start',0)
-                thursday_end = request.POST.get('thursday_end',0)
-                list.append(thursday_start)
-                list.append(thursday_end)
-                timetable += str(list)
-                timetable += '+'
-
-
-            # friday = request.POST['friday']
-            if 'Friday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Friday')
-                friday_start = request.POST.get('friday_start',0)
-                friday_end = request.POST.get('friday_end',0)
-                list.append(friday_start)
-                list.append(friday_end)
-                timetable += str(list)
-                timetable += '+'
-
-            # saturday = request.POST['saturday']
-            if 'Saturday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Saturday')
-                saturday_start = request.POST.get('saturday_start',0)
-                saturday_end = request.POST.get('saturday_end',0)
-                list.append(saturday_start)
-                list.append(saturday_end)
-                timetable += str(list)
-                timetable += '+'
-
-            # sunday = request.POST['sunday']
-            if 'Sunday' in temp:
-                # Storing Day,start_time and end_time as a list
-                list=[]
-                list.append('Sunday')
-                sunday_start = request.POST.get('sunday_start',0)
-                sunday_end = request.POST.get('sunday_end',0)
-                list.append(sunday_start)
-                list.append(sunday_end)
-                timetable += str(list)
-                timetable += '+'
-
-            timetable = timetable[:-1]
-            # Getting faculty details
-            user=request.user
-            faculty = FacultyDetails.objects.get(facultyId = user.pk)
 
             # unique class id
             classId = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
@@ -322,7 +227,7 @@ def facultyClassCreate(request):
 
             # Creating classroom Object
             classCreate = ClassRoom(classId=classId, classname=className, classDepartment= department, academicYear=academicYear,
-                                    classFacultyID_id = faculty.pk, classFacultyName=faculty.facultyName, classTimeTable = timetable)
+                                    classFacultyID_id = faculty.pk, classFacultyName=faculty.facultyName)
 
             if gmeetLink is not None:
                 classCreate.classLink = gmeetLink
@@ -352,11 +257,13 @@ def facultyClassCreate(request):
             offline = OfflineClass(classId_id = classCreate.pk, studentList = input1)
             offline.save()
             # End Creating object for Offline Classes
-
-
             return redirect('facultyDashboard')
 
-        return render(request,'faculty/facultyClassCreate.html')
+
+        context ={
+            'faculty' : faculty,
+        }
+        return render(request,'faculty/facultyClassCreate.html',context)
     else:
         return redirect('facultyLogin')
 
@@ -804,7 +711,7 @@ def studentLogin(request):
             return redirect('studentDashboard')
         else:
             messages.error(request, "You are Not registered")
-            return redirect('studentRegister')
+            return redirect('studentLogin')
     return render(request,'student/studentLogin.html')
 
 # Register View
