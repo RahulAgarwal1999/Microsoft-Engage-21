@@ -557,22 +557,30 @@ def offlineOptedList(request,pk):
 
 @login_required
 def classMembersList(request,pk):
-    id = pk
+    if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
+        id = pk
 
-    studentListObject = ClassroomStudentsList.objects.get(classId = id)
-    studentListDict = json.loads(studentListObject.studentList)
+        user=request.user
+        userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
 
-    studentList = [*studentListDict]
-    students = []
+        studentListObject = ClassroomStudentsList.objects.get(classId = id)
+        studentListDict = json.loads(studentListObject.studentList)
 
-    for x in studentList:
-        temp = User.objects.get(username = x)
-        students.append(temp)
+        studentList = [*studentListDict]
+        students = []
 
-    context = {
-        'students' : students,
-    }
-    return render(request,'faculty/classMembersList.html',context)
+        for x in studentList:
+            temp = User.objects.get(username = x)
+            students.append(temp)
+
+        context = {
+            'students' : students,
+            'id' : id,
+            'userDetails' : userDetails
+        }
+        return render(request,'faculty/classMembersList.html',context)
+    else:
+        return redirect('facultyLogin')
 
 
 @login_required
@@ -583,6 +591,9 @@ def classAttendence(request,pk):
         studentListDict = json.loads(studentListObject.studentList)
         studentList = [*studentListDict]
         students = []
+
+        user=request.user
+        userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
 
         for x in studentList:
             temp = User.objects.get(username = x)
@@ -608,11 +619,17 @@ def classAttendence(request,pk):
             dt_string = now.strftime("%d/%m/%Y")
 
             # Date already present
-            if dt_string in attendence:
+            if dt_string in list(attendence):
                 attendee = attendence.get(dt_string)   #Getting todays dict of presentee
+
+                for student in attendee:
+                    studentAttendence[student] = studentAttendence.get(student,0) - 1
+
+                attendence[dt_string] = {}
+                attendee = {}
+
                 for student in attended:          #Traversing todays list of presentee list
-                    if student not in attendee:
-                        studentAttendence[student] = studentAttendence.get(student,0) + 1
+                    studentAttendence[student] = studentAttendence.get(student,0) + 1
                     attendee[student]=True
                 attendence[dt_string] = attendee
 
@@ -637,10 +654,22 @@ def classAttendence(request,pk):
 
             return redirect(request.path_info)
 
+        now = date.today()
+        dt_string = now.strftime("%d/%m/%Y")
+        todayPresent = {}
+        # Date already present
+        if dt_string in list(attendence):
+            todayPresent = attendence[dt_string]
+        else:
+            todayPresent ={}
+
+        print(attendence)
         context = {
             'students' : students,
             'status' : status,
-            'id':id
+            'id':id,
+            'todayPresent' : todayPresent,
+            'userDetails' : userDetails
         }
         return render(request,'faculty/facultyAttendencePage.html',context)
     else:
@@ -664,6 +693,9 @@ def assignmentSubmissions(request,pk):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         id = pk
 
+        user=request.user
+        userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
+
         assignment = Assignment.objects.get(assignmentId = id)
         assignmentDict = json.loads(assignment.assignmentSubmission)
 
@@ -677,7 +709,9 @@ def assignmentSubmissions(request,pk):
             students.append(temp)
         context = {
             'assignments' : assignmentDict,
-            'students' : students
+            'students' : students,
+            'userDetails' : userDetails,
+            'classId': classId
         }
 
 

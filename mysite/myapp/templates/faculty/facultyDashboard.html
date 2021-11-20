@@ -83,8 +83,7 @@ Admin Page
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="{% url 'facultyDashboard' %}">Home</a></li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -98,7 +97,7 @@ Admin Page
 
               {% if classRooms %}
                 {% for class in classRooms%}
-                    <div class="col-xxl-6 col-lg-12">
+                    <div class="col-xxl-6 col-lg-6">
                       <a href="{% url 'facultySubject' class.pk %}">
                         <div class="card info-card sales-card pb-0">
                          <div class="row g-0" style="background: #4154f1">
@@ -110,7 +109,7 @@ Admin Page
                            <div class="col-md-8 bg-white">
                              <div class="card-body my-1  mt-2 mb-0">
                                <h5 class="card-title" style="text-transform: uppercase;">{{class.classname | truncatechars:20}} <br><span>Class Code : {{class.pk}}</span></h5>
-                               <h5 class="card-title pt-0" style="text-transform: uppercase;">DEPARTMENT : <br><span>{{class.classDepartment | truncatechars:28}}</span></h5>
+                               <h5 class="card-title pt-0" style="text-transform: uppercase;">DEPARTMENT : <br><span>{{class.classDepartment | truncatechars:25}}</span></h5>
                                <h5 class="card-title pt-0" style="text-transform: uppercase;">ACADEMIC YEAR : {{class.academicYear | truncatechars:15}}</h5>
                              </div>
                            </div>
