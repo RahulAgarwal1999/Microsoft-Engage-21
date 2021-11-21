@@ -104,6 +104,8 @@ Admin Page
               {% endif %}
             </div>
 
+            {% include 'partials/_alert.html' %}
+            
               <!-- Table with stripped rows -->
               <form class="" method="POST">
                 {% csrf_token %}

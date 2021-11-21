@@ -49,7 +49,7 @@ def facultyLogin(request):
             login(request, user)
             return redirect('facultyDashboard')
         else:
-            messages.error(request, "You are not registered")
+            messages.error(request, "Invalid Credentials")
             return redirect('facultyLogin')
     return render(request,'faculty/facultyLogin.html')
 
@@ -103,7 +103,7 @@ def facultyRegister(request):
             #             fail_silently = False
             #             )
 
-            messages.success(request,'You are now registered and can Log In')
+            messages.success(request,'You are now registered')
             return redirect('facultyLogin')
 
     return render(request,'faculty/facultyRegister.html')
@@ -408,7 +408,7 @@ def facultySubject(request,pk):
                                                 announcementDescription = announcementDescription)
 
                 newAnnouncement.save()
-
+                messages.success(request,"Announcement Posted Successfully")
                 return redirect(request.path_info)
 
             if 'postAssignment' in request.POST:
@@ -424,6 +424,7 @@ def facultySubject(request,pk):
                                                 assignmentDescription = assignmentDescription, assignmentLink = assignmentLink, assignmentDueTime = dueDate)
 
                 newAssignment.save()
+                messages.success(request,"Assignment Posted Successfully")
                 return redirect(request.path_info)
 
             if 'sendInvite' in request.POST:
@@ -446,9 +447,11 @@ def facultySubject(request,pk):
                     #
                     # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
                     # email.send()
+                    messages.success(request,"Invite Sent Successfully")
 
                     return redirect(request.path_info)
                 except:
+                    messages.error(request,"Invalid Student ID")
                     return redirect(request.path_info)
 
                 return redirect(request.path_info)
@@ -461,7 +464,7 @@ def facultySubject(request,pk):
                 classDetails = ClassRoom.objects.get(classId=id)
                 classDetails.classLink = meetLink
                 classDetails.save()
-
+                messages.success(request,'Meeting Link Updated')
                 return redirect(request.path_info)
 
             if 'enableOffline' in request.POST:
@@ -474,6 +477,7 @@ def facultySubject(request,pk):
                 classOfflineStatus.classStrength = strength
                 classOfflineStatus.studentList = '{}'
                 classOfflineStatus.save()
+                messages.success(request,'Shifted To Online Mode')
                 return redirect(request.path_info)
 
             if 'disableOffline' in request.POST:
@@ -483,6 +487,7 @@ def facultySubject(request,pk):
                 classOfflineStatus.classStrength = 0
                 classOfflineStatus.studentList = '{}'
                 classOfflineStatus.save()
+                messages.success(request,'Shifted To Offline Mode')
                 return redirect(request.path_info)
 
 
@@ -674,6 +679,8 @@ def classAttendence(request,pk):
             attendenceObject.studentAttendence = studentAttendenceStr
             attendenceObject.save()
 
+            messages.success(request,'Attendence Updated Successfully')
+
             return redirect(request.path_info)
 
         now = date.today()
@@ -766,7 +773,7 @@ def studentLogin(request):
             login(request, user)
             return redirect('studentDashboard')
         else:
-            messages.error(request, "You are Not registered")
+            messages.error(request, "Invalid Credentials")
             return redirect('studentLogin')
     return render(request,'student/studentLogin.html')
 
@@ -830,7 +837,7 @@ def studentRegister(request):
             #             fail_silently = False
             #             )
 
-            messages.success(request,'You are now registered and can log in')
+            messages.success(request,'You are now registered')
             return redirect('studentLogin')
     return render(request,'student/studentRegister.html')
 
@@ -875,10 +882,8 @@ def studentDashboard(request):
 
                 try:
                     getClass = ClassRoom.objects.get(classId = classId)
-                    print('----Class Link Valid-------')
                 except:
-                    # message.alert(request,"No such class exist")
-                    print('----Class Link Invalid--------')
+                    messages.error(request,"Invalid Class Code")
                     return redirect(request.path_info)
 
 
@@ -886,10 +891,9 @@ def studentDashboard(request):
                     list = StudentClassroomList.objects.get(studentId = user.pk)
                     my_dict = json.loads(list.classList)
                     if classId in my_dict.keys():
-                        print('----student already in classroom -------')
                         return redirect('studentSubject',pk=classId)
                     else:
-                        print('----student not in classroom-------')
+                        # print('----student not in classroom-------')
                         # classroom  added in student list of StudentClassroomList
                         my_dict[classId] = dt_string
                         input = json.dumps(my_dict)
@@ -908,7 +912,7 @@ def studentDashboard(request):
                         classroomStudentsList.studentList = input
                         classroomStudentsList.save()
                         # ends
-
+                        messages.success(request,"Classroom joined successfully")
                         return redirect('studentSubject',pk=classId)
                     return redirect(request.path_info)
 
