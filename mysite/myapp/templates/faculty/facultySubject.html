@@ -208,7 +208,7 @@ Admin Page
                      <div class="modal-dialog modal-dialog-centered">
                        <div class="modal-content">
                          <div class="modal-header">
-                           <h5 class="modal-title">Update Time Table</h5>
+                           <h5 class="modal-title">Update Time Table (Time in 24hr Format)</h5>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                          </div>
                          <div class="modal-body">
@@ -514,14 +514,16 @@ Admin Page
                  <div class="modal-body">
 
                   <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Heading</label>
-                    <input type="text" class="form-control" name="announcementHeading" id="announcementHeading">
+                    <label for="inputNanme4" class="form-label">Heading*</label>
+                    <input type="text" class="form-control" name="announcementHeading" id="announcementHeading" required>
+                    <div class="invalid-feedback">Please, enter the Announcement Heading!</div>
                   </div>
                   <br>
 
                   <div class="col-12">
-                    <label for="announcementDescription" class="form-label">Description</label>
-                    <textarea type="text" class="form-control" name="announcementDescription" rows="8" cols="80"></textarea>
+                    <label for="announcementDescription" class="form-label">Description*</label>
+                    <textarea type="text" class="form-control" name="announcementDescription" rows="8" cols="80" required></textarea>
+                    <div class="invalid-feedback">Please, enter the Announcement Description!</div>
                   </div>
                </div>
                <div class="modal-footer">
@@ -570,20 +572,20 @@ Admin Page
                   <div class="modal-body">
 
                    <div class="col-12">
-                     <label for="inputNanme4" class="form-label">Heading</label>
+                     <label for="inputNanme4" class="form-label">Heading*</label>
                      <input type="text" class="form-control" name="assignmentHeading" id="assignmentHeading" required>
                      <div class="invalid-feedback">Please, enter the Assignment Heading!</div>
                    </div>
                    <br>
 
                    <div class="col-12">
-                     <label for="assignmentDescription" class="form-label">Description</label>
+                     <label for="assignmentDescription" class="form-label">Description*</label>
                      <textarea type="text" class="form-control" name="assignmentDescription" rows="2" cols="80" required></textarea>
                      <div class="invalid-feedback">Please, enter the Assignment Description!</div>
                    </div>
                    <br>
                    <div class="col-12">
-                     <label for="inputNanme4" class="form-label">Assignment Link(Eg. Google Drive Link)</label>
+                     <label for="inputNanme4" class="form-label">Assignment Link(Eg. Google Form/Google Drive Link)</label>
                      <input type="url" class="form-control" name="assignmentLink" id="assignmentLink">
                      <div class="invalid-feedback">Please, enter valid URL!</div>
                    </div>
@@ -591,7 +593,7 @@ Admin Page
 
                    <div class="col-12">
 
-                     <label for="inputNanme4" class="form-label">Due Date and Time</label>
+                     <label for="inputNanme4" class="form-label">Due Date and Time*</label>
                      <input type="datetime-local" class="form-control" name="dueDate" id="dueDate" required>
                      <div class="invalid-feedback">Please, enter the Due Date and Time</div>
                    </div>
@@ -620,7 +622,7 @@ Admin Page
                </div>
                <div class="col-md-8 bg-white">
                  <div class="card-body my-1  mt-2 mb-0">
-                   <h5 class="card-title text-center ">TAKE <br>Attendence</h5>
+                   <h5 class="card-title text-center ">TAKE <br>ATTENDENCE</h5>
                  </div>
                </div>
              </div>

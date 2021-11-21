@@ -28,32 +28,32 @@ Admin Page
 
                               <div class="row d-flex">
                                 <div class="col-lg-6">
-                                <label for="fname" class="form-label">First Name</label>
+                                <label for="fname" class="form-label">First Name*</label>
                                 <input type="text" class="form-control" id="fname" name="fname" required>
                                 <div class="invalid-feedback">Please enter First Name!</div>
                                 </div>
                                 <div class="col-lg-6">
-                                <label for="lname" class="form-label">Last Name</label>
+                                <label for="lname" class="form-label">Last Name*</label>
                                 <input type="text" class="form-control" id="lname" name="lname" required>
                                 <div class="invalid-feedback">Please enter Last Name!</div>
                                 </div>
                               </div>
 
                               <div class="col-12 my-2">
-                                <label for="yourEmail" class="form-label">Your Email</label>
+                                <label for="yourEmail" class="form-label">Your Email*</label>
                                 <input type="email" name="email" class="form-control" id="yourEmail" required>
                                 <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                               </div>
 
                               <div class="col-12 my-2 my-2">
-                                <label for="yourPassword" class="form-label">Password</label>
+                                <label for="yourPassword" class="form-label">Password*</label>
                                 <input type="password" name="password" class="form-control" id="yourPassword" required>
                                 <div class="invalid-feedback">Please enter your password!</div>
                               </div>
 
 
                               <div class="col-12 my-2">
-                                <label for="yourPassword" class="form-label">Gender</label>
+                                <label for="yourPassword" class="form-label">Gender*</label>
                                 <div class="col-sm-12">
                                   <select class="form-select" name="gender" aria-label="Default select example" required>
                                     <option value="" selected disabled>Select</option>
@@ -67,17 +67,17 @@ Admin Page
 
 
                               <div class="col-12 my-2">
-                                  <label for="inputDate" class="col-form-label">Date of Birth</label>
+                                  <label for="inputDate" class="col-form-label">Date of Birth*</label>
                                   <div class="">
-                                    <input type="date" name="dob" class="form-control " required>
+                                    <input type="date" name="dob" class="form-control" max="2020-12-31" required>
                                   </div>
                               </div>
 
 
                               <div class="col-12 my-2">
-                                <label for="inputPassword" class="col-form-label">Contact Number</label>
+                                <label for="inputPassword" class="col-form-label">Contact Number*</label>
                                 <div class="col-sm-12">
-                                  <input type="text" name="contact" class="form-control" required></input>
+                                  <input type="text" name="contact" pattern="[0-9]{10}" class="form-control" required></input>
                                   <div class="invalid-feedback">Please Enter your Contact No.</div>
                                 </div>
                               </div>
@@ -88,13 +88,13 @@ Admin Page
                       <!-- Left Form -->
                       <div class="col-xxl-6 col-md-6 px-lg-3 mt-0">
                               <div class="col-12 my-2">
-                                <label for="yourPassword" class="form-label">Institution Name</label>
+                                <label for="yourPassword" class="form-label">Institution Name*</label>
                                 <input type="text" name="institute" class="form-control" required>
                                 <div class="invalid-feedback">Please enter your Institution!</div>
                               </div>
 
                               <div class="col-12 my-2">
-                                <label for="yourPassword" class="form-label">State</label>
+                                <label for="yourPassword" class="form-label">State*</label>
                                 <div class="col-sm-12">
                                   <select class="form-select" name="state" aria-label="Default select example" required>
                                     <option value="" selected disabled>Select</option>
@@ -140,16 +140,16 @@ Admin Page
                               </div>
 
                               <div class="col-12 my-2">
-                                <label for="yourPassword" class="form-label">Teaching Experience (in years)</label>
+                                <label for="yourPassword" class="form-label">Teaching Experience in years (Between 0-50)*</label>
                                 <div class="col-sm-12">
-                                  <input type="text" name="yos" class="form-control" required></input>
+                                  <input type="number" name="yos" min="0" max="50" class="form-control" required></input>
                                 </div>
                                 <div class="invalid-feedback">Please enter Teaching Experience!</div>
                               </div>
 
 
                               <div class="col-12 my-2">
-                                <label for="inputPassword" class="col-form-label">About You</label>
+                                <label for="inputPassword" class="col-form-label">About You*</label>
                                 <div class="col-sm-12">
                                   <textarea class="form-control" name="about" style="height: 50px" required></textarea>
                                   <div class="invalid-feedback">Please tell something about you!</div>
@@ -159,7 +159,7 @@ Admin Page
 
 
                               <div class="col-12 my-2">
-                                <label for="facultyPic" class="col-form-label">Profile Picture</label>
+                                <label for="facultyPic" class="col-form-label">Profile Picture*</label>
                                 <div class="col-sm-12">
                                   <input class="form-control" name="profilePic" accept="image/*" type="file" id="formFile" required>
                                 </div>

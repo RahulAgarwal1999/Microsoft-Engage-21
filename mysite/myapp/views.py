@@ -74,7 +74,7 @@ def facultyRegister(request):
         num = random.randint(10000000, 99999999)
         str1 = 'EF'
         unique_id = str1 + str(num)
-
+        full_name = first_name + last_name
         username=unique_id
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')
@@ -582,6 +582,19 @@ def classMembersList(request,pk):
     else:
         return redirect('facultyLogin')
 
+@login_required
+def facultyProfileView(request,pk):
+    if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
+        id = pk
+        studentUser = User.objects.get(username = id)
+        studentDetails = StudentDetails.objects.get(studentId_id =  studentUser.pk)
+        context={
+            'studentUser' : studentUser,
+            'studentDetails' : studentDetails
+        }
+        return render(request,'faculty/profileView.html',context)
+    else:
+        return redirect('facultyLogin')
 
 @login_required
 def classAttendence(request,pk):
@@ -769,7 +782,7 @@ def studentRegister(request):
         num = random.randint(10000000, 99999999)
         str1 = 'ES'
         unique_id = str1 + str(num)
-
+        full_name = first_name + last_name 
         username=unique_id
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')

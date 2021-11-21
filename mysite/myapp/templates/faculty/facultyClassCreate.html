@@ -128,7 +128,7 @@ Admin Page
                           {% csrf_token %}
 
                           <div class="col-12 ">
-                            <label for="className" class="form-label">CLASSROOM NAME</label>
+                            <label for="className" class="form-label">CLASSROOM NAME*</label>
                             <input type="text" name="className" class="form-control" id="className" required>
                             <div class="invalid-feedback">Please enter Classroom Name!</div>
                           </div>
@@ -139,15 +139,15 @@ Admin Page
 
 
                           <div class="col-12">
-                            <label for="department" class="form-label">DEPARTMENT</label>
+                            <label for="department" class="form-label">DEPARTMENT*</label>
                             <input type="text" name="department" class="form-control" id="department" required>
                             <div class="invalid-feedback">Please enter Department!</div>
                           </div>
 
                           <div class="col-12">
-                            <label for="year" class="form-label">ACADEMIC YEAR</label>
-                            <input type="text" name="year" class="form-control" id="year" required>
-                            <div class="invalid-feedback">Please enter Academic Year!</div>
+                            <label for="year" class="form-label">ACADEMIC YEAR*</label>
+                            <input type="number" min="2000" max="2050" name="year" class="form-control" id="year" required>
+                            <div class="invalid-feedback">Please enter Academic Year (Between 2000-2050)</div>
                           </div>
 
                           <div class="col-12">
