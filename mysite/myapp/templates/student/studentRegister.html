@@ -93,6 +93,28 @@ Admin Page
                               </div>
 
                               <div class="col-12 my-2">
+                                <label for="yourPassword" class="form-label">Academic Year*</label>
+                                <div class="col-sm-12">
+                                  <select class="form-select" name="yos" aria-label="Default select example" required>
+                                    <option value="" selected disabled>Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                  </select>
+                                </div>
+                                <div class="invalid-feedback">Please enter Academic Year!</div>
+                              </div>
+
+                              <div class="col-12 my-2">
+                                <label for="department" class="form-label">Department*</label>
+                                <input type="text" name="department" class="form-control" required>
+                                <div class="invalid-feedback">Please enter your Department!</div>
+                              </div>
+
+                              <div class="col-12 my-2">
                                 <label for="yourPassword" class="form-label">State*</label>
                                 <div class="col-sm-12">
                                   <select class="form-select" name="state" aria-label="Default select example" required>
@@ -138,21 +160,6 @@ Admin Page
                                 <div class="invalid-feedback">Please enter the State!</div>
                               </div>
 
-                              <div class="col-12 my-2">
-                                <label for="yourPassword" class="form-label">Academic Year*</label>
-                                <div class="col-sm-12">
-                                  <select class="form-select" name="yos" aria-label="Default select example" required>
-                                    <option value="" selected disabled>Select</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                  </select>
-                                </div>
-                                <div class="invalid-feedback">Please enter Academic Year!</div>
-                              </div>
 
 
                               <div class="col-12 my-2">
@@ -188,10 +195,11 @@ Admin Page
                         <div class="container col-lg-6 col-sm-12 mt-lg-3">
 
                           <div class="col-12">
-                            <button class="btn btn-primary w-100" name="submit" type="submit">Create Account</button>
+                            <button class="btn btn-primary w-100" name="submit" type="submit" style="background: #1b1e7b; border-color:#1b1e7b;">Create Account</button>
                           </div>
-                          <div class="col-12 mt-2">
-                            <p class="small mb-0">Already have an account? <a href="{% url 'studentLogin'%}">Log in</a></p>
+                          <div class="d-flex align-items-center justify-content-center mt-lg-3 pb-4">
+                            <p class="mb-0 me-2">Already have an account</p>
+                            <a href="{% url 'studentLogin'%}" type="button" class="btn btn-outline-danger">Login Now</a>
                           </div>
                         </div>
 

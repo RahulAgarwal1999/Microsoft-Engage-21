@@ -29,6 +29,7 @@ class StudentDetails(models.Model):
     studentPhone = PhoneNumberField(null=False, blank=False, unique=False, default='+91')
     studentGender = models.CharField(max_length=20,null=False)
     studentDOB = models.DateTimeField(default=datetime.now,null=True)
+    studentDepartment = models.CharField(max_length = 50, blank= True, null= True, default=' ')
     # user_pass = models.CharField(max_length=10, blank=True)
     # user_unique = models.CharField(max_length=100,null=True)
     studentDesc = models.TextField(blank=False,null=True)

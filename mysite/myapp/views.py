@@ -177,14 +177,19 @@ def facultyProfile(request):
         if request.method=='POST':
             contact = request.POST['contact']
             institute = request.POST['institute']
-            state = request.POST['state']
             experience = request.POST['year']
             about = request.POST['about']
             profilePic = request.FILES.get('profilePic')
 
             userDetails.facultyPhone = contact
             userDetails.facultyCollege = institute
-            userDetails.collegeState = state
+
+            if 'state' in request.POST:
+                state = request.POST['state']
+                userDetails.collegeState = state
+            else:
+                None
+
             userDetails.experience = experience
             userDetails.facultyDesc = about
             if profilePic:
@@ -534,6 +539,9 @@ def offlineOptedList(request,pk):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         id = pk
 
+        user=request.user
+        userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
+
         studentListObject = ClassroomStudentsList.objects.get(classId = id)
         studentListDict = json.loads(studentListObject.studentList)
 
@@ -549,7 +557,8 @@ def offlineOptedList(request,pk):
 
         context = {
             'students' : students,
-            'offlineList' : offlineList
+            'offlineList' : offlineList,
+            'userDetails':userDetails
         }
         return render(request,'faculty/offlineOptedList.html',context)
     else:
@@ -772,6 +781,7 @@ def studentRegister(request):
         dob = request.POST['dob']
         contact = request.POST['contact']
         institute = request.POST['institute']
+        department = request.POST['department']
         state = request.POST['state']
         yearOfStudy = request.POST['yos']
         about = request.POST['about']
@@ -782,7 +792,7 @@ def studentRegister(request):
         num = random.randint(10000000, 99999999)
         str1 = 'ES'
         unique_id = str1 + str(num)
-        full_name = first_name + last_name 
+        full_name = first_name + last_name
         username=unique_id
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')
@@ -796,7 +806,7 @@ def studentRegister(request):
             u_id = User.objects.get(username=username)
 
             student = StudentDetails(studentId=u_id,studentName=full_name,studentPhone=contact,studentGender=gender,studentDOB = dob,
-                            studentDesc=about,studentCollege=institute,collegeState=state,yearOfStudy=yearOfStudy,studentPic=profilePic)
+                            studentDesc=about,studentCollege=institute,collegeState=state,yearOfStudy=yearOfStudy,studentPic=profilePic,studentDepartment = department)
 
             student.save()
 
@@ -935,7 +945,7 @@ def studentProfile(request):
             state = request.POST['state']
             yos = request.POST['year']
             about = request.POST['about']
-            totalDose = request.POST['vaccineDose']
+            department = request.POST['department']
             profilePic = request.FILES.get('profilePic')
 
 
@@ -944,6 +954,8 @@ def studentProfile(request):
             userDetails.collegeState = state
             userDetails.yearOfStudy = yos
             userDetails.studentDesc = about
+            userDetails.studentDepartment = department
+
             if profilePic:
                 userDetails.studentPic = profilePic
 
@@ -951,11 +963,19 @@ def studentProfile(request):
 
             try:
                 vaccine = VaccineStatus.objects.get(userId_id = user.pk)
-                vaccine.vaccineDose = totalDose
+                if 'vaccineDose' in request.POST:
+                    totalDose = request.POST['vaccineDose']
+                    vaccine.vaccineDose = totalDose
+                else:
+                    None
                 vaccine.save()
             except:
                 vaccine = VaccineStatus(userId_id = user.pk)
-                vaccine.vaccineDose = totalDose
+                if 'vaccineDose' in request.POST:
+                    totalDose = request.POST['vaccineDose']
+                    vaccine.vaccineDose = totalDose
+                else:
+                    None
                 vaccine.save()
 
 

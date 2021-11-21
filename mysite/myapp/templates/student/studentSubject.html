@@ -11,7 +11,7 @@ Admin Page
     <div class="d-flex align-items-center justify-content-between">
       <a href="{% url 'studentDashboard' %}" class="logo d-flex align-items-center">
         <img src="" alt="">
-        <span class="d-none d-lg-block">VirtualClassroom</span>
+        <span class=" d-lg-block">VirtualClassroom</span>
       </a>
       <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
     </div><!-- End Logo -->
@@ -37,7 +37,6 @@ Admin Page
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{user.first_name}} {{user.last_name}}</h6>
-              <span>Web Designer</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -50,16 +49,6 @@ Admin Page
               </a>
             </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -119,9 +108,6 @@ Admin Page
                  <h5 class="card-title" style="text-transform: uppercase; font-size:25px;">{{class.classname | truncatechars:20}} <br><span style="font-size:20px;">Class Code : {{class.pk}}</span></h5>
                  <h5 class="card-title pt-0" style="">DEPARTMENT : <br><span style="font-size:20px;">{{class.classDepartment | truncatechars:50}}</span></h5>
                  <h5 class="card-title pt-0" style="text-transform: uppercase;">ACADEMIC YEAR : {{class.academicYear | truncatechars:15}}</h5>
-                 <!-- <h1  style="color:red; text-transform: uppercase;">{{class.classname}}</h1>
-                 <p class="" style="color:black;">{{class.classDepartment}}</p>
-                 <p class="" style="color:black;">Class Code : <strong>{{class.classId}}</strong></p> -->
                </div>
              </div>
            </div>
