@@ -261,11 +261,11 @@ Admin Page
                            <td class="py-1" style="color: #012970"><strong>: &nbsp; {{totalConducted}}</strong></td>
                          </tr>
                          <tr >
-                           <td class="py-1" style="color: #012970"><strong>ATTENDED</strong></td>
+                           <td class="py-1" style="color: #012970"><strong>TOTAL ATTENDED</strong></td>
                            <td class="py-1" style="color: #012970"><strong>: &nbsp; {{totalAttended}}</strong></td>
                          </tr>
                          <tr>
-                           <td class="py-1" style="color:#012970"><strong>ABSENT</strong></td>
+                           <td class="py-1" style="color:#012970"><strong>TOTAL ABSENT</strong></td>
                            <td class="py-1" style="color:#012970"><strong >: &nbsp; {{totalAbsent}}</strong></td>
                          </tr>
                          <tr>
@@ -297,32 +297,35 @@ Admin Page
                   <h5 class="card-title text-center mb-0">OFFLINE MODE ?</h5>
                   <div class="activity ">
                     {% if classOfflineStatus.offlineStatus == 'NO' %}
-                       <p><strong>Offline Mode : NO</strong></p>
+                       <p><strong>Offline Mode : <span style="color:red;">NOT ACTIVE</span></strong></p>
                     {% else %}
-                       <p class="my-1"><strong>Offline Mode : YES</strong></p>
+                       <p class="my-1"><strong>Offline Mode : <span style="color:green;">ACTIVE</span></strong></p>
                        <p class="my-1"><strong>Dose Required : {{classOfflineStatus.vaccineRequired}}</strong></p>
                        <p class="my-1"><strong>Strength% Allowed : {{classOfflineStatus.classStrength}}</strong></p>
                            {% if opted %}
-                                <p class="my-1"><strong>Opted For : Offline </strong></p>
-                                <a type="button" class="btn btn-primary col-sm-12 bg-danger my-2" style="border:red;" data-bs-toggle="modal" data-bs-target="#optOnline">Opt Online</a>
+                                <p class="my-1"><strong>Opted For :<span style="color:green;"> OFFLINE </span></strong></p>
+                                <a type="button" class="btn btn-primary col-sm-12 bg-danger my-2" style="border:red;" data-bs-toggle="modal" data-bs-target="#optOnline">Opt Online Mode</a>
                            {% else %}
                                  {% if eligible == True %}
-                                      <p class="my-1"><strong>Eligibility : ELIGIBLE </strong></p>
+                                      <p class="my-1"><strong>Eligibility : <span style="color:green;">ELIGIBLE</span>  </strong></p>
                                       {% if available %}
-                                            <p class="my-1"><strong>Current Seat Availability : YES </strong></p>
+                                            <p class="my-1"><strong>Current Seat Availability : <span style="color:green;"> YES </span></strong></p>
                                             <br>
-                                            <a type="button" class="btn btn-primary col-sm-12 bg-success my-2" style="border:green;" data-bs-toggle="modal" data-bs-target="#optOffline">Opt Offline</a>
+                                            <a type="button" class="btn btn-primary col-sm-12 bg-success my-2" style="border:green;" data-bs-toggle="modal" data-bs-target="#optOffline">Opt Offline Mode</a>
                                       {% else %}
-                                          <p class="my-1"><strong>Current Seat Availability : NO </strong></p>
+                                          <p class="my-1"><strong>Current Seat Availability : <span style="color:red;"> NO </span> </strong></p>
                                       {% endif %}
                                  {% else %}
-                                      <p class="my-1"><strong>Eligibility : NOT ELIGIBLE</strong></p>
+                                      <p class="my-1"><strong>Eligibility : <span style="color:red;">NOT ELIGIBLE</span></strong></p>
                                  {% endif %}
                            {% endif %}
 
                     {% endif %}
 
                   </div>
+                </div>
+                <div class="mx-3">
+                  <p class="text-muted" style="text-align:justify;"><strong>Note: </strong>Please update your vaccination status in Edit Profile Section</p>
                 </div>
               </div>
             </div>
@@ -381,6 +384,9 @@ Admin Page
         <div class="col-lg-8">
           <div class="row">
 
+          {% include 'partials/_alert.html' %}
+
+          
                 {% if all_items_feed%}
                   {% for item in all_items_feed %}
                       {% if item.type == 'announcement' %}
@@ -425,7 +431,7 @@ Admin Page
                                      <h5 class="card-title">{{item.assignmentHeading}}</h5>
                                    </div>
                                    <div class="col-sm-3">
-                                     <h5 class="card-title">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
+                                     <h5 class="card-title" style="text-align:right;">Due: {{item.assignmentDueTime |date:"M d, Y" }}</h5>
                                    </div>
                                  </div>
 
@@ -472,7 +478,7 @@ Admin Page
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title">Post Submission</h5>
+                                <h5 class="modal-title">Assignment Submission</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">

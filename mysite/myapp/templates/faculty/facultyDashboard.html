@@ -86,6 +86,8 @@ Admin Page
         <div class="col-lg-8">
           <div class="row">
 
+            {% include 'partials/_alert.html'%}
+
               {% if classRooms %}
                 {% for class in classRooms%}
                     <div class="col-xxl-6 col-lg-6">
@@ -112,8 +114,21 @@ Admin Page
                 {% endfor %}
 
               {% else %}
-                <div class="container">
-                  <h3>No ClassRoom Created By You!</h3>
+                <div class="">
+                  <div class="card info-card sales-card pb-0 ">
+                   <div class="row g-0" style="background: #F52664">
+                     <div class="col-md-3 my-lg-4  pl-0  align-self-center ">
+                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                         <i class="bi bi-emoji-smile" style="color: #F52664"  ></i>
+                       </div>
+                     </div>
+                     <div class="col-md-9 py-lg-4 bg-white">
+                       <div class="card-body  mt-2 mb-0">
+                         <h5 class="card-title text-center ">NO CLASSROOM CREATED YET!</h5>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
                 </div>
               {% endif %}
           </div>

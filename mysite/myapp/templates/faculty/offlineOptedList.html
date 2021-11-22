@@ -78,7 +78,8 @@ Admin Page
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'facultyDashboard' %}">Home</a></li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item"><a href="{% url 'facultySubject' id %}">Classroom</a></li>
+          <li class="breadcrumb-item active">Offline Mode Details</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -88,7 +89,7 @@ Admin Page
 
       <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-center">OFFLINE CLASS DETAILS</h5>
+              <h5 class="card-title text-center">OFFLINE MODE DETAILS</h5>
 
               <!-- Table with stripped rows -->
               <div class="my-3">

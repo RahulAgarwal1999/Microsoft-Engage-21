@@ -74,8 +74,11 @@ def facultyRegister(request):
         num = random.randint(10000000, 99999999)
         str1 = 'EF'
         unique_id = str1 + str(num)
-        full_name = first_name + last_name
         username=unique_id
+        # End Generating unique username
+
+        full_name = first_name + last_name
+
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')
             return redirect('facultyLogin')
@@ -91,17 +94,21 @@ def facultyRegister(request):
                             facultyDesc=about,facultyCollege=institute,collegeState=state,experience=yearOfStudy,facultyPic=profilePic)
 
             faculty.save()
-            # u_id = User.objects.get(username=username)
-            # addusr = UserDetails(user_id=u_id,number=number)
-            # addusr.save()
 
-            # send_mail(
-            #             'EZacademy',
-            #             'Thank you '+ first_name + ' ' + last_name + ' for showing interest in our website. You have been successfully registered. Feel free to call for any house help and avail our facilities at a rational price !',
-            #             '',
-            #             [email],
-            #             fail_silently = False
-            #             )
+            # # Registration Confirmation Email
+            # role_user_email = user.email
+            # # role_user_email = 'rahul.agarwal31101999@gmail.com'
+            # mail_subject = "[Welcome Faculty] - You have successfully registered to VirtualClassroom!!"
+            # message = render_to_string('register_successful.html', {
+            #     'firstname': user.first_name,
+            #     'lastname': user.last_name,
+            #     'unique_id' : unique_id
+            # })
+            #
+            # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+            # email.send()
+            # # End Registration Confirmation Email
+
 
             messages.success(request,'You are now registered')
             return redirect('facultyLogin')
@@ -262,6 +269,8 @@ def facultyClassCreate(request):
             offline = OfflineClass(classId_id = classCreate.pk, studentList = input1)
             offline.save()
             # End Creating object for Offline Classes
+
+            messages.success(request,"Classroom Created Successfully")
             return redirect('facultyDashboard')
 
 
@@ -477,7 +486,7 @@ def facultySubject(request,pk):
                 classOfflineStatus.classStrength = strength
                 classOfflineStatus.studentList = '{}'
                 classOfflineStatus.save()
-                messages.success(request,'Shifted To Online Mode')
+                messages.success(request,'Offline Mode Activated')
                 return redirect(request.path_info)
 
             if 'disableOffline' in request.POST:
@@ -487,7 +496,7 @@ def facultySubject(request,pk):
                 classOfflineStatus.classStrength = 0
                 classOfflineStatus.studentList = '{}'
                 classOfflineStatus.save()
-                messages.success(request,'Shifted To Offline Mode')
+                messages.success(request,'Offline Mode Deactivated')
                 return redirect(request.path_info)
 
 
@@ -563,7 +572,8 @@ def offlineOptedList(request,pk):
         context = {
             'students' : students,
             'offlineList' : offlineList,
-            'userDetails':userDetails
+            'userDetails':userDetails,
+            'id' : id
         }
         return render(request,'faculty/offlineOptedList.html',context)
     else:
@@ -600,11 +610,16 @@ def classMembersList(request,pk):
 def facultyProfileView(request,pk):
     if request.user.is_active and request.user.is_staff and not request.user.is_superuser:
         id = pk
+
+        user=request.user
+        userDetails = FacultyDetails.objects.get(facultyId_id = user.pk)
+
         studentUser = User.objects.get(username = id)
         studentDetails = StudentDetails.objects.get(studentId_id =  studentUser.pk)
         context={
             'studentUser' : studentUser,
-            'studentDetails' : studentDetails
+            'studentDetails' : studentDetails,
+            'userDetails':userDetails
         }
         return render(request,'faculty/profileView.html',context)
     else:
@@ -794,13 +809,16 @@ def studentRegister(request):
         about = request.POST['about']
         profilePic = request.FILES.get('profilePic')
 
-        print(profilePic)
+        # print(profilePic)
         # Generating unique username
         num = random.randint(10000000, 99999999)
         str1 = 'ES'
         unique_id = str1 + str(num)
-        full_name = first_name + last_name
         username=unique_id
+        # End Generating unique username
+
+        full_name = first_name + last_name
+
         if User.objects.filter(email=email).exists():
             messages.error(request,'You Already have an account. Please Log In')
             return redirect('studentLogin')
@@ -825,17 +843,19 @@ def studentRegister(request):
             # End Creating StudentClassroomList object
 
 
-            # u_id = User.objects.get(username=username)
-            # addusr = UserDetails(user_id=u_id,number=number)
-            # addusr.save()
-
-            # send_mail(
-            #             'EZacademy',
-            #             'Thank you '+ first_name + ' ' + last_name + ' for showing interest in our website. You have been successfully registered. Feel free to call for any house help and avail our facilities at a rational price !',
-            #             '',
-            #             [email],
-            #             fail_silently = False
-            #             )
+            # # Registration Confirmation Email
+            # role_user_email = user.email
+            # # role_user_email = 'rahul.agarwal31101999@gmail.com'
+            # mail_subject = "[Welcome Student] - You have successfully registered to VirtualClassroom!!"
+            # message = render_to_string('register_successful.html', {
+            #     'firstname': user.first_name,
+            #     'lastname': user.last_name,
+            #     'unique_id' : unique_id
+            # })
+            #
+            # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+            # email.send()
+            # # End Registration Confirmation Email
 
             messages.success(request,'You are now registered')
             return redirect('studentLogin')
@@ -1047,6 +1067,7 @@ def studentSubject(request,pk):
                 assignment.assignmentSubmission = input;
                 assignment.save()
 
+                messages.success(request,"Assignment Submitted Successfully")
                 return redirect(request.path_info)
 
             if 'optOffline' in request.POST:
@@ -1055,7 +1076,7 @@ def studentSubject(request,pk):
                 stu_list[user.username] = True
                 offline.studentList = json.dumps(stu_list)
                 offline.save()
-
+                messages.success(request,"Opted for Offline Mode")
                 return redirect(request.path_info)
 
             if 'optOnline' in request.POST:
@@ -1069,6 +1090,7 @@ def studentSubject(request,pk):
                 offline.studentList = json.dumps(stu_list)
                 offline.save()
 
+                messages.success(request,"Opted for Online Mode")
                 return redirect(request.path_info)
 
             return redirect(request.path_info)
