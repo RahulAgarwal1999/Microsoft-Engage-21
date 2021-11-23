@@ -46,8 +46,8 @@ Admin Page
 
                               <div class="col-12 my-2">
                                 <label for="yourPassword" class="form-label">Password*</label>
-                                <input type="password" name="password" class="form-control" id="yourPassword" required>
-                                <div class="invalid-feedback">Please enter your password!</div>
+                                <input type="password" pattern=".{6,15}" name="password" class="form-control" id="yourPassword" required>
+                                <div class="invalid-feedback">Please enter a valid password of length between 6 to 15!</div>
                               </div>
 
 

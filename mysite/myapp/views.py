@@ -442,10 +442,10 @@ def facultySubject(request,pk):
                 try:
                     student = User.objects.get(username = studentId)
                     email = student.email
-                    email = 'rahul.agarwal31101999@gmail.com'
 
                     # role_user_email = email
-                    # mail_subject = "[INVITE] - You have been invited to join the Classroom"
+                    #
+                    # mail_subject = "[CLASSROOM INVITE] - You have been invited to join the Classroom"
                     # message = render_to_string('classInviteSend.html', {
                     #     'facultyName': classDetails.classFacultyName,
                     #     'className' : classDetails.classname,
