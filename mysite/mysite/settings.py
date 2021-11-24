@@ -137,6 +137,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # EMAIL USE
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
-EMAIL_HOST_USER = 'adityaverma0198@gmail.com'
-EMAIL_HOST_PASSWORD = 'mlgcstcudwciboxg'
+EMAIL_HOST_USER = 'virtualclassroom.service@gmail.com'
+EMAIL_HOST_PASSWORD = 'jkrclrtjgbcgyrfw'
 EMAIL_USE_TLS = True

@@ -95,19 +95,19 @@ def facultyRegister(request):
 
             faculty.save()
 
-            # # Registration Confirmation Email
-            # role_user_email = user.email
-            # # role_user_email = 'rahul.agarwal31101999@gmail.com'
-            # mail_subject = "[Welcome Faculty] - You have successfully registered to VirtualClassroom!!"
-            # message = render_to_string('register_successful.html', {
-            #     'firstname': user.first_name,
-            #     'lastname': user.last_name,
-            #     'unique_id' : unique_id
-            # })
-            #
-            # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
-            # email.send()
-            # # End Registration Confirmation Email
+            # Registration Confirmation Email
+            role_user_email = user.email
+            # role_user_email = 'rahul.agarwal31101999@gmail.com'
+            mail_subject = "[Welcome Faculty] - You have successfully registered to VirtualClassroom!!"
+            message = render_to_string('register_successful.html', {
+                'firstname': user.first_name,
+                'lastname': user.last_name,
+                'unique_id' : unique_id
+            })
+
+            email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+            email.send()
+            # End Registration Confirmation Email
 
 
             messages.success(request,'You are now registered')
@@ -443,19 +443,19 @@ def facultySubject(request,pk):
                     student = User.objects.get(username = studentId)
                     email = student.email
 
-                    # role_user_email = email
-                    #
-                    # mail_subject = "[CLASSROOM INVITE] - You have been invited to join the Classroom"
-                    # message = render_to_string('classInviteSend.html', {
-                    #     'facultyName': classDetails.classFacultyName,
-                    #     'className' : classDetails.classname,
-                    #     'firstname': student.first_name,
-                    #     'lastname': student.last_name,
-                    #     'classId' : id,
-                    # })
-                    #
-                    # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
-                    # email.send()
+                    role_user_email = email
+
+                    mail_subject = "[CLASSROOM INVITE] - You have been invited to join the Classroom"
+                    message = render_to_string('classInviteSend.html', {
+                        'facultyName': classDetails.classFacultyName,
+                        'className' : classDetails.classname,
+                        'firstname': student.first_name,
+                        'lastname': student.last_name,
+                        'classId' : id,
+                    })
+
+                    email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+                    email.send()
                     messages.success(request,"Invite Sent Successfully")
 
                     return redirect(request.path_info)
@@ -843,19 +843,19 @@ def studentRegister(request):
             # End Creating StudentClassroomList object
 
 
-            # # Registration Confirmation Email
-            # role_user_email = user.email
-            # # role_user_email = 'rahul.agarwal31101999@gmail.com'
-            # mail_subject = "[Welcome Student] - You have successfully registered to VirtualClassroom!!"
-            # message = render_to_string('register_successful.html', {
-            #     'firstname': user.first_name,
-            #     'lastname': user.last_name,
-            #     'unique_id' : unique_id
-            # })
-            #
-            # email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
-            # email.send()
-            # # End Registration Confirmation Email
+            # Registration Confirmation Email
+            role_user_email = user.email
+            # role_user_email = 'rahul.agarwal31101999@gmail.com'
+            mail_subject = "[Welcome Student] - You have successfully registered to VirtualClassroom!!"
+            message = render_to_string('register_successful.html', {
+                'firstname': user.first_name,
+                'lastname': user.last_name,
+                'unique_id' : unique_id
+            })
+
+            email = EmailMessage(mail_subject, message, from_email=EMAIL_HOST_USER, to=[role_user_email])
+            email.send()
+            # End Registration Confirmation Email
 
             messages.success(request,'You are now registered')
             return redirect('studentLogin')
