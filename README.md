@@ -125,7 +125,7 @@ Here is the database schema of our application:
 </p>
 
 
-### Application Deployment
+### APPLICATION DEPLOYMENT
 
 The application is deployed in Heroku and for storage the application is using Cloudinary which is end-to-end image and video-management solution for websites and mobile apps.
 To view the deployed application, just click on this link : CLICK HERE
@@ -133,9 +133,9 @@ and just follow the Step by Step Guide as shown : CLICK HERE.
 AND if you want to clone the project in your local system and use, then check out this section : CLICK HERE
 
 
-### Project Setup Guide ( If wants to clone in the local system)
+### PROJECT SETUP GUIDE ( IF WANTS TO CLONE THE REPO IN LOCAL SYSTEM)
 
-**Python Setup:**
+**PYTHON SETUP:**
 * Install Python on your system. Download Link : Click Here 
 * An Exe file will be downloaded, open it.
 * A dialog box will appear as shown in the figure below. Do not forget to click on the check box of “ADD PYTHON TO PATH”
@@ -150,7 +150,7 @@ AND if you want to clone the project in your local system and use, then check ou
 
 **Note:** If you are using Command Line terminal, then restart the terminal to use python
 
-**GIT Setup:**
+**GIT SETUP:**
 * Download GIT on your system. Download Link : Click Here
 * An Exe file will be downloaded, open it.
 * A dialog box will appear, keep everyting default, and keep on selecting **‘NEXT’**. 
@@ -158,7 +158,7 @@ AND if you want to clone the project in your local system and use, then check ou
 
 **Note:** If you are using Command Line terminal, then restart the terminal to use Git
 
-**Install Django and Packages:**
+**INSTALL DJANGO AND PACKAGES:**
 * Open Command Line Terminal
 * First check whether python is successfully installed or not by typing the command   **python –version**  and press Enter. If it shows the python version, then python has been successfully installed in your system
 * Now run the following command one by one ( Press Enter after each command)
