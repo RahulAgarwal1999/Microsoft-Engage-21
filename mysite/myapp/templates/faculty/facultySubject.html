@@ -98,10 +98,10 @@ Admin Page
            </div>
            <div class="col-md-9 bg-white pb-lg-5" style="height:272px;">
              <div class="card-body mt-lg-5 mb-0">
-               <h5 class="card-title mb-0 pt-2 pb-0" style=" font-size:25px;">{{class.classname | truncatechars:20}}</h5>
-               <h5 class="card-title mt-0 pt-1" >Class Code : {{class.pk}}</h5>
-               <h5 class="card-title pt-0" style="">DEPARTMENT : <br><span style="font-size:22px;">{{class.classDepartment | truncatechars:50}}</span></h5>
-               <h5 class="card-title pt-0" style="text-transform: uppercase;">ACADEMIC YEAR : {{class.academicYear | truncatechars:15}}</h5>
+               <h5 class="card-title mb-0 pt-2 pb-0" style=" font-size:25px; text-transform:uppercase;">{{class.classname | truncatechars:20}}</h5>
+               <h5 class="card-title mt-0 pt-1 py-1" ><b>CLASS CODE : </b>{{class.pk}}</h5>
+               <h5 class="card-title pt-0 py-1" style="text-transform: uppercase;"><b>DEPARTMENT : </b><br>{{class.classDepartment | truncatechars:50}}</h5>
+               <h5 class="card-title pt-0 py-1" style="text-transform: uppercase;"><b>ACADEMIC YEAR : </b>{{class.academicYear | truncatechars:15}}</h5>
                <!-- <h1  style="color:red; text-transform: uppercase;">{{class.classname}}</h1>
                <p class="" style="color:black;">{{class.classDepartment}}</p>
                <p class="" style="color:black;">Class Code : <strong>{{class.classId}}</strong></p> -->
