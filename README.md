@@ -141,4 +141,68 @@ AND if you want to clone the project in your local system and use, then check ou
 * A dialog box will appear as shown in the figure below. Do not forget to click on the check box of “ADD PYTHON TO PATH”
 * Then click on ‘INSTALL NOW’, the installation will be completed.
 
-**Note: ** If you are using Command Line terminal, then restart the terminal to use python
+<p align="center">
+    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <br />
+    Dialog Box in Python Installation
+</p>
+
+
+**Note:** If you are using Command Line terminal, then restart the terminal to use python
+
+**GIT Setup:**
+* Download GIT on your system. Download Link : Click Here
+* An Exe file will be downloaded, open it.
+* A dialog box will appear, keep everyting default, and keep on selecting **‘NEXT’**. 
+* The downloading will start and Git will be successfully installed
+
+**Note:** If you are using Command Line terminal, then restart the terminal to use Git
+
+**Install Django and Packages:**
+* Open Command Line Terminal
+* First check whether python is successfully installed or not by typing the command   **python –version**  and press Enter. If it shows the python version, then python has been successfully installed in your system
+* Now run the following command one by one ( Press Enter after each command)
+    - pip install django==3.0
+    - pip install django-phonenumber-field
+    - pip install phonenumbers
+    - pip install email_validator
+    - pip install django-crispy-forms
+    - pip install jsonfield
+    - pip install pillow
+    
+**CLONING THE DJANGO PROJECT FROM GITUB**
+
+* Go to the Github Repoistory . Github Repo Link : Click Here
+* Click on **CODE** button and copy the **HTTPS** Link of the repo
+
+<p align="center">
+    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <br />
+    Dialog Box in Python Installation
+</p>
+
+
+* Open the Command Line Terminal and cd to the folder you want to clone the project. 
+* In the command line enter the command : **git clone <Copied HTTP repo clone link>** and press **Enter**.
+
+    
+**RUNNING THE PROJECT**
+  
+* After the cloning is completed, cd(change directory) to the repository and again cd to the app(mysite) directory (The same level in which manage.py file is present) via the command line
+* Then Run the command :  **python manage.py runserver**
+    
+    <p align="center">
+    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <br />
+    Dialog Box in Python Installation
+</p>
+    
+* Copy the http server link generated after running the command and open it in the browser
+    
+<p align="center">
+    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <br />
+    Dialog Box in Python Installation
+</p>
+    
+**NOTE:** For copying , select the url and click on right click and copy, otherwise select the link and do CTRL+C. But while using second method, if the server breaks, then again run the previos command, i.e. python manage.py runserver. 
