@@ -915,7 +915,7 @@ Admin Page
                                  <p>{{item.assignmentDescription}}</p>
                                  {% if item.assignmentLink %}
                                  <div class="d-flex justify-content-between">
-                                   <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Click Here</a></strong></p>
+                                   <p><strong>Assignment Link : <a href="{{item.assignmentLink}}" target="_blank">Click Here</a></strong></p>
                                    <div class="" style="text-align:right;">
                                      <a class="btn  btn-sm" href="{% url 'assignmentSubmissions' item.pk %}" name="button" style="background:#4154f1; color:white;">View Submissions</a>
                                    </div>

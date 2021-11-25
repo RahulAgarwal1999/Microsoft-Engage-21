@@ -109,7 +109,7 @@ Admin Page
                     <td>{{user.username}}</td>
                     <td>{{user.first_name}} {{user.last_name}}</td>
                     {% if user.username in assignments %}
-                      <td><strong><a href="{{assignments|get_item_link:user.username}}">View</a></strong></td>
+                      <td><strong><a href="{{assignments|get_item_link:user.username}}" target="_blank">View</a></strong></td>
                       <td>{{assignments|get_date:user.username}}</td>
                     {% else %}
                       <td style="color:red"><strong>Not Submitted</strong></td>

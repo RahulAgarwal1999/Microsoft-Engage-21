@@ -442,7 +442,7 @@ Admin Page
                                   <p>{{item.assignmentDescription}}</p>
                                   {% if item.assignmentLink %}
                                   <div class="d-flex justify-content-between">
-                                    <p><strong>Assignment Link : <a href="{{item.assignmentLink}}">Clicks Here</a></strong></p>
+                                    <p><strong>Assignment Link : <a href="{{item.assignmentLink}}" target="_blank">Clicks Here</a></strong></p>
                                     <div style="text-align:right;">
                                       {% if user.username in item.assignmentSubmission %}
                                         <button class="btn btn-success btn-sm" type="button" name="button"><span class="bi bi-check2-circle"> </span>Submitted</button>
