@@ -17,7 +17,7 @@ The student has the options to join the classroom, check announcements, submit t
 
 
 <p align="center">
-    <img src="/readme_images/VirtualClassroom.png" alt="VirtualClassroom">
+    <img src="/readme_images/VirtualClassroom.PNG" alt="VirtualClassroom">
     <br />
     VirtualClassroom
 </p>
@@ -140,7 +140,7 @@ AND if you want to clone the project in your local system and use, then check ou
 * Then click on ‘INSTALL NOW’, the installation will be completed.
 
 <p align="center">
-    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/Python-setup.PNG" alt="Dialog Box in Python Installation">
     <br />
     Dialog Box in Python Installation
 </p>
@@ -174,9 +174,9 @@ AND if you want to clone the project in your local system and use, then check ou
 * Click on **CODE** button and copy the **HTTPS** Link of the repo
 
 <p align="center">
-    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/Github-clone.PNG" alt="Copy the HTTPS Link">
     <br />
-    Dialog Box in Python Installation
+    Copy the HTTPS Link
 </p>
 
 
@@ -190,17 +190,17 @@ AND if you want to clone the project in your local system and use, then check ou
 * Then Run the command :  **python manage.py runserver**
     
     <p align="center">
-    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/commandtorun.PNG" alt="Commands to Run">
     <br />
-    Dialog Box in Python Installation
+    Commands to Run
 </p>
     
 * Copy the http server link generated after running the command and open it in the browser
     
 <p align="center">
-    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/ServerImg.PNG" alt="Server link to run the project">
     <br />
-    Dialog Box in Python Installation
+    Server link to run the project
 </p>
     
 **NOTE:** For copying , select the url and click on right click and copy, otherwise select the link and do CTRL+C. But while using second method, if the server breaks, then again run the previos command, i.e. python manage.py runserver. 
