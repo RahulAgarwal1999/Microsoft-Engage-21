@@ -13,8 +13,8 @@
 * [Database Schema](#database-schema)
 * [Tech Stacks and Frameworks](#tech-stacks-and-frameworks)
 * [Project Setup Guide](#project-setup-guide)
-* [ADMIN CREDENTIALS](#admin-credentials)
-* [SAMPLE STUDENT AND FACULTY ACCOUNT CREDENTIALS](#sample-student-and-faculty-account-credentials)
+* [Admin Cresentials](#admin-credentials)
+* [Sample Sstudent And Faculty Account Credentials](#sample-student-and-faculty-account-credentials)
 * [Step By Step Guide](#step-by-step-guide)
 
 VirtualClassroom is a web platform that gives students an array of digital academic and social tools to stay engaged with their academics and help teaching professional in creating and managing virtual classrooms. 
@@ -222,7 +222,7 @@ NOTE: PROJECT SETUP GUIDE (IF WANTS TO CLONE THE REPO IN LOCAL SYSTEM)
 ### ADMIN CREDENTIALS
     
 To Check the Admin Panel in Deployed Site, copy the following url and paste it in the browser :   https://virtual-classroom1.herokuapp.com/admin
-
+<br>
 To Check the Admin Panel in Cloned Project, copy the following url and paste it in the browser :   http://127.0.0.1:8000/admin
 
 The django admin login page will open, image shown below :
@@ -233,8 +233,8 @@ The django admin login page will open, image shown below :
     Admin Login Page
 </p>
 
-**CREDENTIALS (FOR BOTH DEPLOYED VERSION AND CLONED PROJECT):**
-**Username** – admin
+**CREDENTIALS (FOR BOTH DEPLOYED VERSION AND CLONED PROJECT):** <br>
+**Username** – admin <br>
 **Password** – admin12345
 
 After Logging in as admin, you can see all the tables used and what data are filled into them, image shown below 
