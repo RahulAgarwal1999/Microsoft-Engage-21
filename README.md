@@ -235,7 +235,7 @@ The django admin login page will open, image shown below :
 
 **CREDENTIALS (FOR BOTH DEPLOYED VERSION AND CLONED PROJECT):** <br>
 **Username** – admin <br>
-**Password** – admin12345
+**Password** – admin12345  <br>
 
 After Logging in as admin, you can see all the tables used and what data are filled into them, image shown below 
 
@@ -250,14 +250,14 @@ After Logging in as admin, you can see all the tables used and what data are fil
 
 There is a already created Student and Faculty Account in both Deployed website and Cloned Project. You can login with this credentials and use.
 
-**Faculty Credentials** 
-Email : samplefaculty@gmail.com
-Password : samplefaculty
+**Faculty Credentials**  <br>
+Email : samplefaculty@gmail.com  <br>
+Password : samplefaculty  <br>
 
-**Student Credentials** 
-Email : samplestudent@gmail.com
-Password : samplestudent
-
+**Student Credentials**  <br>
+Email : samplestudent@gmail.com  <br>
+Password : samplestudent  <br>
+<br>
 **Note : Even if the following credentials doesn’t work or you want to create your new credentials, you can easily create it on the faculty and student registration page**
 
     
