@@ -17,9 +17,9 @@ The student has the options to join the classroom, check announcements, submit t
 
 
 <p align="center">
-    <img src="/media-files/airline-management-system.png" alt="Airline Management System">
+    <img src="/readme_images/VirtualClassroom.png" alt="VirtualClassroom">
     <br />
-    Airline Management System
+    VirtualClassroom
 </p>
 
 ### System Requirements
@@ -68,7 +68,7 @@ Here are the top use cases of the VirtualClassroom:
 Here is the use case diagram of our application - VirtualClassroom:
 
 <p align="center">
-    <img src="/media-files/ams-use-case-diagram.svg" alt="Airline Management System Use Case Diagram">
+    <img src="/readme_images/Use case diagram.jpg" alt="VirtualClassroom Use Case Diagram">
     <br />
     Use Case Diagram for VirtualClassroom
 </p>
@@ -87,23 +87,19 @@ Here are the main classes of our application:
 
 
 <p align="center">
-    <img src="/media-files/ams-class-diagram.png" alt="Airline Management System Class Diagram">
+    <img src="/readme_images/ClassDiagram.jpg" alt="VirtualClassroom Class Diagram">
     <br />
     Class Diagram for VirtualClassroom
 </p>
 
-<p align="center">
-    <img src="/media-files/ams-uml.svg" alt="Airline Management System UML">
-    <br />
-    UML for Airline Management System
-</p>
+
 
 ### Activity Diagrams
 
 **Faculty Activities:** Login, Registration, Edit Profile,  Create Classroom, Send Class Invites, Update Timetable, Post Announcements, Post Assignments, Take Attendence, Choose Class Mode
 
 <p align="center">
-    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/Activity Diagram_Faculty.jpg" alt="Virtual Classroom - Faculty Activity Diagram">
     <br />
     Activity Diagram for VirtualClassroom - Faculty 
 </p>
@@ -111,7 +107,7 @@ Here are the main classes of our application:
 * **Student Activities:** Registration, Login, Edit Profile,  Join Classroom, Check Attendence, Submit Assignments, Choose Class Mode
 
 <p align="center">
-    <img src="/media-files/ams-cancel-reservation-activity-diagram.svg" alt="Airline Management System Cancel Reservation Activity Diagram">
+    <img src="/readme_images/Activity Diagram_Student.jpg" alt="Virtual Classroom - Student Activity Diagram">
     <br />
     Activity Diagram for VirtualClassroom - Student
 </p>
@@ -121,7 +117,7 @@ Here are the main classes of our application:
 Here is the database schema of our application:
 
 <p align="center">
-    <img src="/media-files/ams-reserve-ticket-activity-diagram.svg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/Database Schema.jpg" alt="Airline Management System Reserve Ticket Activity Diagram">
     <br />
     Database Schema for VirtualClassroom
 </p>
