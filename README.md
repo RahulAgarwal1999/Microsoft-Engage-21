@@ -1,8 +1,8 @@
 <h1 align="center">VirtualClassroom</h1>
 <h3 align="center">WEBSITE DEPLOYED : <a href="https://virtual-classroom1.herokuapp.com/">CLICK HERE</a></h3>
 
-<h3> Full Documentation : <a href="">CLICK HERE</a><h3>
-<h3> Demo Video : <a href="">CLICK HERE</a><h3>
+<h3> Full Documentation : <a href="https://drive.google.com/file/d/1tYygKPxYYG4xWGzMOfFOyVdoIIFxuCSQ/view?usp=sharing">CLICK HERE</a><h3>
+<h3> Demo Video : <a href="https://www.youtube.com/watch?v=h7EkSFCbLmY">CLICK HERE</a><h3>
     
 **We'll cover the following:**
 
