@@ -8,6 +8,8 @@
 * [Class Diagram](#class-diagram)
 * [Activity Diagrams](#activity-diagrams)
 * [Database Schema](#database-schema)
+* [Tech Stacks and Frameworks](#tech-stacks-and-frameworks)
+* [Step By Step Guide](#step-by-step-guide)
 
 VirtualClassroom is a web platform that gives students an array of digital academic and social tools to stay engaged with their academics and help teaching professional in creating and managing virtual classrooms. 
 It gives the faculty in smooth conducting of both online and offline classes alongwith various features such as updating class timetable, posting announcement, posting assignments, taking attendence, updating meeting details, and switching between online and offline class mode.
@@ -206,3 +208,19 @@ AND if you want to clone the project in your local system and use, then check ou
 </p>
     
 **NOTE:** For copying , select the url and click on right click and copy, otherwise select the link and do CTRL+C. But while using second method, if the server breaks, then again run the previos command, i.e. python manage.py runserver. 
+    
+
+### TECH STACKS AND FRAMEWORKS
+    
+* **Python** - Python is an interpreted high-level general purpose programming language mainly used to build websites and software, automate tasks, and conduct data analysis.
+* **Django Framework** - Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. Some features of Django are : 
+* **SQLite** - SQLite is a relational database management system contained in a C library. SQLite is a server-less database and is self-contained. This is also referred to as an embedded database which means the DB engine runs as a part of the app. Thus it is a lot faster than SQL server.
+* **Heroku** - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud
+* **Cloudinary** - Cloudinary is an end-to-end image- and video-management solution for websites and mobile apps, covering everything from image and video uploads, storage, manipulations, optimizations to delivery.
+* **Bootstrap**  - Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development
+* **HTML , CSS , Javascript , Json**
+
+    
+### Step By Step Guide
+    
+<h4>FULL STEP BY STEP GUIDE : <a href="https://drive.google.com/file/d/17EDhcdr8Pf_hSb4CnjD2g08lwcXLPgbX/view?usp=sharing">CLICK HERE</a></h4>
