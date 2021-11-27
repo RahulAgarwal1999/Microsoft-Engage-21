@@ -8,6 +8,8 @@
 * [Class Diagram](#class-diagram)
 * [Activity Diagrams](#activity-diagrams)
 * [Database Schema](#database-schema)
+* [Tech Stacks and Frameworks](#tech-stacks-and-frameworks)
+* [Step By Step Guide](#step-by-step-guide)
 
 VirtualClassroom is a web platform that gives students an array of digital academic and social tools to stay engaged with their academics and help teaching professional in creating and managing virtual classrooms. 
 It gives the faculty in smooth conducting of both online and offline classes alongwith various features such as updating class timetable, posting announcement, posting assignments, taking attendence, updating meeting details, and switching between online and offline class mode.
@@ -217,3 +219,8 @@ AND if you want to clone the project in your local system and use, then check ou
 * **Cloudinary** - Cloudinary is an end-to-end image- and video-management solution for websites and mobile apps, covering everything from image and video uploads, storage, manipulations, optimizations to delivery.
 * **Bootstrap**  - Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development
 * **HTML , CSS , Javascript , Json**
+
+    
+### Step By Step Guide
+    
+    FULL STEP BY STEP GUIDE : <a href="https://drive.google.com/file/d/17EDhcdr8Pf_hSb4CnjD2g08lwcXLPgbX/view?usp=sharing">CLICK HERE</a>
