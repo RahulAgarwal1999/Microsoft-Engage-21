@@ -15,7 +15,7 @@ class FacultyDetails(models.Model):
     facultyDesc = models.TextField(blank=False,null=True)
     facultyCollege = models.CharField(max_length=100,null=False)
     collegeState = models.CharField(max_length=50,null=False)
-    experience = models.CharField(max_length=2,null=True)
+    experience = models.CharField(max_length=20,null=True)
     facultyPic = models.ImageField(upload_to='facultyPic/', null=True, blank=True)
     user_date = models.DateTimeField(default=datetime.now,null=True)
 
@@ -35,7 +35,7 @@ class StudentDetails(models.Model):
     studentDesc = models.TextField(blank=False,null=True)
     studentCollege = models.CharField(max_length=100,null=False)
     collegeState = models.CharField(max_length=50,null=False)
-    yearOfStudy = models.CharField(max_length=2,null=True)
+    yearOfStudy = models.CharField(max_length=20,null=True)
     studentPic = models.ImageField(upload_to='StudentPic/', null=True, blank=True)
     user_date = models.DateTimeField(default=datetime.now,null=True)
 
@@ -46,7 +46,7 @@ class ClassRoom(models.Model):
     classId = models.CharField(max_length=10,primary_key=True)
     classname = models.CharField(max_length=50,null=False)
     classDepartment = models.CharField(max_length=50,null=False)
-    academicYear = models.CharField(max_length=2,null=False)
+    academicYear = models.CharField(max_length=20,null=False)
     classLink = models.TextField(blank=False,null=True)
     classFacultyID = models.ForeignKey(FacultyDetails,on_delete=models.CASCADE)
     classFacultyName = models.CharField(max_length=100,null=False)
@@ -118,7 +118,7 @@ class VaccineStatus(models.Model):
 
 class OfflineClass(models.Model):
     classId = models.ForeignKey(ClassRoom,on_delete=models.CASCADE)
-    offlineStatus = models.CharField(max_length=5,null=True,blank=True,default='NO')
+    offlineStatus = models.CharField(max_length=20,null=True,blank=True,default='NO')
     vaccineRequired = models.IntegerField(null=True,blank=True,default=0)
     classStrength = models.IntegerField(null=True,blank=True,default=0)
     studentList = models.TextField(blank=True,null=True)
