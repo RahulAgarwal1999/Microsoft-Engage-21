@@ -1,7 +1,7 @@
 <h1 align="center">VirtualClassroom</h1>
 <h3 align="center">WEBSITE DEPLOYED : <a href="https://virtual-classroom1.herokuapp.com/">CLICK HERE</a></h3>
 
-<h3> Full Documentation : <a href="https://drive.google.com/file/d/1tYygKPxYYG4xWGzMOfFOyVdoIIFxuCSQ/view?usp=sharing">CLICK HERE</a><h3>
+<h3> Full Documentation : <a href="https://drive.google.com/file/d/1MxgQCnCJZ_XE9O_4XA5sj44zQaiuGUYU/view?usp=sharing">CLICK HERE</a><h3>
 <h3> Demo Video : <a href="https://www.youtube.com/watch?v=h7EkSFCbLmY">CLICK HERE</a><h3>
     
 **We'll cover the following:**
@@ -12,6 +12,9 @@
 * [Activity Diagrams](#activity-diagrams)
 * [Database Schema](#database-schema)
 * [Tech Stacks and Frameworks](#tech-stacks-and-frameworks)
+* [Project Setup Guide](#project-setup-guide)
+* [ADMIN CREDENTIALS](#admin-credentials)
+* [SAMPLE STUDENT AND FACULTY ACCOUNT CREDENTIALS](#sample-student-and-faculty-account-credentials)
 * [Step By Step Guide](#step-by-step-guide)
 
 VirtualClassroom is a web platform that gives students an array of digital academic and social tools to stay engaged with their academics and help teaching professional in creating and managing virtual classrooms. 
@@ -120,24 +123,30 @@ Here are the main classes of our application:
 Here is the database schema of our application:
 
 <p align="center">
-    <img src="/readme_images/Database Schema.jpg" alt="Airline Management System Reserve Ticket Activity Diagram">
+    <img src="/readme_images/Database Schema.jpg" alt="Database Schema">
     <br />
     Database Schema for VirtualClassroom
 </p>
 
 
-### APPLICATION DEPLOYMENT
+### TECH STACKS AND FRAMEWORKS
+    
+* **Python** - Python is an interpreted high-level general purpose programming language mainly used to build websites and software, automate tasks, and conduct data analysis.
+* **Django Framework** - Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. Some features of Django are : 
+* **SQLite** - SQLite is a relational database management system contained in a C library. SQLite is a server-less database and is self-contained. This is also referred to as an embedded database which means the DB engine runs as a part of the app. Thus it is a lot faster than SQL server.
+* **Heroku** - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud
+* **Cloudinary** - Cloudinary is an end-to-end image- and video-management solution for websites and mobile apps, covering everything from image and video uploads, storage, manipulations, optimizations to delivery.
+* **Bootstrap**  - Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development
+* **HTML , CSS , Javascript , Json**
+    
 
-The application is deployed in Heroku and for storage the application is using Cloudinary which is end-to-end image and video-management solution for websites and mobile apps.
-To view the deployed application, just click on this link : CLICK HERE
-and just follow the Step by Step Guide as shown : CLICK HERE.
-AND if you want to clone the project in your local system and use, then check out this section : CLICK HERE
 
+### PROJECT SETUP GUIDE
 
-### PROJECT SETUP GUIDE ( IF WANTS TO CLONE THE REPO IN LOCAL SYSTEM)
+NOTE: PROJECT SETUP GUIDE (IF WANTS TO CLONE THE REPO IN LOCAL SYSTEM)
 
 **PYTHON SETUP:**
-* Install Python on your system. Download Link : Click Here 
+* Install Python on your system. Download Link : <a href="https://www.python.org/downloads/">Click Here</a>
 * An Exe file will be downloaded, open it.
 * A dialog box will appear as shown in the figure below. Do not forget to click on the check box of “ADD PYTHON TO PATH”
 * Then click on ‘INSTALL NOW’, the installation will be completed.
@@ -152,7 +161,7 @@ AND if you want to clone the project in your local system and use, then check ou
 **Note:** If you are using Command Line terminal, then restart the terminal to use python
 
 **GIT SETUP:**
-* Download GIT on your system. Download Link : Click Here
+* Download GIT on your system. Download Link : <a href="https://git-scm.com/downloads">Click Here</a>
 * An Exe file will be downloaded, open it.
 * A dialog box will appear, keep everyting default, and keep on selecting **‘NEXT’**. 
 * The downloading will start and Git will be successfully installed
@@ -173,7 +182,7 @@ AND if you want to clone the project in your local system and use, then check ou
     
 **CLONING THE DJANGO PROJECT FROM GITUB**
 
-* Go to the Github Repoistory . Github Repo Link : Click Here
+* Go to the Github Repoistory . Github Repo Link : <a href="https://github.com/RahulAgarwal1999/VirtualClassroom-Microsoft_Engage">Click Here</a>
 * Click on **CODE** button and copy the **HTTPS** Link of the repo
 
 <p align="center">
@@ -209,16 +218,49 @@ AND if you want to clone the project in your local system and use, then check ou
 **NOTE:** For copying , select the url and click on right click and copy, otherwise select the link and do CTRL+C. But while using second method, if the server breaks, then again run the previos command, i.e. python manage.py runserver. 
     
 
-### TECH STACKS AND FRAMEWORKS
-    
-* **Python** - Python is an interpreted high-level general purpose programming language mainly used to build websites and software, automate tasks, and conduct data analysis.
-* **Django Framework** - Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. Some features of Django are : 
-* **SQLite** - SQLite is a relational database management system contained in a C library. SQLite is a server-less database and is self-contained. This is also referred to as an embedded database which means the DB engine runs as a part of the app. Thus it is a lot faster than SQL server.
-* **Heroku** - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud
-* **Cloudinary** - Cloudinary is an end-to-end image- and video-management solution for websites and mobile apps, covering everything from image and video uploads, storage, manipulations, optimizations to delivery.
-* **Bootstrap**  - Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development
-* **HTML , CSS , Javascript , Json**
 
+### ADMIN CREDENTIALS
+    
+To Check the Admin Panel in Deployed Site, copy the following url and paste it in the browser :   https://virtual-classroom1.herokuapp.com/admin
+
+To Check the Admin Panel in Cloned Project, copy the following url and paste it in the browser :   http://127.0.0.1:8000/admin
+
+The django admin login page will open, image shown below :
+    
+<p align="center">
+    <img src="/readme_images/admin-login.PNG" alt="Admin Login Page">
+    <br />
+    Admin Login Page
+</p>
+
+**CREDENTIALS (FOR BOTH DEPLOYED VERSION AND CLONED PROJECT):**
+**Username** – admin
+**Password** – admin12345
+
+After Logging in as admin, you can see all the tables used and what data are filled into them, image shown below 
+
+<p align="center">
+    <img src="/readme_images/admin-dashboard.PNG" alt="Admin Dashboard Page">
+    <br />
+    Admin Dashboard Page
+</p>
+
+
+### SAMPLE STUDENT AND FACULTY ACCOUNT CREDENTIALS
+
+There is a already created Student and Faculty Account in both Deployed website and Cloned Project. You can login with this credentials and use.
+
+**Faculty Credentials** 
+Email : samplefaculty@gmail.com
+Password : samplefaculty
+
+**Student Credentials** 
+Email : samplestudent@gmail.com
+Password : samplestudent
+
+**Note : Even if the following credentials doesn’t work or you want to create your new credentials, you can easily create it on the faculty and student registration page**
+
+    
     
 ### Step By Step Guide
     
