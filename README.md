@@ -1,6 +1,9 @@
 <h1 align="center">VirtualClassroom</h1>
-<h3 align="center">Website Deployed : CLICK HERE</h3>
+<h3 align="center">WEBSITE DEPLOYED : <a href="https://virtual-classroom1.herokuapp.com/">CLICK HERE</a></h3>
 
+<h3> Full Documentation : <a href="">CLICK HERE</a><h3>
+<h3> Demo Video : <a href="">CLICK HERE</a><h3>
+    
 **We'll cover the following:**
 
 * [System Requirements](#system-requirements)
