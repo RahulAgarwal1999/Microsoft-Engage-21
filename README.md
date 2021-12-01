@@ -258,7 +258,7 @@ Password : samplefaculty  <br>
 Email : samplestudent@gmail.com  <br>
 Password : samplestudent  <br>
 <br>
-**Note : Even if the following credentials doesn’t work or you want to create your new credentials, you can easily create it on the faculty and student registration page**
+**Note : Even if the following credentials doesn’t work or you want to create your new credentials, you can easily create it on the faculty and student registration page. And also, to get email service, while registering as faculty or student, register with a valid email id(and not with a dummy one), to get registration confirmation mail.**
 
     
     
