@@ -14,7 +14,7 @@
 * [Tech Stacks and Frameworks](#tech-stacks-and-frameworks)
 * [Project Setup Guide](#project-setup-guide)
 * [Admin Credentials](#admin-credentials)
-* [Sample Sstudent And Faculty Account Credentials](#sample-student-and-faculty-account-credentials)
+* [Sample Student And Faculty Account Credentials](#sample-student-and-faculty-account-credentials)
 * [Step By Step Guide](#step-by-step-guide)
 
 VirtualClassroom is a web platform that gives students an array of digital academic and social tools to stay engaged with their academics and help teaching professional in creating and managing virtual classrooms. 
