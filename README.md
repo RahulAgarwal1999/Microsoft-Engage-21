@@ -13,7 +13,7 @@
 * [Database Schema](#database-schema)
 * [Tech Stacks and Frameworks](#tech-stacks-and-frameworks)
 * [Project Setup Guide](#project-setup-guide)
-* [Admin Cresentials](#admin-credentials)
+* [Admin Credentials](#admin-credentials)
 * [Sample Sstudent And Faculty Account Credentials](#sample-student-and-faculty-account-credentials)
 * [Step By Step Guide](#step-by-step-guide)
 
