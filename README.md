@@ -132,7 +132,7 @@ Here is the database schema of our application:
 ### TECH STACKS AND FRAMEWORKS
     
 * **Python** - Python is an interpreted high-level general purpose programming language mainly used to build websites and software, automate tasks, and conduct data analysis.
-* **Django Framework** - Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. Some features of Django are : 
+* **Django Framework** - Django is a Python-based free and open-source web framework that follows the model–template–views architectural pattern. 
 * **SQLite** - SQLite is a relational database management system contained in a C library. SQLite is a server-less database and is self-contained. This is also referred to as an embedded database which means the DB engine runs as a part of the app. Thus it is a lot faster than SQL server.
 * **Heroku** - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud
 * **Cloudinary** - Cloudinary is an end-to-end image- and video-management solution for websites and mobile apps, covering everything from image and video uploads, storage, manipulations, optimizations to delivery.
