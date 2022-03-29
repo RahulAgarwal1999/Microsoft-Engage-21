@@ -233,10 +233,6 @@ The django admin login page will open, image shown below :
     Admin Login Page
 </p>
 
-**CREDENTIALS (FOR BOTH DEPLOYED VERSION AND CLONED PROJECT):** <br>
-**Username** – admin <br>
-**Password** – admin12345  <br>
-
 After Logging in as admin, you can see all the tables used and what data are filled into them, image shown below 
 
 <p align="center">
